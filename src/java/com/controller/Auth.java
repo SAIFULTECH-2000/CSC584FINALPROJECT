@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import Person.*;
+import java.util.LinkedList;
+import java.util.List;
 /**
  *
  * @author saifultech
@@ -37,20 +39,29 @@ public class Auth extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        List errorMsgs = new LinkedList();
+        
         try{
         PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if(password.length() == 0 || username.length() == 0){
-        out.println(" Username and Password fields is required.");
-        }else{
+        if(password.length() == 0 || username.length() == 0)
+        {
+           request.setAttribute("errorMsgs", errorMsgs);
+           RequestDispatcher view = request.getRequestDispatcher("/error.jsp");
+           view.forward(request, response);
+           return;
+        }
+        else
+        {
            if(login(username,password)){
            //successful login
            // out.println("successful login .");
             //Load the driver
              Class.forName("org.apache.derby.jdbc.ClientDriver");
             //Connect to the sample database
-            Connection conn= DriverManager.getConnection("jdbc:derby://localhost:1527/BloodManagement;create=true;user=root;password=root");
+            Connection conn= DriverManager.getConnection("jdbc:derby://localhost:1527/BloodManagement;create=true;user=ROOT;password=root");
             PreparedStatement ps = conn.prepareStatement("select * from USERS where USERNAME=? and PASSWORD=?"); 
             ps.setString(1, username);
             ps.setString(2, password);
@@ -70,7 +81,7 @@ public class Auth extends HttpServlet {
            //sent object into page dashboard;
             request.setAttribute("person", omstf);
                         
-           
+        
            //set the session
             HttpSession session=request.getSession();  
             session.setAttribute("username",username);
@@ -87,7 +98,7 @@ public class Auth extends HttpServlet {
         }catch(IOException | ClassNotFoundException | SQLException e ){
             PrintWriter out = response.getWriter();
             out.println("error:"+e);
-        //errorMsgs.add("An unexpected error: " + e.getMessage());
+        errorMsgs.add("An unexpected error: " + e.getMessage());
        // request.setAttribute("errorMsgs", errorMsgs);
         //RequestDispatcher view = request.getRequestDispatcher("/error.view");
        // view.forward(request, response);
@@ -136,7 +147,7 @@ public class Auth extends HttpServlet {
      boolean status= false;
      try{
         Class.forName("org.apache.derby.jdbc.ClientDriver");
-                Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/BloodManagement;create=true;user=root;password=root");
+                Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/BloodManagement;create=true;user=ROOT;password=root");
                 PreparedStatement ps = conn.prepareStatement("select * from USERS where USERNAME=? and PASSWORD=?");
                 ps.setString(1, username);
                 ps.setString(2, password);
@@ -147,4 +158,5 @@ public class Auth extends HttpServlet {
             }
      return status;
     }
+
 }

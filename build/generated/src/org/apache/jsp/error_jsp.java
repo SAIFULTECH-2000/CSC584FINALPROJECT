@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class Dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class error_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -42,16 +42,28 @@ public final class Dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
       out.write("\n");
-      out.write("\n");
-      out.write("\n");
       out.write("<!DOCTYPE html>\n");
+      out.write("\n");
+      com.controller.Auth Staff = null;
+      Staff = (com.controller.Auth) _jspx_page_context.getAttribute("Staff", PageContext.REQUEST_SCOPE);
+      if (Staff == null){
+        throw new java.lang.InstantiationException("bean Staff not found within scope");
+      }
+      out.write("\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>JSP Page</title>\n");
+      out.write("        <title>Error Page</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
-      out.write("        <h1>Hello World!</h1>\n");
+      out.write("        <form action=\"index.jsp\" method=\"POST\">\n");
+      out.write("            \n");
+      out.write("        </form>\n");
+      out.write("        <h1>Error</h1>\n");
+      out.write("        \n");
+      out.write("        Please enter username and password\n");
+      out.write("        \n");
+      out.write("        <a href='index.jsp'>Error</a>;\n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
