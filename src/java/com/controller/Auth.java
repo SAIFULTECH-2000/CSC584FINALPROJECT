@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import Person.*;
 import java.util.LinkedList;
 import java.util.List;
 /**
@@ -48,10 +47,10 @@ public class Auth extends HttpServlet {
         String password = request.getParameter("password");
         if(password.length() == 0 || username.length() == 0)
         {
+           errorMsgs.add("Please insert username and password");
            request.setAttribute("errorMsgs", errorMsgs);
-           RequestDispatcher view = request.getRequestDispatcher("/error.jsp");
+           RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
            view.forward(request, response);
-           return;
         }
         else
         {
@@ -59,43 +58,21 @@ public class Auth extends HttpServlet {
            //successful login
            // out.println("successful login .");
             //Load the driver
-             Class.forName("org.apache.derby.jdbc.ClientDriver");
-            //Connect to the sample database
-            Connection conn= DriverManager.getConnection("jdbc:derby://localhost:1527/BloodManagement;create=true;user=ROOT;password=root");
-            PreparedStatement ps = conn.prepareStatement("select * from USERS where USERNAME=? and PASSWORD=?"); 
-            ps.setString(1, username);
-            ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
-            //get data from database
-            if (rs.next()) {
-            String name=rs.getString("USERNAME");
-            String email=rs.getString("EMAIL");
-            String ic = rs.getString("IC");
-            String position = rs.getString("POSITION");
-            //put data into modal
-            Staff omstf = new Staff();
-            omstf.setName(name);
-            omstf.setEmail(email);
-            omstf.setIc(ic);
-            omstf.setPosition(position);
-           //sent object into page dashboard;
-            request.setAttribute("person", omstf);
-                        
-        
            //set the session
             HttpSession session=request.getSession();  
             session.setAttribute("username",username);
             //redirect dashboard
             RequestDispatcher view = request.getRequestDispatcher("/Dashboard.jsp");
             view.forward(request, response);
-            }
+            
            }else{
-           //password or username not correct
-           //RequestDispatcher view = request.getRequestDispatcher("/error.view");
-            // view.forward(request, response);
+           errorMsgs.add("password or username not correct");
+           request.setAttribute("errorMsgs", errorMsgs);
+           RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
+           view.forward(request, response);
            }
         }
-        }catch(IOException | ClassNotFoundException | SQLException e ){
+        }catch(IOException e ){
             PrintWriter out = response.getWriter();
             out.println("error:"+e);
         errorMsgs.add("An unexpected error: " + e.getMessage());
@@ -147,14 +124,13 @@ public class Auth extends HttpServlet {
      boolean status= false;
      try{
         Class.forName("org.apache.derby.jdbc.ClientDriver");
-                Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/BloodManagement;create=true;user=ROOT;password=root");
+                Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/BloodManagement;create=true;user=root;password=root");
                 PreparedStatement ps = conn.prepareStatement("select * from USERS where USERNAME=? and PASSWORD=?");
                 ps.setString(1, username);
                 ps.setString(2, password);
                 ResultSet rs =ps.executeQuery();
-                status = rs.next();
-            }catch(Exception ex){
-                 ex.printStackTrace();
+                status = rs.next();   
+            }catch(ClassNotFoundException | SQLException ex){
             }
      return status;
     }

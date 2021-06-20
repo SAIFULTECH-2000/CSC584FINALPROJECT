@@ -4,7 +4,15 @@
     Author     : saifultech
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+if(null!=session.getAttribute("username")){
+response.sendRedirect("Dashboard.jsp");
+}
+
+%>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <!--
@@ -82,6 +90,14 @@ input[type="submit"]{
 </head>
 <body>
     <div class="center">
+         <%
+        String popup =(String) request.getAttribute("message");
+        if(popup !=null){
+        %>
+        <font color="green">
+            <p><%=popup%></p>
+        </font>
+        <%}%>
         <h1>Login</h1>
     <form action="Auth" method="post">
     <div class="txt_field">
@@ -92,9 +108,26 @@ input[type="submit"]{
         <label>Password</label>
         <input type="text" name="password" id="password">
         </div>
-        <form>
+        
             <input type="Submit" name="Submit">
-        </form>
+        </form><br>
+        <%
+        List errorMsgs = (List) request.getAttribute("errorMsgs");
+        if(errorMsgs!=null){
+        %>
+        <font color="red">
+            <ul><%
+                Iterator items = errorMsgs.iterator();
+                while(items.hasNext()){
+                    String message =(String) items.next();
+                %>
+                <li>
+                    <%= message%>
+                </li>
+                <%}%>
+            </ul>
+        </font>
+        <%}%>
     </div>
 </body>
 </html>
