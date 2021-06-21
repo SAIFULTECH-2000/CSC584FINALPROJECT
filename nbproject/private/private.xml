@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/web/Dashboard.jsp</file>
             <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/src/java/Person/Staff.java</file>
@@ -10,5 +11,8 @@
             <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/web/error.jsp</file>
             <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/web/index.jsp</file>
         </group>
+=======
+        <group/>
+>>>>>>> 95a01df1af3bf232b3f4502cfb2cdbdd4dbed127
     </open-files>
 </project-private>

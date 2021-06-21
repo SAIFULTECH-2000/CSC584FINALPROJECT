@@ -4,10 +4,17 @@
     Author     : saifultech
 --%>
 
-<%@page import="Person.Staff"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
+<%
+if(null==session.getAttribute("username")){
+response.sendRedirect("index.jsp");
 
-
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,17 +162,23 @@ input[type="submit"]{
 }                                                                                    
 </style>
 <body>
-    
+    <%
+     String username =(String) session.getAttribute("username");   
+     %>
+     <sql:query var="result" dataSource="${myDatasource}">
+         SELECT *  FROM USERS where USERNAME = '${username}'
+     </sql:query>
+     </table>
 <!-- Top navigation -->
 <div class="topnav">
 
     <!-- Centered link -->
     <div class="topnav-centered">
-      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="dashboard.jsp" class="active">Dashboard</a>
     </div>
     
     <!-- Left-aligned links (default) -->
-    <a href="dashboard.html">Dashboard</a>
+    <a href="RegisterStaff.jsp">Register Staff</a>
     <a href="blooddonation.html">Blood Donation</a>
     <a href="donation.html">Donation Information</a>
 
@@ -174,27 +187,28 @@ input[type="submit"]{
     <div class="topnav-right">
       <a href="submission.html">Submission</a>
       <a href="hospital.html">Hospital</a>
-      <a href="index.html">Logout</a>
+      <a href="logout">Logout</a>
     </div>
     
   </div>
         <h1 style="margin-left:0px;color:white; text-align: center ">Profile</h1>
-        <% Staff obj =(Staff) request.getAttribute("person");%>
-        <div class="card" >
+          <c:forEach var = "row" items = "${result.rows}">
+               <div class="card" >
         <div class="container">
             <table style="width:100%">
                 <tr>
-                    <td>Name:<%=obj.getName()%></td>
+                    <td>Name:${row.username}</td>
                 </tr>
                 <tr>
-                    <td>Email:<%=obj.getEmail()%></td>
+                    <td>Email:${row.email}</td>
                 </tr>
                 <tr>
-                    <td>Position:<%=obj.getPosition()%></td>
+                    <td>Position:${row.position}</td>
                 </tr>
             </table>
         </div>
         </div>
+         </c:forEach>
       <h1  style="margin-left:0px;color:white; text-align: center ">Blood Types Inventory</h1>
       <div class="card" >
         <div class="container">

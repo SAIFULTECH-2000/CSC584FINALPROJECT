@@ -4,7 +4,15 @@
     Author     : saifultech
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+if(null!=session.getAttribute("username")){
+response.sendRedirect("Dashboard.jsp");
+}
+
+%>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <!--
@@ -18,7 +26,8 @@ and open the template in the editor.
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel = "icon" href ="img/214281.jpg" type="image/x-icon">
 <style>
 body{
     margin: 0;
@@ -78,10 +87,25 @@ input[type="submit"]{
     color: white;
     border-radius:25px;
 }
+.centerImg{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 </style>
 </head>
 <body>
     <div class="center">
+         <%
+        String popup =(String) request.getAttribute("message");
+        if(popup !=null){
+        %>
+        <font color="green">
+            <p>&nbsp;<%=popup%></p>
+        </font>
+        <%}%>
+        <img src="img/214281.jpg" width="100" height="100"  class="centerImg">
         <h1>Login</h1>
     <form action="Auth" method="post">
     <div class="txt_field">
@@ -92,9 +116,26 @@ input[type="submit"]{
         <label>Password</label>
         <input type="text" name="password" id="password">
         </div>
-        <form>
+        
             <input type="Submit" name="Submit">
-        </form>
+        </form><br>
+        <%
+        List errorMsgs = (List) request.getAttribute("errorMsgs");
+        if(errorMsgs!=null){
+        %>
+        <font color="red">
+            <ul><%
+                Iterator items = errorMsgs.iterator();
+                while(items.hasNext()){
+                    String message =(String) items.next();
+                %>
+                <li>
+                    <%= message%>
+                </li>
+                <%}%>
+            </ul>
+        </font>
+        <%}%>
     </div>
 </body>
 </html>
