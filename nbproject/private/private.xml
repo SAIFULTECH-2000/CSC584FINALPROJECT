@@ -4,7 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/web/Dashboard.jsp</file>
-            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/src/java/com/controller/Auth.java</file>
+            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/src/java/Person/Staff.java</file>
+            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/src/java/com/mvc/util/DBConnection.java</file>
+            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/src/java/com/mvc/dao/AuthDao.java</file>
             <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/web/error.jsp</file>
             <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/web/index.jsp</file>
         </group>
