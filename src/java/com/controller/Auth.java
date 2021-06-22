@@ -6,6 +6,7 @@ package com.controller;
  * and open the template in the editor.
  */
 
+import com.mvc.dao.AuthDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -54,7 +55,8 @@ public class Auth extends HttpServlet {
         }
         else
         {
-           if(login(username,password)){
+            AuthDao obj = new AuthDao();
+           if(obj.auth(username,password)){
            //successful login
            // out.println("successful login .");
             //Load the driver

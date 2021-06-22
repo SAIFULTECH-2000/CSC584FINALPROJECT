@@ -13,16 +13,11 @@ import java.sql.ResultSet;
  */
 public class AuthDao {
     
-    public boolean auth(Staff staff,String password)
+    public boolean auth(String username,String password)
     {
         boolean status = false;
         Connection conn;
         PreparedStatement ps;
-        
-        String username;
-        username = staff.getName();
-        
-        
         try{
                 conn=DBConnection.createConnection();
                 ps = conn.prepareStatement("select * from USERS where USERNAME=? and PASSWORD=?");

@@ -13,10 +13,9 @@ public class DBConnection
     public static Connection createConnection() throws SQLException
     {
         Connection conn = null;
-        String url = "jdbc:derby//localhost:1527/BloodManagement";
-        String username ="ROOT";
+        String url = "jdbc:derby://localhost:1527/BloodManagement";
+        String username ="root";
         String password ="root";
-        
         try
         {
         try
