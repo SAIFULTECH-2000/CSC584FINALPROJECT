@@ -170,9 +170,9 @@ input[type="submit"]{
     </div>
     
     <!-- Left-aligned links (default) -->
-    <a href="dashboard.jsp">Dashboard</a>
+    <a href="Dashboard.jsp">Dashboard</a>
     <a href="blooddonation.html">Blood Donation</a>
-    <a href="donation.html">Donation Information</a>
+    <a href="donation_information.jsp">Donation Information</a>
 
     
     <!-- Right-aligned links -->

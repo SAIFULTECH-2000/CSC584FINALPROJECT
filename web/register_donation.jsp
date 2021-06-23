@@ -1,27 +1,17 @@
 <%-- 
-    Document   : Dashboard
-    Created on : Jun 18, 2021, 12:42:05 AM
-    Author     : saifultech
+    Document   : register_donation
+    Created on : Jun 23, 2021, 7:36:23 PM
+    Author     : SAIFULTECH
 --%>
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
-<%
-if(null==session.getAttribute("username")){
-response.sendRedirect("index.jsp");
-
-}
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Donation Information</title>
 </head>
 <style>
 body{
@@ -159,104 +149,75 @@ input[type="submit"]{
     background-color: #2691d9;
     color: white;
     border-radius:25px;
-}                                                                                    
+} 
+.gender{
+color:#2691d9;    
+    
+}
 </style>
 <body>
-    <%
-     String username =(String) session.getAttribute("username");   
-     %>
-     <sql:query var="result" dataSource="${myDatasource}">
-         SELECT *  FROM USERS where USERNAME = '${username}'
-     </sql:query>
-     </table>
+    
 <!-- Top navigation -->
 <div class="topnav">
 
     <!-- Centered link -->
     <div class="topnav-centered">
-      <a href="dashboard.jsp" class="active">Dashboard</a>
+      <a href="donation_information.jsp" class="active">Donation Information</a>
     </div>
     
     <!-- Left-aligned links (default) -->
-    <a href="RegisterStaff.jsp">Register Staff</a>
+    <a href="Dashboard.jsp">Dashboard</a>
     <a href="blooddonation.html">Blood Donation</a>
-    <a href="donation_information.jsp">Donation Information</a>
+    <a href="RegisterStaff.jsp" >Register Staff</a>
 
     
     <!-- Right-aligned links -->
     <div class="topnav-right">
       <a href="submission.html">Submission</a>
       <a href="hospital.html">Hospital</a>
-      <a href="logout">Logout</a>
+      <a href="index.html">Logout</a>
     </div>
     
   </div>
-        <h1 style="margin-left:0px;color:white; text-align: center ">Profile</h1>
-          <c:forEach var = "row" items = "${result.rows}">
-               <div class="card" >
-        <div class="container">
-            <table style="width:100%">
-                <tr>
-                    <td>Name:${row.username}</td>
-                </tr>
-                <tr>
-                    <td>Email:${row.email}</td>
-                </tr>
-                <tr>
-                    <td>Position:${row.position}</td>
-                </tr>
-            </table>
-        </div>
-        </div>
-         </c:forEach>
-      <h1  style="margin-left:0px;color:white; text-align: center ">Blood Types Inventory</h1>
+      <h1  style="margin-left:0px;color:white; text-align: center ">Registry Form</h1>
       <div class="card" >
         <div class="container">
-            <table style="width:100%">
-                <tr>
-                  <th>Blood Type</th>
-                  <th>Quantity(Bags)</th>
-                </tr>
-                <tr>
-                  <td>A</td>
-                  <td>1000</td>
-                </tr>
-                <tr>
-                  <td>B</td>
-                  <td>750</td>
-                </tr>
-                <tr>
-                    <td>AB</td>
-                    <td>1200</td>
-                </tr>
-                <tr>
-                    <td>O</td>
-                    <td>450</td>
-                </tr>
-              </table>
+        <h1>BLOOD DONATION REGISTER</h1>
+        <form action="" method="post">
+        <div class="gender">
+        <label>Gender</label>
+        <input type="checkbox" name="gender" id="gender">Male
+        <input type="checkbox" name="gender" id="gender">Female
         </div>
-      </div>
-      
-      <h1  style="margin-left:0px;color:white; text-align: center ">Staff List</h1>
-      <sql:query var="result" dataSource="${myDatasource}">
-          SELECT *  FROM USERS
-      </sql:query>
-    
-      <div class="card" >
-        <div class="container">
-            <table style="width:100%">
-                <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                </tr>
-                 <c:forEach var = "row" items = "${result.rows}">
-                <tr>
-                  <td>${row.username}</td>
-                  <td>${row.position}</td>
-                </tr>
-                 </c:forEach>
-              </table>
+        <div class="txt_field">
+          <label>Name</label>
+          <input type="text" name="Name" id="Name">
+          </div>
+          <div class="txt_field">
+            <label>IC</label>
+            <input type="text" name="IC" id="IC">
+            </div>
+            <div class="txt_field">
+              <label>Address</label>
+              <input type="text" name="address" id="addresss">
+              </div>
+              <div class="txt_field">
+                <label>Contact Number</label>
+                <input type="text" name="tel" id="tel">
+                </div>
+                <div class="txt_field">
+                  <label>Blood Type</label>
+                  <input type="text" name="bloodtype" id="bloodtype">
+                  </div>
+                  <div class="txt_field">
+                    <label>Health History (If applicable)</label>
+                    <input type="text" name="hh" id="hh">
+                    </div>
+        <input type="Submit" name="Submit">
+        <br> <br>
+        </form>
         </div>
+          <a href="donation_information.jsp">Back</a>
       </div>
 </body>
 </html>

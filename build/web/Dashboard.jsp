@@ -180,7 +180,7 @@ input[type="submit"]{
     <!-- Left-aligned links (default) -->
     <a href="RegisterStaff.jsp">Register Staff</a>
     <a href="blooddonation.html">Blood Donation</a>
-    <a href="donation.html">Donation Information</a>
+    <a href="donation_information.jsp">Donation Information</a>
 
     
     <!-- Right-aligned links -->
@@ -238,6 +238,10 @@ input[type="submit"]{
       </div>
       
       <h1  style="margin-left:0px;color:white; text-align: center ">Staff List</h1>
+      <sql:query var="result" dataSource="${myDatasource}">
+          SELECT *  FROM USERS
+      </sql:query>
+    
       <div class="card" >
         <div class="container">
             <table style="width:100%">
@@ -245,22 +249,12 @@ input[type="submit"]{
                   <th>Name</th>
                   <th>Position</th>
                 </tr>
+                 <c:forEach var = "row" items = "${result.rows}">
                 <tr>
-                  <td>Nur Sakina</td>
-                  <td>Nurse</td>
+                  <td>${row.username}</td>
+                  <td>${row.position}</td>
                 </tr>
-                <tr>
-                  <td>Ahmad Ali</td>
-                  <td>Doctor</td>
-                </tr>
-                <tr>
-                    <td>Manaf Mamat</td>
-                    <td>Nurse</td>
-                </tr>
-                <tr>
-                    <td>Ravindren Singh</td>
-                    <td>Nurse</td>
-                </tr>
+                 </c:forEach>
               </table>
         </div>
       </div>
