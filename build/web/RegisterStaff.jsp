@@ -1,7 +1,7 @@
 <%-- 
     Document   : donator
     Created on : Jun 20, 2021, 4:11:03 PM
-    Author     : SAIFULTECH
+    Author     : SAIFULTECH/syakir
 --%>
 
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>

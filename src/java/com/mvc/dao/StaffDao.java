@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author SAIFULTECH
+ * @author SAIFULTECH/syakir
  */
 public class StaffDao {
     public boolean insertStaff(Staff staff,String password){

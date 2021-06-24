@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 
 /**
  *
- * @author SAIFULTECH
+ * @author SAIFULTECH/syakir
  */
 public class HospitalDao {
      public boolean insertHospital(Hospital hospital){
