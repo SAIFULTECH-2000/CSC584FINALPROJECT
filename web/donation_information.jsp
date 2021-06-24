@@ -156,7 +156,7 @@ color:#2691d9;
 }
 
  .btn {
-  background-color: #f1f1f1;
+  background-color: #6699ff;
   color: black;
   font-size: 12px;
   padding: 16px 25px;
@@ -190,7 +190,7 @@ color:#2691d9;
     <div class="topnav-right">
       <a href="submission.html">Submission</a>
       <a href="hospital.html">Hospital</a>
-      <a href="index.html">Logout</a>
+      <a href="logout">Logout</a>
     </div>
     
   </div>
