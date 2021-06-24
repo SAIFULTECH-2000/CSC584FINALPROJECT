@@ -175,7 +175,7 @@ color:#2691d9;
     <div class="topnav-right">
       <a href="submission.html">Submission</a>
       <a href="hospital.html">Hospital</a>
-      <a href="index.html">Logout</a>
+      <a href="logout">Logout</a>
     </div>
     
   </div>
