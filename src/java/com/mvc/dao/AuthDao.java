@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author: Syakir
+ * @author: Syakir/saifultech
  */
 public class AuthDao {
     

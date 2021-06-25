@@ -7,7 +7,7 @@ package Person;
 
 /**
  *
- * @author SAIFULTECH
+ * @author SAIFULTECH/syakir
  */
 public class Donator {
     String gender;

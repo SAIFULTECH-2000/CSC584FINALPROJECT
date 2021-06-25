@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 
 /**
  *
- * @author SAIFULTECH
+ * @author SAIFULTECH/syakir
  */
 public class DonatorDao {
     public boolean insertDonator(Donator donator){

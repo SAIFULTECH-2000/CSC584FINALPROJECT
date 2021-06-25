@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
 
 /**
  *
- * @author SAIFULTECH
+ * @author SAIFULTECH/syakir
  */
 public class SubmissionDao {
     public boolean insertSubmission(Submission submission){

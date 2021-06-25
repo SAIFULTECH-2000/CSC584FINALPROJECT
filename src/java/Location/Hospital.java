@@ -7,7 +7,7 @@ package Location;
 
 /**
  *
- * @author SAIFULTECH
+ * @author SAIFULTECH/syakir
  */
 public class Hospital {
     String name;

@@ -1,7 +1,7 @@
 <%-- 
     Document   : donation_information
     Created on : Jun 23, 2021, 7:22:38 PM
-    Author     : SAIFULTECH
+    Author     : SAIFULTECH/syakir
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

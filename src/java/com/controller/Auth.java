@@ -24,7 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 /**
  *
- * @author saifultech
+ * @author saifultech/syakir
  */
 public class Auth extends HttpServlet {
 
