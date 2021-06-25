@@ -17,6 +17,12 @@ String email;
 String ic;
 String position;
 
+    public Staff() {
+        name = " ";
+        email = " ";
+        ic = " ";
+        position = " ";
+    }
     
     public Staff(String name, String email, String ic, String position) {
         this.name = name;

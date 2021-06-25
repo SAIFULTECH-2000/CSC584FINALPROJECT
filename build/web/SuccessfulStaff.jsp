@@ -1,14 +1,15 @@
 <%-- 
-    Document   : Dashboard
-    Created on : Jun 18, 2021, 12:42:05 AM
-    Author     : saifultech
+    Document   : donator
+    Created on : Jun 20, 2021, 4:11:03 PM
+    Author     : SAIFULTECH
 --%>
 
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
+<jsp:useBean id="staff" class="Person.Staff" scope="request"/>
 <%
     if (null == session.getAttribute("username")) {
         response.sendRedirect("index.jsp");
@@ -21,7 +22,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard</title>
+        <title>Successful Staff</title>
     </head>
     <style>
         body{
@@ -154,32 +155,26 @@
 
         input[type="submit"]{
             width: 100%;
-            height: 25px;
+            height: 50px;
             border:1px solid;
             background-color: #2691d9;
             color: white;
-            border-radius:10px;
-            font-size: 8px;
+            border-radius:25px;
         }                                                                                    
     </style>
     <body>
-        <%
-            String username = (String) session.getAttribute("username");
-        %>
-        <sql:query var="result" dataSource="${myDatasource}">
-            SELECT *  FROM USERS where USERNAME = '${username}'
-        </sql:query>
+        
     </table>
     <!-- Top navigation -->
     <div class="topnav">
 
         <!-- Centered link -->
         <div class="topnav-centered">
-            <a href="dashboard.jsp" class="active">Dashboard</a>
+            <a href="RegisterStaff.jsp" class="active">Register Staff</a>
         </div>
 
         <!-- Left-aligned links (default) -->
-        <a href="RegisterStaff.jsp">Register Staff</a>
+        <a href="Dashboard.jsp">Dashboard</a>
         <a href="blooddonation.html">Blood Donation</a>
         <a href="donation_information.jsp">Donation Information</a>
 
@@ -192,49 +187,33 @@
         </div>
 
     </div>
-    <h1 style="margin-left:0px;color:white; text-align: center ">Profile</h1>
-    <c:forEach var = "row" items = "${result.rows}">
-        <div class="card" >
-            <div class="container">
-                <table style="width:100%">
-                    <tr>
-                        <td>Name:${row.username}</td>
-                    </tr>
-                    <tr>
-                        <td>Email:${row.email}</td>
-                    </tr>
-                    <tr>
-                        <td>Position:${row.position}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </c:forEach>
-    <h1  style="margin-left:0px;color:white; text-align: center ">Blood Types Inventory</h1>
-    <div class="card" >
+
+
+    <h1  style="margin-left:0px;color:white; text-align: center ">Successful Add Staff</h1>
+    <div class="center" >
         <div class="container">
-            <table style="width:100%">
-                <tr>
-                    <th>Blood Type</th>
-                    <th>Quantity(Bags)</th>
-                </tr>
-                <tr>
-                    <td>A</td>
-                    <td>1000</td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td>750</td>
-                </tr>
-                <tr>
-                    <td>AB</td>
-                    <td>1200</td>
-                </tr>
-                <tr>
-                    <td>O</td>
-                    <td>450</td>
-                </tr>
-            </table>
+         <br>
+        You have successful add new staff
+         <br>
+         <%
+         
+         %>
+           <table style="width:100%">
+                    <tr>
+                        <td>Name:<jsp:getProperty name="staff" property="name"/></td>
+                    </tr>
+                    <tr>
+                        <td>IC:<jsp:getProperty name="staff" property="ic"/></td>
+                    </tr>
+                    <tr>
+                        <td>Email:<jsp:getProperty name="staff" property="email"/></td>
+                    </tr>
+                    <tr>
+                        <td>Position:<jsp:getProperty name="staff" property="position"/></td>
+                    </tr>
+          </table>
+                    <a href="RegisterStaff.jsp">Back</a>
+        <br>
         </div>
     </div>
 </body>

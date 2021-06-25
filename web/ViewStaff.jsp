@@ -1,29 +1,20 @@
 <%-- 
-    Document   : Dashboard
-    Created on : Jun 18, 2021, 12:42:05 AM
-    Author     : saifultech
+    Document   : ViewStaff
+    Created on : Jun 25, 2021, 2:14:21 PM
+    Author     : SAIFULTECH
 --%>
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
-<%
-    if (null == session.getAttribute("username")) {
-        response.sendRedirect("index.jsp");
-
-    }
-%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
     </head>
-    <style>
+     <style>
         body{
             margin: 0;
             padding: 0;
@@ -162,15 +153,9 @@
             font-size: 8px;
         }                                                                                    
     </style>
+    
     <body>
-        <%
-            String username = (String) session.getAttribute("username");
-        %>
-        <sql:query var="result" dataSource="${myDatasource}">
-            SELECT *  FROM USERS where USERNAME = '${username}'
-        </sql:query>
-    </table>
-    <!-- Top navigation -->
+            <!-- Top navigation -->
     <div class="topnav">
 
         <!-- Centered link -->
@@ -192,50 +177,38 @@
         </div>
 
     </div>
-    <h1 style="margin-left:0px;color:white; text-align: center ">Profile</h1>
-    <c:forEach var = "row" items = "${result.rows}">
-        <div class="card" >
-            <div class="container">
-                <table style="width:100%">
-                    <tr>
-                        <td>Name:${row.username}</td>
-                    </tr>
-                    <tr>
-                        <td>Email:${row.email}</td>
-                    </tr>
-                    <tr>
-                        <td>Position:${row.position}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </c:forEach>
-    <h1  style="margin-left:0px;color:white; text-align: center ">Blood Types Inventory</h1>
+     <h1  style="margin-left:0px;color:white; text-align: center ">Staff List</h1>
+    <sql:query var="result" dataSource="${myDatasource}">
+        SELECT *  FROM USERS
+    </sql:query>
+
     <div class="card" >
         <div class="container">
             <table style="width:100%">
                 <tr>
-                    <th>Blood Type</th>
-                    <th>Quantity(Bags)</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Action</th>
                 </tr>
-                <tr>
-                    <td>A</td>
-                    <td>1000</td>
-                </tr>
-                <tr>
-                    <td>B</td>
-                    <td>750</td>
-                </tr>
-                <tr>
-                    <td>AB</td>
-                    <td>1200</td>
-                </tr>
-                <tr>
-                    <td>O</td>
-                    <td>450</td>
-                </tr>
+                <c:forEach var = "row" items = "${result.rows}">
+                    <tr>
+                        <td>${row.username}</td>
+                        <td>${row.position}</td>
+                        <td>
+                            <form action="StaffController" method="post">
+                                <input type="hidden" name="ID" value="${row.ID}">
+                                <input type="submit" value="UPDATE">
+                            </form>
+                             <form action="StaffController" method="post">
+                                <input type="hidden" name="ID" value="${row.ID}">
+                                <input type="submit" value="Delete">
+                            </form>  
+                            
+                        </td>
+                    </tr>
+                </c:forEach>
             </table>
         </div>
     </div>
-</body>
+    </body>
 </html>
