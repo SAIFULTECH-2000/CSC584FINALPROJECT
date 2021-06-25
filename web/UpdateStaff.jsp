@@ -22,7 +22,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Register Staff</title>
+        <title>Update Staff</title>
          <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <style>
@@ -92,35 +92,38 @@
                 </div>
             </div>
         </nav>    
+        <%
+        String name = request.getParameter("username");
+        String ic = request.getParameter("ic");
+        String position = request.getParameter("position");
+        String email = request.getParameter("email");
+        String id = request.getParameter("ID");
+        %>
 
-
-        <h1  style="margin-left:0px;color:white; text-align: center ">Register Staff</h1>
+        <h1  style="margin-left:0px;color:white; text-align: center ">Update Staff</h1>
         <div class="container">
             <div class="card mx-auto" style="width: 18rem;">
                 <div class="card-body">
                     <form action="StaffControl" method="POST">
                         <table>
                             <tr>
+                            <input type="hidden" name="ID" value="<%=id%>">
                                 <td> <label>Username</label></td>
-                                <td> <input type="text" name="username" id="username"></td>
+                                <td> <input type="text" name="username" value="<%=name%>"></td>
                             </tr>
-                            <tr>
-                                <td> <label>Password</label>   </td> 
-                                <td> <input type="text" name="password" id="password">    </td> 
-                            </tr>
-
                             <tr>
                                 <td>      <label>IC</label>   </td> 
-                                <td>    <input type="text" name="ic" id="password">   </td> 
+                                <td>    <input type="text" name="ic" value="<%=ic%>">   </td> 
                             </tr>
 
                             <tr>
                                 <td>   <label>POSITION</label>   </td> 
-                                <td>   <input type="text" name="position" id="password">   </td> 
+                                <td>   <input type="text" name="position" value="<%=position%>">   </td> 
                             </tr>
                             <tr>
                                 <td>   <label>Email</label>   </td> 
-                                <td>     <input type="text" name="email" id="password">   </td> 
+                                <td>     <input type="text" name="email" value="<%=email%>">   </td> 
+                                                
                             </tr>
                             <tr>
                                 <td></td>

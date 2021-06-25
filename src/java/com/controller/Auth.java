@@ -63,6 +63,7 @@ public class Auth extends HttpServlet {
            //set the session
             HttpSession session=request.getSession();  
             session.setAttribute("username",username);
+            session.setAttribute("ID", obj.getID(username, password));
             //redirect dashboard
             RequestDispatcher view = request.getRequestDispatcher("/Dashboard.jsp");
             view.forward(request, response);

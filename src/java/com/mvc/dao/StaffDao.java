@@ -46,7 +46,7 @@ public class StaffDao {
     try{
    
      conn=DBConnection.createConnection();
-     ps = conn.prepareStatement("UPDATE  STAFF SET USERNAME=? ,IC=?,POSITION=?,EMAIL=? where ID=?");
+     ps = conn.prepareStatement("UPDATE  USERS SET USERNAME=? ,IC=?,POSITION=?,EMAIL=? where ID_USER=?");
      ps.setString(1, staff.getName());
      ps.setString(2, staff.getIc());
      ps.setString(3, staff.getPosition());
@@ -67,7 +67,7 @@ public class StaffDao {
     int num;
     try{
     conn = DBConnection.createConnection();
-    ps = conn.prepareStatement("DELETE FROM STAFF WHERE ID=?");
+    ps = conn.prepareStatement("DELETE FROM USERS WHERE ID_USER=?");
     ps.setInt(1, ID);
     num=ps.executeUpdate();
     if(num==1)

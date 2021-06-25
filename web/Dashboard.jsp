@@ -94,9 +94,10 @@ display: block;
 
         <%
             String username = (String) session.getAttribute("username");
+            int id = (Integer) session.getAttribute("ID");
         %>
         <sql:query var="result" dataSource="${myDatasource}">
-            SELECT *  FROM USERS where USERNAME = '${username}'
+            SELECT *  FROM USERS where USERNAME = '${username}' and ID_USER = <%=id%>
         </sql:query>
     <h1 style="margin-left:0px;color:white; text-align: center ">Profile</h1>
     <c:forEach var = "row" items = "${result.rows}">

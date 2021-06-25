@@ -32,5 +32,21 @@ public class AuthDao {
             }
         return status;
     }
-    
+    public int getID(String username,String password){
+    int id=0;
+    try{
+        Connection conn = DBConnection.createConnection();
+        PreparedStatement ps = conn.prepareStatement("select * from USERS where USERNAME=? and PASSWORD=?");
+         ps.setString(1, username);
+         ps.setString(2, password);
+         ResultSet rs =ps.executeQuery();
+        while(rs.next()){
+        id=rs.getInt("ID_USER");
+        }
+    }catch(Exception ex)
+    {
+     ex.printStackTrace();
+    }
+    return id;
+    }
 }

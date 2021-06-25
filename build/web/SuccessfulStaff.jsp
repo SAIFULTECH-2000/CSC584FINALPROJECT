@@ -80,7 +80,7 @@ display: block;
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li> <a  class="dropdown-item" href="RegisterStaff.jsp">Register Staff</a></li>
-              <li><a class="dropdown-item" href="ViewStaff">View Staff</a></li>
+              <li><a class="dropdown-item" href="ViewStaff.jsp">View Staff</a></li>
             </ul>
           </li>
           <li class="nav-item">

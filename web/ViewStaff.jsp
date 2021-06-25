@@ -50,7 +50,7 @@ display: block;
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a href="dashboard.jsp" aria-current="page" class="nav-link active">Dashboard</a>
+            <a href="Dashboard.jsp" aria-current="page" class="nav-link active">Dashboard</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,7 +67,7 @@ display: block;
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li> <a  class="dropdown-item" href="RegisterStaff.jsp">Register Staff</a></li>
-              <li><a class="dropdown-item" href="ViewStaff">View Staff</a></li>
+              <li><a class="dropdown-item" href="ViewStaff.jsp">View Staff</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -83,11 +83,25 @@ display: block;
       </div>
     </div>
   </nav>    
-     <h1  style="margin-left:0px;color:white; text-align: center ">Staff List</h1>
+    
     <sql:query var="result" dataSource="${myDatasource}">
         SELECT *  FROM USERS
     </sql:query>
-
+    <%
+    String name = request.getParameter("name");
+    
+    
+    
+    if(name!=null){    
+    %>
+    <div class="card">
+        <div class="container">
+              <h1  style="margin-left:0px;color:green; text-align: center ">Successful Delete Staff:<%=name%></h1>
+           
+        </div>
+    </div>
+    <%}%>
+     <h1  style="margin-left:0px;color:white; text-align: center ">Staff List</h1>
     <div class="container" >
         <div class="card">
             <div class="card-body">
@@ -104,12 +118,17 @@ display: block;
                         <td>${row.username}</td>
                         <td>${row.position}</td>
                         <td>
-                            <form action="StaffController" method="post">
-                                <input type="hidden" name="ID" value="${row.ID}">
+                            <form action="UpdateStaff.jsp" method="post">
+                                <input type="hidden" name="ID" value="${row.ID_USER}">
+                                <input type="hidden" name="username" value="${row.USERNAME}">
+                                <input type="hidden" name="ic" value="${row.IC}">
+                                <input type="hidden" name="position" value="${row.POSITION}">
+                                 <input type="hidden" name="email" value="${row.EMAIL}">
                                 <input type="submit" value="UPDATE">
                             </form>
-                             <form action="StaffController" method="post">
-                                <input type="hidden" name="ID" value="${row.ID}">
+                             <form action="StaffControl" method="post">
+                                <input type="hidden" name="ID" value="${row.ID_USER}">
+                                <input type="hidden" name="username" value="${row.username}">
                                 <input type="submit" value="Delete">
                             </form>  
                             

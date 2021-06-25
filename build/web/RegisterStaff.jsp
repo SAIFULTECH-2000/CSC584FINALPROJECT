@@ -98,7 +98,7 @@
         <div class="container">
             <div class="card mx-auto" style="width: 18rem;">
                 <div class="card-body">
-                    <form action="StaffController" method="POST">
+                    <form action="StaffControl" method="POST">
                         <table>
                             <tr>
                                 <td> <label>Username</label></td>

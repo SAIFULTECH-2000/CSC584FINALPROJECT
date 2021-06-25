@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SAIFULTECH
  */
-@WebServlet(name = "StaffController", urlPatterns = {"/StaffController"})
-public class StaffController extends HttpServlet {
+@WebServlet(name = "StaffControl", urlPatterns = {"/StaffControl"})
+public class StaffControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,24 +37,49 @@ public class StaffController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      PrintWriter out = response.getWriter();
+           PrintWriter out = response.getWriter();
       List errorMsgs = new LinkedList();
-      errorMsgs.removeAll(errorMsgs);
       try{
       String username = request.getParameter("username");
       String password = request.getParameter("password");
       String ic = request.getParameter("ic");
       String position = request.getParameter("position");
       String  email = request.getParameter("email");
-      
-      if(username.length()==0 || password.length()==0 || ic.length()==0||position.length()==0||email.length()==0){
-       errorMsgs.add("Please insert all details");
-       request.setAttribute("errorMsgs", errorMsgs);
-       RequestDispatcher view = request.getRequestDispatcher("RegisterStaff.jsp");
-       view.forward(request, response);
-      }else{
-      Staff staff = new Staff(username,email,ic,position);
+      String id = request.getParameter("ID");
       StaffDao staffDao = new StaffDao();
+      if(id!=null){
+       if( ic!=null||position!=null||email!=null){   
+        Staff staff = new Staff(username,email,ic,position);
+        if(staffDao.updateStaff(staff, Integer.parseInt(id))){
+        request.removeAttribute("username");
+        request.setAttribute("update", "update");
+        RequestDispatcher view = request.getRequestDispatcher("ViewStaff.jsp");
+        view.forward(request, response);
+        }else{
+        out.println("gagal update");
+        }
+       
+       }else{
+       if(staffDao.deleteStaff(Integer.parseInt(id))){
+      request.setAttribute("username",username);
+      RequestDispatcher view = request.getRequestDispatcher("ViewStaff.jsp");
+      view.forward(request, response);
+      }else{
+      //error delete
+      }
+       }    
+      
+       
+      }
+    
+      
+      if(username.length()==0 || password.length()==0 || ic.length()==0||position.length()==0||email.length()==0){   
+      errorMsgs.add("Please insert all details");
+      request.setAttribute("errorMsgs", errorMsgs);
+      RequestDispatcher view = request.getRequestDispatcher("RegisterStaff.jsp");
+      view.forward(request, response);
+      }else{   
+      Staff staff = new Staff(username,email,ic,position);
       if(staffDao.insertStaff(staff, password)){
         request.setAttribute("staff", staff);
         RequestDispatcher view = request.getRequestDispatcher("SuccessfulStaff.jsp");
@@ -64,6 +89,9 @@ public class StaffController extends HttpServlet {
       }
       
       }
+      
+      
+   
       }catch(Exception e){
       e.printStackTrace();
       }
