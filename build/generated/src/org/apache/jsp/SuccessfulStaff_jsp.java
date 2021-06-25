@@ -63,6 +63,16 @@ public final class SuccessfulStaff_jsp extends org.apache.jasper.runtime.HttpJsp
         return;
       out.write('\r');
       out.write('\n');
+      Person.Staff staff = null;
+      synchronized (request) {
+        staff = (Person.Staff) _jspx_page_context.getAttribute("staff", PageContext.REQUEST_SCOPE);
+        if (staff == null){
+          staff = new Person.Staff();
+          _jspx_page_context.setAttribute("staff", staff, PageContext.REQUEST_SCOPE);
+        }
+      }
+      out.write('\r');
+      out.write('\n');
 
     if (null == session.getAttribute("username")) {
         response.sendRedirect("index.jsp");
@@ -76,7 +86,8 @@ public final class SuccessfulStaff_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("        <meta charset=\"UTF-8\">\r\n");
       out.write("        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n");
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n");
-      out.write("        <title>Donator</title>\r\n");
+      out.write("        <title>Successful Staff</title>\r\n");
+      out.write("        <link href=\"dist/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
       out.write("    </head>\r\n");
       out.write("    <style>\r\n");
       out.write("        body{\r\n");
@@ -217,6 +228,7 @@ public final class SuccessfulStaff_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("        }                                                                                    \r\n");
       out.write("    </style>\r\n");
       out.write("    <body>\r\n");
+      out.write("        \r\n");
       out.write("    </table>\r\n");
       out.write("    <!-- Top navigation -->\r\n");
       out.write("    <div class=\"topnav\">\r\n");
@@ -242,64 +254,44 @@ public final class SuccessfulStaff_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("    </div>\r\n");
       out.write("\r\n");
       out.write("\r\n");
-      out.write("    <h1  style=\"margin-left:0px;color:white; text-align: center \">Register Staff</h1>\r\n");
+      out.write("    <h1  style=\"margin-left:0px;color:white; text-align: center \">Successful Add Staff</h1>\r\n");
       out.write("    <div class=\"center\" >\r\n");
       out.write("        <div class=\"container\">\r\n");
-      out.write("            <form action=\"Register\" method=\"POST\">\r\n");
-      out.write("                <div class=\"txt_field\">\r\n");
-      out.write("                    <label>Username</label>\r\n");
-      out.write("                    <input type=\"text\" name=\"username\" id=\"username\">\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"txt_field\">\r\n");
-      out.write("                    <label>Password</label>\r\n");
-      out.write("                    <input type=\"text\" name=\"password\" id=\"password\">\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"txt_field\">\r\n");
-      out.write("                    <label>IC</label>\r\n");
-      out.write("                    <input type=\"text\" name=\"ic\" id=\"password\">\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"txt_field\">\r\n");
-      out.write("                    <label>POSITION</label>\r\n");
-      out.write("                    <input type=\"text\" name=\"position\" id=\"password\">\r\n");
-      out.write("                </div>\r\n");
-      out.write("                <div class=\"txt_field\">\r\n");
-      out.write("                    <label>Email</label>\r\n");
-      out.write("                    <input type=\"text\" name=\"email\" id=\"password\">\r\n");
-      out.write("                </div>\r\n");
-      out.write("\r\n");
-      out.write("                <input type=\"Submit\" name=\"Submit\">\r\n");
-      out.write("                \r\n");
-      out.write("            </form>\r\n");
-      out.write("               ");
+      out.write("         <br>\r\n");
+      out.write("        You have successful add new staff\r\n");
+      out.write("         <br>\r\n");
+      out.write("         ");
 
-        List errorMsgs = (List) request.getAttribute("errorMsgs");
-        if(errorMsgs!=null){
-        
+         
+         
       out.write("\r\n");
-      out.write("        <font color=\"red\">\r\n");
-      out.write("            <ul>");
-
-                Iterator items = errorMsgs.iterator();
-                while(items.hasNext()){
-                    String message =(String) items.next();
-                
-      out.write("\r\n");
-      out.write("                <li>\r\n");
-      out.write("                    ");
-      out.print( message);
-      out.write("\r\n");
-      out.write("                </li>\r\n");
-      out.write("                ");
-}
-      out.write("\r\n");
-      out.write("            </ul>\r\n");
-      out.write("        </font>\r\n");
-      out.write("        ");
-}
-      out.write("\r\n");
+      out.write("           <table style=\"width:100%\">\r\n");
+      out.write("                    <tr>\r\n");
+      out.write("                        <td>Name:");
+      out.write(org.apache.jasper.runtime.JspRuntimeLibrary.toString((((Person.Staff)_jspx_page_context.findAttribute("staff")).getName())));
+      out.write("</td>\r\n");
+      out.write("                    </tr>\r\n");
+      out.write("                    <tr>\r\n");
+      out.write("                        <td>IC:");
+      out.write(org.apache.jasper.runtime.JspRuntimeLibrary.toString((((Person.Staff)_jspx_page_context.findAttribute("staff")).getIc())));
+      out.write("</td>\r\n");
+      out.write("                    </tr>\r\n");
+      out.write("                    <tr>\r\n");
+      out.write("                        <td>Email:");
+      out.write(org.apache.jasper.runtime.JspRuntimeLibrary.toString((((Person.Staff)_jspx_page_context.findAttribute("staff")).getEmail())));
+      out.write("</td>\r\n");
+      out.write("                    </tr>\r\n");
+      out.write("                    <tr>\r\n");
+      out.write("                        <td>Position:");
+      out.write(org.apache.jasper.runtime.JspRuntimeLibrary.toString((((Person.Staff)_jspx_page_context.findAttribute("staff")).getPosition())));
+      out.write("</td>\r\n");
+      out.write("                    </tr>\r\n");
+      out.write("          </table>\r\n");
+      out.write("                    <a href=\"RegisterStaff.jsp\">Back</a>\r\n");
       out.write("        <br>\r\n");
       out.write("        </div>\r\n");
       out.write("    </div>\r\n");
+      out.write("<script src=\"dist/js/bootstrap.bundle.min.js\" type=\"text/javascript\"></script>\r\n");
       out.write("</body>\r\n");
       out.write("</html>");
     } catch (Throwable t) {
