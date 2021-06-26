@@ -48,7 +48,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="dashboard.jsp" aria-current="page" class="nav-link active">Dashboard</a>
+                            <a href="Dashboard.jsp" aria-current="page" class="nav-link active">Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,7 +65,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li> <a  class="dropdown-item" href="RegisterStaff.jsp">Register Staff</a></li>
-                                <li><a class="dropdown-item" href="ViewStaff">View Staff</a></li>
+                                <li><a class="dropdown-item" href="ViewStaff.jsp">View Staff</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
