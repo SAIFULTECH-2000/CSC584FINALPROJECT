@@ -64,10 +64,10 @@ public final class RegisterStaff_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("\r\n");
       out.write("\r\n");
 
-    if (null == session.getAttribute("username")) {
-        response.sendRedirect("index.jsp");
+   // if (null == session.getAttribute("username")) {
+    //    response.sendRedirect("index.jsp");
 
-    }
+   // }
 
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
@@ -152,7 +152,7 @@ public final class RegisterStaff_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("        <div class=\"container\">\r\n");
       out.write("            <div class=\"card mx-auto\" style=\"width: 18rem;\">\r\n");
       out.write("                <div class=\"card-body\">\r\n");
-      out.write("                    <form action=\"StaffController\" method=\"POST\">\r\n");
+      out.write("                    <form action=\"StaffControl\" method=\"POST\">\r\n");
       out.write("                        <table>\r\n");
       out.write("                            <tr>\r\n");
       out.write("                                <td> <label>Username</label></td>\r\n");

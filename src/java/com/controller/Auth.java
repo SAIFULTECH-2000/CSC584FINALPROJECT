@@ -40,49 +40,7 @@ public class Auth extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List errorMsgs = new LinkedList();
-        
-        try{
-        PrintWriter out = response.getWriter();
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        if(password.length() == 0 || username.length() == 0)
-        {
-           errorMsgs.add("Please insert username and password");
-           request.setAttribute("errorMsgs", errorMsgs);
-           RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
-           view.forward(request, response);
-        }
-        else
-        {
-            AuthDao obj = new AuthDao();
-           if(obj.auth(username,password)){
-           //successful login
-           // out.println("successful login .");
-            //Load the driver
-           //set the session
-            HttpSession session=request.getSession();  
-            session.setAttribute("username",username);
-            session.setAttribute("ID", obj.getID(username, password));
-            //redirect dashboard
-            RequestDispatcher view = request.getRequestDispatcher("/Dashboard.jsp");
-            view.forward(request, response);
-            
-           }else{
-           errorMsgs.add("password or username not correct");
-           request.setAttribute("errorMsgs", errorMsgs);
-           RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
-           view.forward(request, response);
-           }
-        }
-        }catch(IOException e ){
-            PrintWriter out = response.getWriter();
-            out.println("error:"+e);
-        errorMsgs.add("An unexpected error: " + e.getMessage());
-       // request.setAttribute("errorMsgs", errorMsgs);
-        //RequestDispatcher view = request.getRequestDispatcher("/error.view");
-       // view.forward(request, response);
-        }
+      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -112,6 +70,50 @@ public class Auth extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+          List errorMsgs = new LinkedList();
+        
+        try{
+        PrintWriter out = response.getWriter();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        if(password.length() == 0 || username.length() == 0)
+        {
+           errorMsgs.add("Please insert username and password");
+           request.setAttribute("errorMsgs", errorMsgs);
+           RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
+           view.forward(request, response);
+        }
+        else
+        {
+            AuthDao obj = new AuthDao();
+           if(obj.auth(username,password)){
+           //successful login
+           // out.println("successful login .");
+            //Load the driver
+           //set the session
+            HttpSession session=request.getSession();  
+            session.setAttribute("username",username);
+            session.setAttribute("ID", obj.getID(username, password));
+            session.setAttribute("role_id",obj.getRole_ID(username,password));
+            //redirect dashboard
+            RequestDispatcher view = request.getRequestDispatcher("/Dashboard.jsp");
+            view.forward(request, response);
+            
+           }else{
+           errorMsgs.add("password or username not correct");
+           request.setAttribute("errorMsgs", errorMsgs);
+           RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
+           view.forward(request, response);
+           }
+        }
+        }catch(IOException e ){
+            PrintWriter out = response.getWriter();
+            out.println("error:"+e);
+        errorMsgs.add("An unexpected error: " + e.getMessage());
+       // request.setAttribute("errorMsgs", errorMsgs);
+        //RequestDispatcher view = request.getRequestDispatcher("/error.view");
+       // view.forward(request, response);
+        }
     }
 
     /**
@@ -123,19 +125,5 @@ public class Auth extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    private boolean login(String username,String password){
-     boolean status= false;
-     try{
-        Class.forName("org.apache.derby.jdbc.ClientDriver");
-                Connection conn=DriverManager.getConnection("jdbc:derby://localhost:1527/BloodManagement;create=true;user=root;password=root");
-                PreparedStatement ps = conn.prepareStatement("select * from USERS where USERNAME=? and PASSWORD=?");
-                ps.setString(1, username);
-                ps.setString(2, password);
-                ResultSet rs =ps.executeQuery();
-                status = rs.next();   
-            }catch(ClassNotFoundException | SQLException ex){
-            }
-     return status;
-    }
 
 }

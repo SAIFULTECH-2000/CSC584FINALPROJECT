@@ -11,10 +11,10 @@
 <sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
 
 <%
-    if (null == session.getAttribute("username")) {
-        response.sendRedirect("index.jsp");
+   // if (null == session.getAttribute("username")) {
+    //    response.sendRedirect("index.jsp");
 
-    }
+   // }
 %>
 <!DOCTYPE html>
 <html lang="en">

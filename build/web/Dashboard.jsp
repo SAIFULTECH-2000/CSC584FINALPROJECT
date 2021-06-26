@@ -69,6 +69,10 @@ display: block;
                  <li> <a  class="dropdown-item" href="donation_information.jsp">Donation Information</a></li>
             </ul>
           </li>
+          <%
+          int role_id =(Integer) session.getAttribute("role_id");
+          if(role_id==1){
+          %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Staff
@@ -78,6 +82,7 @@ display: block;
               <li><a class="dropdown-item" href="ViewStaff">View Staff</a></li>
             </ul>
           </li>
+          <%}%>
           <li class="nav-item">
                  <a  class="nav-link"  href="submission.html">Submission</a>
           </li>
@@ -97,7 +102,7 @@ display: block;
             int id = (Integer) session.getAttribute("ID");
         %>
         <sql:query var="result" dataSource="${myDatasource}">
-            SELECT *  FROM USERS where USERNAME = '${username}' and ID_USER = <%=id%>
+            SELECT *  FROM STAFF where USERNAME = '${username}' and ID_USER = <%=id%>
         </sql:query>
     <h1 style="margin-left:0px;color:white; text-align: center ">Profile</h1>
     <c:forEach var = "row" items = "${result.rows}">
@@ -106,7 +111,7 @@ display: block;
                 <div class="card-body">
                   <table>
                     <tr>
-                        <td>Name:${row.username}</td>
+                        <td>Name:${row.name}</td>
                     </tr>
                     <tr>
                         <td>Email:${row.email}</td>

@@ -61,7 +61,7 @@ public class StaffControl extends HttpServlet {
        
        }else{
        if(staffDao.deleteStaff(Integer.parseInt(id))){
-      request.setAttribute("username",username);
+      request.setAttribute("name",username);
       RequestDispatcher view = request.getRequestDispatcher("ViewStaff.jsp");
       view.forward(request, response);
       }else{
