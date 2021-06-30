@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%-- 
     Document   : donation_information
     Created on : Jun 23, 2021, 7:22:38 PM
@@ -5,6 +7,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -81,55 +84,56 @@
                 </div>
             </div>
         </nav>  
-
+        <sql:query var="result" dataSource="${myDatasource}">
+            SELECT * FROM DONATION
+        </sql:query>
         <h1  style="margin-left:0px;color:white; text-align: center ">Donor Details</h1>
         <div class="container" >
             <div class="card">
                 <div class="card-body">
-                     <a href="register_donation.jsp" class="btn btn-primary">Register New Donation</a>
+                    <a href="register_donation.jsp" class="btn btn-primary">Register New Donation</a>
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
 
                         <table class="table table-bordered table-striped mb-0">
                             <tr>
                                 <th>Name</th>
-                                <th>Age</th>
+                                <th>Gender</th>
                                 <th>Blood Type</th>
                                 <th>Contact</th>
-                                <th>Gender</th>
+                                <th>Action</th>
                             </tr>
-                            <tr>
-                                <td>Siti Sarah</td>
-                                <td>24</td>
-                                <td>B</td>
-                                <td>017-9924837</td>
-                                <td>Female</td>
-                            </tr>
-                            <tr>
-                                <td>Nur Aminah</td>
-                                <td>43</td>
-                                <td>AB</td>
-                                <td>019-9192322</td>
-                                <td>Female</td>
-                            </tr>
-                            <tr>
-                                <td>Chee Siew Ling</td>
-                                <td>27</td>
-                                <td>O</td>
-                                <td>012-8872625</td>
-                                <td>Female</td>
-                            </tr>
-                            <tr>
-                                <td>Frederick A/L Joseph</td>
-                                <td>45</td>
-                                <td>A</td>
-                                <td>011-10287746</td>
-                                <td>Male</td>
-                            </tr>
+                            <c:forEach var ="row" items = "${result.rows}">
+                                <tr>
+                                    <td>${row.NAME}</td>
+                                    <td>${row.GENDER}</td>
+                                    <td>${row.TYPE_BLOOD}</td>
+                                    <td>${row.PHONENUM}</td>
+                                    <td>
+                                        <form action="DonationControl" method="post">
+                                            <input type="hidden" name="Name" id="Name" value="${row.NAME}">
+                                            <input type="hidden" name="IC" id="IC" value="${row.IC}">
+                                            <input type="hidden" name="address" id="addresss" value="${row.ADDRESS}">
+                                            <input type="hidden" name="tel" id="tel"value="${row.PHONENUM}">
+                                            <input type="hidden" name="bloodtype" id="bloodtype" value="${row.TYPE_BLOOD}">
+                                            <input type="hidden" name="ID" name="ID" value="${row.ID_DONATION}">
+                                            <input type="hidden" name="hh" id="hh" value="${row.HEALTHHISTORY}">  
+                                            <input type="hidden" name="gender" value="${row.gender}">
+                                               <input type="submit" value="UPDATE">
+                                        </form>
+                                   
+                                <form action="DonationControl" method="post">
+                                    <input type="hidden" name="method" value="DELETE">
+                                    <input type="hidden" name="ID" value="${row.ID_DONATION}">
+                                    <input type="submit" value="DELETE">
+                                </form>
+                                </td>
+                                </tr>
+                            </c:forEach>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-           <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+        <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     </body>
 </html>

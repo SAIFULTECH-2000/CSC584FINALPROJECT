@@ -42,7 +42,7 @@ public class DonatorDao {
     }
     return status;
     }
-    public boolean updateStaff(Staff staff,int ID){
+    public boolean updateDonator(Donator donator,int ID){
     boolean status=false;
     Connection conn;
     PreparedStatement ps;
@@ -50,12 +50,15 @@ public class DonatorDao {
     try{
    
      conn=DBConnection.createConnection();
-     ps = conn.prepareStatement("UPDATE  STAFF SET NAME=? ,IC=?,POSITION=?,EMAIL=? where ID_USER=?");
-     ps.setString(1, staff.getName());
-     ps.setString(2, staff.getIc());
-     ps.setString(3, staff.getPosition());
-     ps.setString(4, staff.getEmail());
-     ps.setInt(5, ID);
+     ps = conn.prepareStatement("UPDATE  DONATION SET TYPE_BLOOD=?,NAME=?,IC=?,GENDER=?,ADDRESS=?,PHONENUM=?,HEALTHHISTORY=? where ID_DONATION=?");
+     ps.setString(1,donator.getBloodtype());
+     ps.setString(2, donator.getName());
+     ps.setString(3, donator.getIc());
+     ps.setString(4,donator.getGender());
+     ps.setString(5, donator.getAddress());
+     ps.setString(6, donator.getPhone());
+     ps.setString(7, donator.getHistory());
+     ps.setInt(8, ID);
      num =ps.executeUpdate();
      if(num==1)
         status=true;
@@ -64,14 +67,14 @@ public class DonatorDao {
     }
     return status;
     }
-    public boolean deleteStaff(int ID){
+    public boolean deleteDonator(int ID){
      boolean status=false;
     Connection conn;
     PreparedStatement ps;
     int num;
     try{
     conn = DBConnection.createConnection();
-    ps = conn.prepareStatement("DELETE FROM STAFF WHERE ID_USER=?");
+    ps = conn.prepareStatement("DELETE FROM STAFF WHERE ID_DONATION=?");
     ps.setInt(1, ID);
     num=ps.executeUpdate();
     if(num==1)
@@ -80,22 +83,5 @@ public class DonatorDao {
     e.printStackTrace();
     }
     return status;
-    }
-    public boolean checkusername(String username){
-    boolean status = false;
-        Connection conn;
-        PreparedStatement ps;
-        try{
-                conn=DBConnection.createConnection();
-                ps = conn.prepareStatement("select * from STAFF where USERNAME=? ");
-                ps.setString(1, username);
-                ResultSet rs =ps.executeQuery();
-                status = rs.next();
-            }
-        catch(Exception ex)
-            {
-                 ex.printStackTrace();
-            }
-        return status;
     }
 }

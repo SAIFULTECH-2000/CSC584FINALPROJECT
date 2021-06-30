@@ -144,8 +144,8 @@
                         <table>
                             <tr>
                                 <td><label>Gender</label></td>                 
-                                <td><input type="checkbox" name="gender" id="gender">Male
-                                    <input type="checkbox" name="gender" id="gender">Female</td>
+                                <td><input type="radio" name="gender" id="gender">Male
+                                    <input type="radio" name="gender" id="gender">Female</td>
                             </tr>
 
                             <tr>
@@ -158,7 +158,7 @@
                             </tr>
                             <tr>
                                 <td>Address</td>
-                                <td><input type="text" name="address" id="addresss" value=<%=address%>></td>
+                                <td><input type="text" name="address" id="addresss" value="<%=address%>"></td>
                             </tr>
                             <tr>
                                 <td>Contact Number</td>
