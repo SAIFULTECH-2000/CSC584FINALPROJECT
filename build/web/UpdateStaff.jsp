@@ -93,7 +93,8 @@
             </div>
         </nav>    
         <%
-        String name = request.getParameter("username");
+        String username = request.getParameter("username");
+        String name = request.getParameter("name");
         String ic = request.getParameter("ic");
         String position = request.getParameter("position");
         String email = request.getParameter("email");
@@ -107,9 +108,14 @@
                     <form action="StaffControl" method="POST">
                         <table>
                             <tr>
+                              <input type="hidden" name="method" value="update">
                             <input type="hidden" name="ID" value="<%=id%>">
                                 <td> <label>Username</label></td>
-                                <td> <input type="text" name="username" value="<%=name%>"></td>
+                                <td> <input type="text" name="username" value="<%=username%>"></td>
+                            </tr>
+                            <tr>
+                                <td> <label>Name</label></td>
+                                <td> <input type="text" name="name" value="<%=name%>"></td>
                             </tr>
                             <tr>
                                 <td>      <label>IC</label>   </td> 

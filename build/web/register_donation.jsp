@@ -4,6 +4,8 @@
     Author     : SAIFULTECH/syakir
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,13 +83,24 @@
                 </div>
             </div>
         </nav>  
+
         <h1  style="margin-left:0px;color:white; text-align: center ">BLOOD DONATION REGISTER</h1>
+        <%
+            String name = request.getParameter("Name");
+            String ic = request.getParameter("IC");
+            String address = request.getParameter("address");
+            String tel = request.getParameter("tel");
+            String bloodtype = request.getParameter("bloodtype");
+        %>
+
         <div class="container" >
             <div class="card mx-auto"  style="width: 30rem;">
                 <div class="card-body" >
-                   
-                        <form action="" method="post">
-                             <table>
+                    <%
+                        if (name == null || ic == null || address == null || tel == null || bloodtype == null) {
+                    %>
+                    <form action="DonationControl" method="post">
+                        <table>
                             <tr>
                                 <td><label>Gender</label></td>                 
                                 <td><input type="checkbox" name="gender" id="gender">Male
@@ -124,9 +137,67 @@
                             </tr>
 
                             <br> <br>
-                             </table>
-                        </form>
-                   
+                        </table>
+                    </form>
+                    <%} else {%>
+                    <form action="DonationControl" method="post">
+                        <table>
+                            <tr>
+                                <td><label>Gender</label></td>                 
+                                <td><input type="checkbox" name="gender" id="gender">Male
+                                    <input type="checkbox" name="gender" id="gender">Female</td>
+                            </tr>
+
+                            <tr>
+                                <td>Name</td>
+                                <td><input type="text" name="Name" id="Name" value="<%=name%>"></td>
+                            </tr>
+                            <tr>
+                                <td>IC</td>
+                                <td><input type="text" name="IC" id="IC" value="<%=ic%>"></td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td><input type="text" name="address" id="addresss" value=<%=address%>></td>
+                            </tr>
+                            <tr>
+                                <td>Contact Number</td>
+                                <td> <input type="text" name="tel" id="tel"value="<%=tel%>"></td
+                            </tr>
+                            <tr>
+                                <td>Blood Type</td>
+                                <td><input type="text" name="bloodtype" id="bloodtype" value="<%=bloodtype%>"></td>
+                            </tr>
+                            <tr>
+                                <td>Health History (If applicable)</td>
+                                <td> <input type="text" name="hh" id="hh"></td>                      
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td> <input type="Submit" name="Submit"></td>                      
+                            </tr>
+
+                            <br> <br>
+                        </table>
+                    </form>
+                    <%
+                        List errorMsgs = (List) request.getAttribute("errorMsgs");
+                        if (errorMsgs != null) {
+                    %>
+                    <font color="red">
+                    <ul><%
+                        Iterator items = errorMsgs.iterator();
+                        while (items.hasNext()) {
+                            String message = (String) items.next();
+                        %>
+                        <li>
+                            <%= message%>
+                        </li>
+                        <%}%>
+                    </ul>
+                    </font>
+                    <%}%>
+                    <%}%>
                 </div>
             </div>
             <a href="donation_information.jsp">Back</a>

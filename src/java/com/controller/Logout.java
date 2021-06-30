@@ -38,6 +38,8 @@ public class Logout extends HttpServlet {
       HttpSession session = request.getSession(false);
       String message = "You have been successfully logged out";
       session.removeAttribute("username");
+      session.removeAttribute("ID");
+      session.removeAttribute("role_id");
       session.invalidate();
       request.setAttribute("message", message);
       RequestDispatcher view = request.getRequestDispatcher("/index.jsp");

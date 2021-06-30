@@ -16,7 +16,7 @@ public class Donator {
     String address;
     String phone;
     String bloodtype;
-    String history;
+    String history="not state";
 
     public Donator(String gender, String name, String ic, String address, String phone, String bloodtype, String history) {
         this.gender = gender;

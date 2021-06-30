@@ -24,12 +24,15 @@ public class StaffDao {
     try{
    
      conn=DBConnection.createConnection();
-     ps = conn.prepareStatement("INSERT INTO USERS (USERNAME,PASSWORD,IC,POSITION,EMAIL) values(?,?,?,?,?)");
+     ps = conn.prepareStatement("INSERT INTO STAFF (NAME,USERNAME,PASSWORD,IC,POSITION,EMAIL,ID_ROLE) values(?,?,?,?,?,?,?)");
      ps.setString(1, staff.getName());
-     ps.setString(2, password);
-     ps.setString(3, staff.getIc());
-     ps.setString(4, staff.getPosition());
-     ps.setString(5, staff.getEmail());
+     ps.setString(2, staff.getUsername());
+     ps.setString(3, password);
+     ps.setString(4, staff.getIc());
+     ps.setString(5, staff.getPosition());
+     ps.setString(6, staff.getEmail());
+     ps.setInt(7,staff.getRole());
+  
      num =ps.executeUpdate();
      if(num==1)
         status=true;
@@ -46,7 +49,7 @@ public class StaffDao {
     try{
    
      conn=DBConnection.createConnection();
-     ps = conn.prepareStatement("UPDATE  USERS SET USERNAME=? ,IC=?,POSITION=?,EMAIL=? where ID_USER=?");
+     ps = conn.prepareStatement("UPDATE  STAFF SET NAME=? ,IC=?,POSITION=?,EMAIL=? where ID_USER=?");
      ps.setString(1, staff.getName());
      ps.setString(2, staff.getIc());
      ps.setString(3, staff.getPosition());
@@ -67,7 +70,7 @@ public class StaffDao {
     int num;
     try{
     conn = DBConnection.createConnection();
-    ps = conn.prepareStatement("DELETE FROM USERS WHERE ID_USER=?");
+    ps = conn.prepareStatement("DELETE FROM STAFF WHERE ID_USER=?");
     ps.setInt(1, ID);
     num=ps.executeUpdate();
     if(num==1)
@@ -76,5 +79,22 @@ public class StaffDao {
     e.printStackTrace();
     }
     return status;
+    }
+    public boolean checkusername(String username){
+    boolean status = false;
+        Connection conn;
+        PreparedStatement ps;
+        try{
+                conn=DBConnection.createConnection();
+                ps = conn.prepareStatement("select * from STAFF where USERNAME=? ");
+                ps.setString(1, username);
+                ResultSet rs =ps.executeQuery();
+                status = rs.next();
+            }
+        catch(Exception ex)
+            {
+                 ex.printStackTrace();
+            }
+        return status;
     }
 }

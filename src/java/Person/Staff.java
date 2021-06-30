@@ -16,19 +16,32 @@ String name;
 String email;
 String ic;
 String position;
+String username;
+int role;
 
     public Staff() {
         name = " ";
         email = " ";
         ic = " ";
         position = " ";
+        username ="";
     }
     
-    public Staff(String name, String email, String ic, String position) {
+    public Staff(String username,String name, String email, String ic, String position,int role) {
+        this.username=username;
         this.name = name;
         this.email = email;
         this.ic = ic;
         this.position = position;
+        this.role = role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    public int getRole() {
+        return role;
     }
 
     public String getName() {
@@ -61,6 +74,14 @@ String position;
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     @Override

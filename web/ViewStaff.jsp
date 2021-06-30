@@ -83,23 +83,36 @@ display: block;
       </div>
     </div>
   </nav>    
+      
+      <%
+      int id = (Integer) session.getAttribute("ID");
+      %>
     
     <sql:query var="result" dataSource="${myDatasource}">
-        SELECT *  FROM USERS
+        SELECT *  FROM STAFF WHERE ID_USER != <%=id%>
     </sql:query>
-    <%
-    String name = request.getParameter("name");
-    
-    
-    
-    if(name!=null){    
-    %>
+       <%
+       String md=(String) session.getAttribute("md");
+       String name=(String) session.getAttribute("mdname");
+       if(md!=null){
+       if(md.equals("delete")){ 
+       %>
+         
     <div class="card">
         <div class="container">
-              <h1  style="margin-left:0px;color:green; text-align: center ">Successful Delete Staff:<%=name%></h1>
+              <h1  style="margin-left:0px;color:red; text-align: center ">Successful Delete Staff:<%=name%></h1>
            
         </div>
     </div>
+    <%session.removeAttribute("md");session.removeAttribute("mdname");}else if(md.equals("update")){%>
+    
+      <div class="card">
+        <div class="container">
+              <h1  style="margin-left:0px;color:green; text-align: center ">Successful update Staff:<%=name%></h1>
+           
+        </div>
+    </div>
+    <%session.removeAttribute("md");session.removeAttribute("mdname");} %>
     <%}%>
      <h1  style="margin-left:0px;color:white; text-align: center ">Staff List</h1>
     <div class="container" >
@@ -115,20 +128,22 @@ display: block;
                 </tr>
                 <c:forEach var = "row" items = "${result.rows}">
                     <tr>
-                        <td>${row.username}</td>
+                        <td>${row.name}</td>
                         <td>${row.position}</td>
                         <td>
                             <form action="UpdateStaff.jsp" method="post">
                                 <input type="hidden" name="ID" value="${row.ID_USER}">
                                 <input type="hidden" name="username" value="${row.USERNAME}">
+                                <input type="hidden" name="name" value="${row.name}">
                                 <input type="hidden" name="ic" value="${row.IC}">
                                 <input type="hidden" name="position" value="${row.POSITION}">
                                  <input type="hidden" name="email" value="${row.EMAIL}">
                                 <input type="submit" value="UPDATE">
                             </form>
                              <form action="StaffControl" method="post">
+                                 <input type="hidden" name="method" value="delete">
                                 <input type="hidden" name="ID" value="${row.ID_USER}">
-                                <input type="hidden" name="username" value="${row.username}">
+                                <input type="hidden" name="name" value="${row.name}">
                                 <input type="submit" value="Delete">
                             </form>  
                             

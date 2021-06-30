@@ -11,10 +11,10 @@
 <sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
 
 <%
-   // if (null == session.getAttribute("username")) {
+    // if (null == session.getAttribute("username")) {
     //    response.sendRedirect("index.jsp");
 
-   // }
+    // }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +23,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Register Staff</title>
-         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <style>
         .gradient-custom {
@@ -92,41 +92,106 @@
                 </div>
             </div>
         </nav>    
-
+        <%            String username = request.getParameter("username");
+            String name = request.getParameter("name");
+            String ic = request.getParameter("ic");
+            String position = request.getParameter("position");
+            String email = request.getParameter("email");
+        %>
 
         <h1  style="margin-left:0px;color:white; text-align: center ">Register Staff</h1>
         <div class="container">
             <div class="card mx-auto" style="width: 18rem;">
                 <div class="card-body">
                     <form action="StaffControl" method="POST">
+                        <%
+                            if (name == null || ic == null || position == null || email == null) {
+                        %>
                         <table>
                             <tr>
                                 <td> <label>Username</label></td>
                                 <td> <input type="text" name="username" id="username"></td>
                             </tr>
                             <tr>
+                                <td>Name</td>
+
+                                <td><input type="text" name="name" ></td>
+                            </tr>
+                            <tr>
                                 <td> <label>Password</label>   </td> 
-                                <td> <input type="text" name="password" id="password">    </td> 
+                                <td> <input type="text" name="password" >    </td> 
                             </tr>
 
                             <tr>
                                 <td>      <label>IC</label>   </td> 
-                                <td>    <input type="text" name="ic" id="password">   </td> 
+                                <td>    <input type="text" name="ic" >   </td> 
                             </tr>
-
+                            <tr>
+                                <td>      <label>ROLE ID</label>   </td> 
+                                <td>    
+                                    <select class="form-select" aria-label="Default select example" name="role">
+                                        <option value="1">Admin</option>
+                                        <option value="2">Staff</option>
+                                    </select>
+                                </td> 
+                            </tr>
                             <tr>
                                 <td>   <label>POSITION</label>   </td> 
-                                <td>   <input type="text" name="position" id="password">   </td> 
+                                <td>   <input type="text" name="position" >   </td> 
                             </tr>
                             <tr>
                                 <td>   <label>Email</label>   </td> 
-                                <td>     <input type="text" name="email" id="password">   </td> 
+                                <td>     <input type="text" name="email" >   </td> 
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>    <input type="Submit" name="Submit"></td>
                             </tr>
                         </table>
+                        <%} else {%>
+                        <table>
+                            <tr>
+                                <td> <label>Username</label></td>
+                                <td> <input type="text" name="username" value="<%=username%>"></td>
+                            </tr>
+                            <tr>
+                                <td>Name</td>
+
+                                <td><input type="text" name="name" value="<%=name%>"></td>
+                            </tr>
+                            <tr>
+                                <td> <label>Password</label>   </td> 
+                                <td> <input type="text" name="password" >    </td> 
+                            </tr>
+
+                            <tr>
+                                <td>      <label>IC</label>   </td> 
+                                <td>    <input type="text" name="ic" value="<%=ic%>">   </td> 
+                            </tr>
+                            <tr>
+                                <td>IC</td>
+                                <td> 
+                                    <select class="form-select" aria-label="Default select example" name="role">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">Admin</option>
+                                        <option value="2">Staff</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>   <label>POSITION</label>   </td> 
+                                <td>   <input type="text" name="position" value="<%=position%>">   </td> 
+                            </tr>
+                            <tr>
+                                <td>   <label>Email</label>   </td> 
+                                <td>     <input type="text" name="email" value="<%=email%>">   </td> 
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>    <input type="Submit" name="Submit"></td>
+                            </tr>
+                        </table>
+                        <%}%>
                     </form>
                     <%
                         List errorMsgs = (List) request.getAttribute("errorMsgs");
@@ -149,6 +214,7 @@
                 </div>
             </div>
         </div>
-             <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+
+        <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     </body>
 </html>
