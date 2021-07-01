@@ -102,7 +102,37 @@ display: block;
     </div>
   </nav>    
 
-
+  
+      <%
+      int id = (Integer) session.getAttribute("ID");
+      %>
+    
+    <sql:query var="result" dataSource="${myDatasource}">
+        SELECT *  FROM HOSPITAL WHERE ID_HOSPITAL != <%=id%>
+    </sql:query>
+       <%
+       String md=(String) session.getAttribute("md");
+       String name_hospital=(String) session.getAttribute("mdname_hospital");
+       if(md!=null){
+       if(md.equals("delete")){ 
+       %>
+         
+    <div class="card">
+        <div class="container">
+              <h1  style="margin-left:0px;color:red; text-align: center ">Successfully Deleted Hospital:<%=name_hospital%></h1>
+           
+        </div>
+    </div>
+    <%session.removeAttribute("md");session.removeAttribute("mdname_hospital");}else if(md.equals("update")){%>
+    
+      <div class="card">
+        <div class="container">
+              <h1  style="margin-left:0px;color:green; text-align: center ">Successfully Update Hospital:<%=name_hospital%></h1>
+           
+        </div>
+    </div>
+    <%session.removeAttribute("md");session.removeAttribute("mdname_hospital");} %>
+    <%}%>
   <div class="container">
     <h1  style="margin-left:0px;color:white; text-align: center ">Hospital List</h1>
     <div class="card">
@@ -111,34 +141,35 @@ display: block;
 
           <table class="table table-bordered table-striped mb-0">
                           <tr>
-                    <th>Hosp. Name</th>
-                    <th>Hosp. Address</th>
+                    <th>Hospital Name</th>
+                    <th>Hospital Address</th>
                     <th>Person In Charge (PIC)</th>
                     <th>Action</th>
                 </tr>
                 <c:forEach var = "row" items = "${result.rows}">
                     <tr>
-                        <td>${row.name_hospital}</td>
-                        <td>${row.address_hospital}</td>
-                        <td>${row.pic}</td>
+                        <td>${row.NAME_HOSPITAL}</td>
+                        <td>${row.ADDRESS_HOSPITAL}</td>
+                        <td>${row.PIC}</td>
                         <td>
                             <form action="UpdateHospital.jsp" method="post">
-                                <input type="hidden" name="name_hospital" value="${row.name_hospital}">
-                                <input type="hidden" name="address_hospital" value="${row.address_hospital}">
-                                <input type="hidden" name="pic" value="${row.pic}">
+                                <input type="hidden" name="name_hospital" value="${row.NAME_HOSPITAL}">
+                                <input type="hidden" name="address_hospital" value="${row.ADDRESS_HOSPITAL}">
+                                <input type="hidden" name="pic" value="${row.PIC}">
                                 <input type="submit" value="UPDATE">
                             </form>
                              <form action="HospitalControl" method="post">
                                  <input type="hidden" name="method" value="delete">
-                                <input type="hidden" name="id_hospital" value="${row.id_hospital}">
-                                <input type="hidden" name="name_hospital" value="${row.name_hospital}">
-                                <input type="submit" value="Delete">
+                                <input type="hidden" name="id_hospital" value="${row.ID_HOSPITAL}">
+                                <input type="hidden" name="name_hospital" value="${row.NAME_HOSPITAL}">
+                                <input type="submit" value="DELETE">
                             </form>  
                             
                         </td>
                     </tr>
                 </c:forEach>
                     </table>
+            
         
         </div>
       </div>

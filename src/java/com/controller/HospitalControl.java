@@ -75,11 +75,12 @@ public class HospitalControl extends HttpServlet {
             String pic = request.getParameter("pic");
             String id_hospital = request.getParameter("id_hospital");
             HospitalDao hospitalDao = new HospitalDao();
-            Hospital hospital = new Hospital();
             String method = request.getParameter("method");
             
             if (id_hospital == null) {
-                if (name_hospital.length() == 0 || name_hospital.length() == 0 || address_hospital.length() == 0 || pic.length() == 0) {
+                
+                
+                if (name_hospital.length() == 0 || address_hospital.length() == 0 || pic.length() == 0) {
                     if (name_hospital.length() != 0) {
                         request.setAttribute("name_hospital", name_hospital);
                     } else {
@@ -96,12 +97,13 @@ public class HospitalControl extends HttpServlet {
                     
                     errorMsgs.add("Please insert all details");
                     request.setAttribute("errorMsgs", errorMsgs);
-                    RequestDispatcher view = request.getRequestDispatcher("RegisterStaff.jsp");
+                    RequestDispatcher view = request.getRequestDispatcher("RegisterHospital.jsp");
                     view.forward(request, response);
                 } else {
                     //insert
-                    if (hospitalDao.insertHospital(hospital)) {
-                        errorMsgs.add("username is take please try again");
+                    
+                    if (hospitalDao.checkHospital(name_hospital)) {
+                        errorMsgs.add("hospital name is take please try again");
                         request.setAttribute("name_hospital", name_hospital);
                         request.setAttribute("address_hospital", address_hospital);
                         request.setAttribute("pic", pic);
@@ -110,12 +112,16 @@ public class HospitalControl extends HttpServlet {
                         view.forward(request, response);
                     } else {
                         //insert method here
-                        hospital = new Hospital(name_hospital, address_hospital, pic);
+                        
+                        Hospital hospital = new Hospital(name_hospital, address_hospital, pic);
                         if (hospitalDao.insertHospital(hospital)) {
                             request.setAttribute("hospital", hospital);
                             RequestDispatcher view = request.getRequestDispatcher("SuccessfulHospital.jsp");
                             view.forward(request, response);
                         } else {
+                            /*errorMsgs.add(name_hospital);
+                            errorMsgs.add(address_hospital);
+                            errorMsgs.add(pic);*/
                             errorMsgs.add("Please contact Developer");
                             request.setAttribute("errorMsgs", errorMsgs);
                             RequestDispatcher view = request.getRequestDispatcher("RegisterHospital.jsp");
@@ -129,7 +135,7 @@ public class HospitalControl extends HttpServlet {
              if(hospitalDao.deleteHospital(Integer.parseInt(id_hospital))){
               HttpSession session=request.getSession();  
               session.setAttribute("md","delete");
-              session.setAttribute("mdname",name_hospital);
+              session.setAttribute("mdname_hospital",name_hospital);
               request.getRequestDispatcher("Hospital.jsp").forward(request, response);
              }else{
               RequestDispatcher view = request.getRequestDispatcher("Hospital.jsp");
@@ -137,12 +143,12 @@ public class HospitalControl extends HttpServlet {
              }
              
              }else if(method.equals("update")){
-                hospital = new Hospital(name_hospital, address_hospital, pic);
+                Hospital hospital = new Hospital(name_hospital, address_hospital, pic);
                 if(hospitalDao.updateHospital(hospital,Integer.parseInt(id_hospital))){
                     HttpSession session=request.getSession();  
  
                  session.setAttribute("md","update");
-              session.setAttribute("mdname",name_hospital);
+              session.setAttribute("mdname_hospital",name_hospital);
               RequestDispatcher view = request.getRequestDispatcher("Hospital.jsp");
               view.forward(request, response);
                 }else{

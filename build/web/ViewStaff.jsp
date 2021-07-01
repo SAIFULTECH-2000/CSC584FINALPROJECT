@@ -106,7 +106,7 @@ display: block;
          
     <div class="card">
         <div class="container">
-              <h1  style="margin-left:0px;color:red; text-align: center ">Successful Delete Staff:<%=name%></h1>
+              <h1  style="margin-left:0px;color:red; text-align: center ">Successfully Deleted Staff:<%=name%></h1>
            
         </div>
     </div>

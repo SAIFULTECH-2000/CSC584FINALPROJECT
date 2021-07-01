@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/src/java/Person/BloodDonator.java</file>
-            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/src/java/com/controller/Auth.java</file>
-            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/src/java/com/controller/DonationControl.java</file>
-            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/src/java/Person/Donator.java</file>
-            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/src/java/Person/Submission.java</file>
-            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/src/java/Person/Staff.java</file>
+            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/src/java/com/mvc/dao/HospitalDao.java</file>
+            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/web/UpdateHospital.jsp</file>
+            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/src/java/com/controller/HospitalControl.java</file>
+            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/src/java/com/controller/StaffControl.java</file>
+            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/web/Hospital.jsp</file>
+            <file>file:/C:/Users/Admin/Desktop/584%20project/CSC584FINALPROJECT/CSC584FINALPROJECT/web/ViewStaff.jsp</file>
         </group>
     </open-files>
 </project-private>

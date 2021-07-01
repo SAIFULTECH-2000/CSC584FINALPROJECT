@@ -98,29 +98,27 @@
             </div>
         </nav>    
         <%
-        String username = request.getParameter("username");
-        String name = request.getParameter("name");
-        String ic = request.getParameter("ic");
-        String position = request.getParameter("position");
-        String email = request.getParameter("email");
-        String id = request.getParameter("ID");
+        String name_hospital = request.getParameter("name_hospital");
+        String address_hospital = request.getParameter("address_hospital");
+        String pic = request.getParameter("pic");
+        String id_hospital= request.getParameter("ID_HOSPITAL");
         %>
 
         <h1  style="margin-left:0px;color:white; text-align: center ">Update Hospital Information</h1>
         <div class="container">
             <div class="card mx-auto" style="width: 18rem;">
                 <div class="card-body">
-                    <form action="StaffControl" method="POST">
+                    <form action="HospitalControl" method="POST">
                         <table>
                             <tr>
                               <input type="hidden" name="method" value="update">
-                            <input type="hidden" name="ID" value="<%=id%>">
+                            <input type="hidden" name="ID_HOSPITAL" value="<%=id_hospital%>">
                                 <td> <label>Name</td>
-                                <td> <input type="text" name="name"></td>
+                                <td> <input type="text" name="name_hospital"></td>
                             </tr>
                             <tr>
                                 <td> <label>Address</label></td>
-                                <td> <input type="text" name="address"></td>
+                                <td> <input type="text" name="address_hospital"></td>
                             </tr>
                             <tr>
                                 <td>      <label>PIC</label>   </td> 
