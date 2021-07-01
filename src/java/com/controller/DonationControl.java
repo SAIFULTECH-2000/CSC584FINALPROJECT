@@ -78,11 +78,12 @@ public class DonationControl extends HttpServlet {
             HttpSession session = request.getSession();
             int id = (Integer) session.getAttribute("ID");
             String method = request.getParameter("method");
-
+            int iddonation =Integer.parseInt(  request.getParameter("ID"));
             DonatorDao dao = new DonatorDao();
+            if(method !=null){
             if (method.equals("DELETE")) {
                 //DELETE
-                if (dao.deleteDonator(id)) {
+                if (dao.deleteDonator(iddonation)) {
                     RequestDispatcher view = request.getRequestDispatcher("donation_information.jsp");
                     view.forward(request, response);
                 } else {
@@ -104,7 +105,7 @@ public class DonationControl extends HttpServlet {
                     }
                 }
             }
-
+            }
             if (gender == null || name.length() == 0 || ic.length() == 0 || address.length() == 0 || tel.length() == 0 || bloodtype.length() == 0) {
                 if (gender != null) {
                     request.setAttribute("gender", gender);
@@ -152,7 +153,7 @@ public class DonationControl extends HttpServlet {
                     out.println("Please contact your developer");
                 }
             }
-
+            
         } catch (Exception e) {
 
         }

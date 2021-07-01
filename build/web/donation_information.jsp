@@ -109,7 +109,7 @@
                                     <td>${row.TYPE_BLOOD}</td>
                                     <td>${row.PHONENUM}</td>
                                     <td>
-                                        <form action="DonationControl" method="post">
+                                        <form action="update_donation.jsp" method="post">
                                             <input type="hidden" name="Name" id="Name" value="${row.NAME}">
                                             <input type="hidden" name="IC" id="IC" value="${row.IC}">
                                             <input type="hidden" name="address" id="addresss" value="${row.ADDRESS}">

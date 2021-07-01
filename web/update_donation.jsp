@@ -86,12 +86,12 @@
 
         <h1  style="margin-left:0px;color:white; text-align: center ">BLOOD DONATION REGISTER</h1>
         <%
+            String gender = request.getParameter("gender");
             String name = request.getParameter("Name");
             String ic = request.getParameter("IC");
             String address = request.getParameter("address");
             String tel = request.getParameter("tel");
             String bloodtype = request.getParameter("bloodtype");
-            String gender = request.getParameter("gender");
         %>
 
         <div class="container" >
@@ -104,8 +104,8 @@
                         <table>
                             <tr>
                                 <td><label>Gender</label></td>                 
-                                <td><input type="checkbox" name="gender" id="gender">Male
-                                    <input type="checkbox" name="gender" id="gender">Female</td>
+                                <td><input type="checkbox" name="gender" id="gender" value="MALE">Male
+                                    <input type="checkbox" name="gender" id="gender" value="FEMALE">Female</td>
                             </tr>
 
                             <tr>
@@ -146,14 +146,14 @@
                             <tr>
                                 <td><label>Gender</label></td>                 
                                 <td>
-                                    <%   if (gender.equals("MALE")) {%>
+                                    
+                                 <%   if(gender.equals("MALE")){%>
                                     <input type="radio" name="gender" id="gender" value="MALE" checked>Male
                                     <input type="radio" name="gender" id="gender" value="FEMALE">Female
-                                    <%  } else {%>
+                                      <%  }else{%>
                                     <input type="radio" name="gender" id="gender" value="MALE">Male
                                     <input type="radio" name="gender" id="gender" value="FEMALE" checked>Female
-                                    <%    }%>
-
+                                <%    }%>
                                 </td>
                             </tr>
 
@@ -207,10 +207,9 @@
                     </font>
                     <%}%>
                     <%}%>
-                    <a href="donation_information.jsp">Back</a>
                 </div>
             </div>
-
+            <a href="donation_information.jsp">Back</a>
         </div>
         <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     </body>

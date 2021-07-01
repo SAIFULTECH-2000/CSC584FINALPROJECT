@@ -9,11 +9,6 @@ package com.controller;
 import com.mvc.dao.AuthDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -76,14 +71,7 @@ public class Auth extends HttpServlet {
         PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if(password.length() == 0 || username.length() == 0)
-        {
-           errorMsgs.add("Please insert username and password");
-           request.setAttribute("errorMsgs", errorMsgs);
-           RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
-           view.forward(request, response);
-        }
-        else
+        if(password.length() != 0 || username.length() != 0)
         {
             AuthDao obj = new AuthDao();
            if(obj.auth(username,password)){
@@ -100,7 +88,7 @@ public class Auth extends HttpServlet {
             view.forward(request, response);
             
            }else{
-           errorMsgs.add("password or username not correct");
+           errorMsgs.add("Password or Username not correct");
            request.setAttribute("errorMsgs", errorMsgs);
            RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
            view.forward(request, response);

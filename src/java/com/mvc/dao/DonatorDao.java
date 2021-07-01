@@ -74,7 +74,7 @@ public class DonatorDao {
     int num;
     try{
     conn = DBConnection.createConnection();
-    ps = conn.prepareStatement("DELETE FROM STAFF WHERE ID_DONATION=?");
+    ps = conn.prepareStatement("DELETE FROM DONATION WHERE ID_DONATION=?");
     ps.setInt(1, ID);
     num=ps.executeUpdate();
     if(num==1)

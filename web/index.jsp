@@ -46,9 +46,29 @@
                 display: block;
             }
         </style>
+        <script>
+function validateForm() {
+  let errorusername = document.forms["myForm"]["username"].value;
+  let errorpassword = document.forms["myForm"]["password"].value;
+  if (errorusername == "") {
+    document.getElementById("errorusername").innerHTML = "Please Insert username!";
+    if(errorpassword==""){
+    document.getElementById("errorpass").innerHTML = "Please Insert password!";
+    }
+    return false;
+  }
+  if(errorpassword ==""){
+    document.getElementById("errorpass").innerHTML = "Please Insert password!";
+    return false;
+  }
+  
+ 
+}
+</script>
     </head>
     <h1 style="margin-left:0px;color:white; text-align: center ">Login</h1>
     <body class="gradient-custom">
+        
         <!--Grid row-->
         <div class="row d-flex justify-content-center">
 
@@ -65,18 +85,23 @@
                 <%}%>
                 <div class="card-body">
 
-                    <form action="Auth" method="post">
+                    <form name="myForm" action="Auth" onsubmit="return validateForm()"  method="post">
                         <div class="mb-3">
                             <label  class="form-label">USERNAME</label>
                             <input type="text" class="form-control" name="username">
+                            <p id="errorusername" style="color:red"></p>
                         </div>
                         <div class="mb-3">
                             <label  class="form-label">Password</label>
                             <input type="text" class="form-control" name="password">
+                            <p id="errorpass" style="color:red"></p>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
+                
+                
+                
                 <%                      List errorMsgs = (List) request.getAttribute("errorMsgs");
                     if (errorMsgs != null) {
                 %>
