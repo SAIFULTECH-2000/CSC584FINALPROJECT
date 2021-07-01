@@ -1,18 +1,26 @@
 <%-- 
-    Document   : ViewStaff
-    Created on : Jun 25, 2021, 2:14:21 PM
-    Author     : SAIFULTECH
+    Document   : Hospital
+    Created on : Jul 1, 2021, 11:40:43 PM
+    Author     : Syakir/Saifultech
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
+<%
+    if (null == session.getAttribute("username")) {
+        response.sendRedirect("index.jsp");
+
+    }
+%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Staff</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hospital</title>
         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
 <style>
@@ -39,8 +47,7 @@ overflow: auto;
 display: block;
 }
 </style>
-    
-  <body class="gradient-custom">
+   <body class="gradient-custom">
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">BLOOD MANAGEMENT</a>
@@ -61,6 +68,10 @@ display: block;
                  <li> <a  class="dropdown-item" href="donation_information.jsp">Donation Information</a></li>
             </ul>
           </li>
+          <%
+          int role_id =(Integer) session.getAttribute("role_id");
+          if(role_id==1){
+          %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Staff
@@ -70,6 +81,7 @@ display: block;
               <li><a class="dropdown-item" href="ViewStaff.jsp">View Staff</a></li>
             </ul>
           </li>
+          <%}%>
           <li class="nav-item">
                  <a  class="nav-link"  href="submission.html">Submission</a>
           </li>
@@ -89,67 +101,37 @@ display: block;
       </div>
     </div>
   </nav>    
-      
-      <%
-      int id = (Integer) session.getAttribute("ID");
-      %>
-    
-    <sql:query var="result" dataSource="${myDatasource}">
-        SELECT *  FROM STAFF WHERE ID_USER != <%=id%>
-    </sql:query>
-       <%
-       String md=(String) session.getAttribute("md");
-       String name=(String) session.getAttribute("mdname");
-       if(md!=null){
-       if(md.equals("delete")){ 
-       %>
-         
-    <div class="card">
-        <div class="container">
-              <h1  style="margin-left:0px;color:red; text-align: center ">Successful Delete Staff:<%=name%></h1>
-           
-        </div>
-    </div>
-    <%session.removeAttribute("md");session.removeAttribute("mdname");}else if(md.equals("update")){%>
-    
-      <div class="card">
-        <div class="container">
-              <h1  style="margin-left:0px;color:green; text-align: center ">Successful update Staff:<%=name%></h1>
-           
-        </div>
-    </div>
-    <%session.removeAttribute("md");session.removeAttribute("mdname");} %>
-    <%}%>
-     <h1  style="margin-left:0px;color:white; text-align: center ">Staff List</h1>
-    <div class="container" >
-        <div class="card">
-            <div class="card-body">
-                <div class="table-wrapper-scroll-y my-custom-scrollbar">
 
-                    <table class="table table-bordered table-striped mb-0">
+
+  <div class="container">
+    <h1  style="margin-left:0px;color:white; text-align: center ">Hospital List</h1>
+    <div class="card">
+      <div class="card-body">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+          <table class="table table-bordered table-striped mb-0">
                           <tr>
-                    <th>Name</th>
-                    <th>Position</th>
+                    <th>Hosp. Name</th>
+                    <th>Hosp. Address</th>
+                    <th>Person In Charge (PIC)</th>
                     <th>Action</th>
                 </tr>
                 <c:forEach var = "row" items = "${result.rows}">
                     <tr>
-                        <td>${row.name}</td>
-                        <td>${row.position}</td>
+                        <td>${row.name_hospital}</td>
+                        <td>${row.address_hospital}</td>
+                        <td>${row.pic}</td>
                         <td>
-                            <form action="UpdateStaff.jsp" method="post">
-                                <input type="hidden" name="ID" value="${row.ID_USER}">
-                                <input type="hidden" name="username" value="${row.USERNAME}">
-                                <input type="hidden" name="name" value="${row.name}">
-                                <input type="hidden" name="ic" value="${row.IC}">
-                                <input type="hidden" name="position" value="${row.POSITION}">
-                                 <input type="hidden" name="email" value="${row.EMAIL}">
+                            <form action="UpdateHospital.jsp" method="post">
+                                <input type="hidden" name="name_hospital" value="${row.name_hospital}">
+                                <input type="hidden" name="address_hospital" value="${row.address_hospital}">
+                                <input type="hidden" name="pic" value="${row.pic}">
                                 <input type="submit" value="UPDATE">
                             </form>
-                             <form action="StaffControl" method="post">
+                             <form action="HospitalControl" method="post">
                                  <input type="hidden" name="method" value="delete">
-                                <input type="hidden" name="ID" value="${row.ID_USER}">
-                                <input type="hidden" name="name" value="${row.name}">
+                                <input type="hidden" name="id_hospital" value="${row.id_hospital}">
+                                <input type="hidden" name="name_hospital" value="${row.name_hospital}">
                                 <input type="submit" value="Delete">
                             </form>  
                             
@@ -157,8 +139,11 @@ display: block;
                     </tr>
                 </c:forEach>
                     </table>
+        
         </div>
+      </div>
     </div>
-       <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-    </body>
+  </div>
+        <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+</body>
 </html>

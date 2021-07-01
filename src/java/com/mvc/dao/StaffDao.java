@@ -86,7 +86,7 @@ public class StaffDao {
         PreparedStatement ps;
         try{
                 conn=DBConnection.createConnection();
-                ps = conn.prepareStatement("select * from STAFF where USERNAME=? ");
+                ps = conn.prepareStatement("select * from USERS where USERNAME=? ");
                 ps.setString(1, username);
                 ResultSet rs =ps.executeQuery();
                 status = rs.next();

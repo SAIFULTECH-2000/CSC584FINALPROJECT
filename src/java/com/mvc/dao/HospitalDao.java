@@ -23,11 +23,10 @@ public class HospitalDao {
     try{
    
      conn=DBConnection.createConnection();
-     ps = conn.prepareStatement("INSERT INTO HOSPIITAL (NAME,REGION,PHONE,CODE) values(?,?,?,?)");
+     ps = conn.prepareStatement("INSERT INTO HOSPITAL (NAME,ADDRESS,PIC) values(?,?,?)");
      ps.setString(1, hospital.getName());
-     ps.setString(2, hospital.getRegion());
-     ps.setString(3, hospital.getPhone());
-     ps.setString(4, hospital.getCode());
+     ps.setString(2, hospital.getAddress());
+     ps.setString(3, hospital.getPIC());
      num =ps.executeUpdate();
      if(num==1)
         status=true;
@@ -44,11 +43,10 @@ public class HospitalDao {
     try{
    
      conn=DBConnection.createConnection();
-     ps = conn.prepareStatement("UPDATE  HOSPITAL SET NAME=?,REGION=?,PHONE=?,CODE=? where ID=?");
+     ps = conn.prepareStatement("UPDATE  HOSPITAL SET NAME=?,ADDRESS=?,PIC=? where ID=?");
      ps.setString(1, hospital.getName());
-     ps.setString(2, hospital.getRegion());
-     ps.setString(3, hospital.getPhone());
-     ps.setString(4, hospital.getCode());
+     ps.setString(2, hospital.getAddress());
+     ps.setString(3, hospital.getPIC());
      ps.setInt(5, ID);
      num =ps.executeUpdate();
      if(num==1)

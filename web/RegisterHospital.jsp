@@ -1,7 +1,7 @@
 <%-- 
-    Document   : donator
-    Created on : Jun 20, 2021, 4:11:03 PM
-    Author     : SAIFULTECH/syakir
+    Document   : RegisterHospital
+    Created on : Jul 2, 2021, 1:31:46 AM
+    Author     : Admin
 --%>
 
 <%@page import="java.util.Iterator"%>
@@ -22,7 +22,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Register Staff</title>
+        <title>Register Hospital</title>
         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <style>
@@ -105,49 +105,27 @@
             String email = request.getParameter("email");
         %>
 
-        <h1  style="margin-left:0px;color:white; text-align: center ">Register Staff</h1>
+        <h1  style="margin-left:0px;color:white; text-align: center ">Register Hospital</h1>
         <div class="container">
             <div class="card mx-auto" style="width: 18rem;">
                 <div class="card-body">
-                    <form action="StaffControl" method="POST">
+                    <form action="HospitalControl" method="POST">
                         <%
                             if (name == null || ic == null || position == null || email == null) {
                         %>
                         <table>
                             <tr>
-                                <td> <label>Username</label></td>
-                                <td> <input type="text" name="username" id="username"></td>
+                                <td> <label>Name</label></td>
+                                <td> <input type="text" name="name_hospital" id="name_hospital"></td>
                             </tr>
                             <tr>
-                                <td>Name</td>
-
-                                <td><input type="text" name="name" ></td>
-                            </tr>
-                            <tr>
-                                <td> <label>Password</label>   </td> 
-                                <td> <input type="text" name="password" >    </td> 
+                                <td> <label>Address</label>   </td> 
+                                <td> <input type="text" name="address_hospital" >    </td> 
                             </tr>
 
                             <tr>
-                                <td>      <label>IC</label>   </td> 
-                                <td>    <input type="text" name="ic" >   </td> 
-                            </tr>
-                            <tr>
-                                <td>      <label>ROLE ID</label>   </td> 
-                                <td>    
-                                    <select class="form-select" aria-label="Default select example" name="role">
-                                        <option value="1">Admin</option>
-                                        <option value="2">Staff</option>
-                                    </select>
-                                </td> 
-                            </tr>
-                            <tr>
-                                <td>   <label>POSITION</label>   </td> 
-                                <td>   <input type="text" name="position" >   </td> 
-                            </tr>
-                            <tr>
-                                <td>   <label>Email</label>   </td> 
-                                <td>     <input type="text" name="email" >   </td> 
+                                <td>      <label>PIC</label>   </td> 
+                                <td>    <input type="text" name="pic" >   </td> 
                             </tr>
                             <tr>
                                 <td></td>
@@ -157,41 +135,19 @@
                         <%} else {%>
                         <table>
                             <tr>
-                                <td> <label>Username</label></td>
-                                <td> <input type="text" name="username" value="<%=username%>"></td>
+                                <td> <label>Name</label></td>
+                                <td> <input type="text" name="name_hospital"></td>
                             </tr>
                             <tr>
-                                <td>Name</td>
+                                <td>Address</td>
 
-                                <td><input type="text" name="name" value="<%=name%>"></td>
+                                <td><input type="text" name="address_hospital"></td>
                             </tr>
                             <tr>
-                                <td> <label>Password</label>   </td> 
-                                <td> <input type="text" name="password" >    </td> 
+                                <td> <label>PIC</label>   </td> 
+                                <td> <input type="text" name="pic" >    </td> 
                             </tr>
 
-                            <tr>
-                                <td>      <label>IC</label>   </td> 
-                                <td>    <input type="text" name="ic" value="<%=ic%>">   </td> 
-                            </tr>
-                            <tr>
-                                <td>IC</td>
-                                <td> 
-                                    <select class="form-select" aria-label="Default select example" name="role">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">Admin</option>
-                                        <option value="2">Staff</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>   <label>POSITION</label>   </td> 
-                                <td>   <input type="text" name="position" value="<%=position%>">   </td> 
-                            </tr>
-                            <tr>
-                                <td>   <label>Email</label>   </td> 
-                                <td>     <input type="text" name="email" value="<%=email%>">   </td> 
-                            </tr>
                             <tr>
                                 <td></td>
                                 <td>    <input type="Submit" name="Submit"></td>
