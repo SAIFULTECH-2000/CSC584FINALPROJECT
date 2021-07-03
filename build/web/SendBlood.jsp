@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Hospital
-    Created on : Jul 1, 2021, 11:40:43 PM
+    Document   : SendBlood
+    Created on : Jul 4, 2021, 1:55:45 AM
     Author     : Syakir/Saifultech
 --%>
 
@@ -8,19 +8,11 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
-<%
-    if (null == session.getAttribute("username")) {
-        response.sendRedirect("index.jsp");
-
-    }
-%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hospital</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Send Blood</title>
         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
 <style>
@@ -47,7 +39,8 @@ overflow: auto;
 display: block;
 }
 </style>
-   <body class="gradient-custom">
+    
+  <body class="gradient-custom">
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">BLOOD MANAGEMENT</a>
@@ -68,10 +61,6 @@ display: block;
                  <li> <a  class="dropdown-item" href="donation_information.jsp">Donation Information</a></li>
             </ul>
           </li>
-          <%
-          int role_id =(Integer) session.getAttribute("role_id");
-          if(role_id==1){
-          %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Staff
@@ -81,7 +70,6 @@ display: block;
               <li><a class="dropdown-item" href="ViewStaff.jsp">View Staff</a></li>
             </ul>
           </li>
-          <%}%>
           <li class="nav-item">
                  <a  class="nav-link"  href="submission.html">Submission</a>
           </li>
@@ -100,9 +88,7 @@ display: block;
         </ul>
       </div>
     </div>
-  </nav>    
-
-  
+  </nav>  
       <%
       int id = (Integer) session.getAttribute("ID");
       %>
@@ -119,7 +105,7 @@ display: block;
          
     <div class="card">
         <div class="container">
-              <h1  style="margin-left:0px;color:red; text-align: center ">Successfully Deleted Hospital:<%=name_hospital%></h1>
+              <h1  style="margin-left:0px;color:red; text-align: center ">Successfully Deleted Staff:<%=name_hospital%></h1>
            
         </div>
     </div>
@@ -127,47 +113,68 @@ display: block;
     
       <div class="card">
         <div class="container">
-              <h1  style="margin-left:0px;color:green; text-align: center ">Successfully Update Hospital:<%=name_hospital%></h1>
+              <h1  style="margin-left:0px;color:green; text-align: center ">Successful update Staff:<%=name_hospital%></h1>
            
         </div>
     </div>
     <%session.removeAttribute("md");session.removeAttribute("mdname_hospital");} %>
     <%}%>
-  <div class="container">
-    <h1  style="margin-left:0px;color:white; text-align: center ">Hospital List</h1>
-    <div class="card">
-      <div class="card-body">
-        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <div class="container" >
+     <h1  style="margin-left:0px;color:white; text-align: center ">Send Blood to:</h1>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
 
-          <table class="table table-bordered table-striped mb-0">
+                    
+                   <table class="table table-bordered table-striped mb-0">
                           <tr>
-                    <th>Hospital Name</th>
-                    <th>Hospital Address</th>
-                    <th>Person In Charge (PIC)</th>
+                              <th>ID Hospital</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>PIC</th>
+                    <th>Type Blood & Quantity</th>
                 </tr>
                 <c:forEach var = "row" items = "${result.rows}">
                     <tr>
+                        <td>${row.ID_HOSPITAL}</td>
                         <td>${row.NAME_HOSPITAL}</td>
                         <td>${row.ADDRESS_HOSPITAL}</td>
                         <td>${row.PIC}</td>
                         <td>
-                            <form action="SendBlood.jsp" method="post">
+                            <form action="SendControl" method="POST">
+                                <input type="hidden" name="id_hospital" value="${row.ID_HOSPITAL}">
                                 <input type="hidden" name="name_hospital" value="${row.NAME_HOSPITAL}">
                                 <input type="hidden" name="address_hospital" value="${row.ADDRESS_HOSPITAL}">
                                 <input type="hidden" name="pic" value="${row.PIC}">
+                                <form action="SendControl">
+                                    <label for="bloodtype">Choose blood type:</label>
+                                    <select id="bloodtype" name="bloodtype">
+                                    <option value="a">A</option>
+                                    <option value="b">B</option>
+                                    <option value="ab">AB</option>
+                                    <option value="o">O</option>
+                                    </select>
+                                </form>
+                                <form action="SendControl">
+                                    <label for="quantity">Choose quantity:</label>
+                                    <select id="quantity" name="quantity">
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="300">300</option>
+                                    </select>
+                                    <input type="submit">
+                                </form>
                             </form>
+                            
                         </td>
                     </tr>
                 </c:forEach>
                     </table>
-            
         </div>
-      </div>
     </div>
-    <form action="SendBlood.jsp" method="post">
-                <input type="submit" value="Send Blood">
-            </form>
-  </div>
-        <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-</body>
+        </div>
+    </div>
+       <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    </body>
 </html>

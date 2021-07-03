@@ -1,7 +1,7 @@
 <%-- 
-    Document   : donator
-    Created on : Jun 20, 2021, 4:11:03 PM
-    Author     : SAIFULTECH
+    Document   : SuccessBlood
+    Created on : Jul 4, 2021, 3:04:23 AM
+    Author     : Syakir
 --%>
 
 <%@page import="java.util.Iterator"%>
@@ -9,7 +9,7 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
-<jsp:useBean id="staff" class="Person.Staff" scope="request"/>
+<jsp:useBean id="send" class="Location.Send" scope="request"/>
 <%
     if (null == session.getAttribute("username")) {
         response.sendRedirect("index.jsp");
@@ -22,7 +22,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Successful Staff</title>
+        <title>Success Blood</title>
         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
  <style>
@@ -104,31 +104,31 @@ display: block;
   </nav>    
 
 
-    <h1  style="margin-left:0px;color:white; text-align: center ">Successfully Added Staff</h1>
+    <h1  style="margin-left:0px;color:white; text-align: center ">Success</h1>
     <div class="container" >
         <div class="card mx-auto"  style="width: 30rem;">
             <div class="card-body">
          <br>
-        You have successfully added new staff
+        Blood Supply request successfully added
          <br>
          <%
          
          %>
            <table style="width:100%">
                     <tr>
-                        <td>Name:<jsp:getProperty name="staff" property="name"/></td>
+                        <td>Name:<jsp:getProperty name="send" property="name_hospital"/></td>
                     </tr>
                     <tr>
-                        <td>IC:<jsp:getProperty name="staff" property="ic"/></td>
+                        <td>Address:<jsp:getProperty name="send" property="address"/></td>
                     </tr>
                     <tr>
-                        <td>Email:<jsp:getProperty name="staff" property="email"/></td>
+                        <td>PIC:<jsp:getProperty name="send" property="pic"/></td>
                     </tr>
                     <tr>
-                        <td>Position:<jsp:getProperty name="staff" property="position"/></td>
+                        <td>Quantity:<jsp:getProperty name="send" property="quantity"/></td>
                     </tr>
           </table>
-                    <a href="RegisterStaff.jsp">Back</a>
+                    <a href="Hospital.jsp">Back</a>
         <br>
             </div>
         </div>

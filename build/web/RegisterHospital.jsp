@@ -110,9 +110,6 @@
             <div class="card mx-auto" style="width: 18rem;">
                 <div class="card-body">
                     <form action="HospitalControl" method="POST">
-                        <%
-                            if (name == null || ic == null || position == null || email == null) {
-                        %>
                         <table>
                             <tr>
                                 <td> <label>Name</label></td>
@@ -132,28 +129,6 @@
                                 <td>    <input type="Submit" name="Submit"></td>
                             </tr>
                         </table>
-                        <%} else {%>
-                        <table>
-                            <tr>
-                                <td> <label>Name</label></td>
-                                <td> <input type="text" name="name_hospital"></td>
-                            </tr>
-                            <tr>
-                                <td>Address</td>
-
-                                <td><input type="text" name="address_hospital"></td>
-                            </tr>
-                            <tr>
-                                <td> <label>PIC</label>   </td> 
-                                <td> <input type="text" name="pic" >    </td> 
-                            </tr>
-
-                            <tr>
-                                <td></td>
-                                <td>    <input type="Submit" name="Submit"></td>
-                            </tr>
-                        </table>
-                        <%}%>
                     </form>
                     <%
                         List errorMsgs = (List) request.getAttribute("errorMsgs");

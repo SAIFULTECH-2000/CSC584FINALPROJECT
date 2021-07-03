@@ -103,7 +103,7 @@ public class HospitalControl extends HttpServlet {
                     //insert
                     
                     if (hospitalDao.checkHospital(name_hospital)) {
-                        errorMsgs.add("hospital name is take please try again");
+                        errorMsgs.add("hospital name is taken please try again");
                         request.setAttribute("name_hospital", name_hospital);
                         request.setAttribute("address_hospital", address_hospital);
                         request.setAttribute("pic", pic);
@@ -112,16 +112,12 @@ public class HospitalControl extends HttpServlet {
                         view.forward(request, response);
                     } else {
                         //insert method here
-                        
                         Hospital hospital = new Hospital(name_hospital, address_hospital, pic);
                         if (hospitalDao.insertHospital(hospital)) {
                             request.setAttribute("hospital", hospital);
                             RequestDispatcher view = request.getRequestDispatcher("SuccessfulHospital.jsp");
                             view.forward(request, response);
                         } else {
-                            /*errorMsgs.add(name_hospital);
-                            errorMsgs.add(address_hospital);
-                            errorMsgs.add(pic);*/
                             errorMsgs.add("Please contact Developer");
                             request.setAttribute("errorMsgs", errorMsgs);
                             RequestDispatcher view = request.getRequestDispatcher("RegisterHospital.jsp");
