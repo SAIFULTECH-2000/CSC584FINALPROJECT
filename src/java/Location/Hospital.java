@@ -10,51 +10,41 @@ package Location;
  * @author SAIFULTECH/syakir
  */
 public class Hospital {
-    String name;
-    String region;
-    String code;
-    String phone;
-
+    String name_hospital;
+    String address_hospital;
+    String pic;
+    
     public String getName() {
-        return name;
+        return name_hospital;
     }
 
-    public String getRegion() {
-        return region;
+    public String getAddress() {
+        return address_hospital;
     }
 
-    public String getCode() {
-        return code;
+    public String getPIC() {
+        return pic;
     }
 
-    public String getPhone() {
-        return phone;
+    public void setName(String name_hospital) {
+        this.name_hospital = name_hospital;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAddress(String address_hospital) {
+        this.address_hospital = address_hospital;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPIC(String pic) {
+        this.pic = pic;
     }
 
     public Hospital() {
     }
 
-    public Hospital(String name, String region, String code, String phone) {
-        this.name = name;
-        this.region = region;
-        this.code = code;
-        this.phone = phone;
+    public Hospital(String name_hospital, String address_hospital, String pic) {
+        this.name_hospital = name_hospital;
+        this.address_hospital = address_hospital;
+        this.pic = pic;
     }
     
 }

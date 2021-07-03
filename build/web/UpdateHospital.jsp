@@ -1,21 +1,28 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%-- 
-    Document   : donation_information
-    Created on : Jun 23, 2021, 7:22:38 PM
+    Document   : Update Hospital
     Author     : SAIFULTECH/syakir
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
+
+<%
+    if (null == session.getAttribute("username")) {
+        response.sendRedirect("index.jsp");
+
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Donation Information</title>
-        <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <title>Update Hospital</title>
+         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <style>
         .gradient-custom {
@@ -51,7 +58,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="Dashboard.jsp" aria-current="page" class="nav-link active">Dashboard</a>
+                            <a href="dashboard.jsp" aria-current="page" class="nav-link">Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,7 +74,7 @@
                                 Staff
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li> <a  class="dropdown-item" href="RegisterStaff.jsp">Register Staff</a></li>
+                                <li> <a  class="dropdown-item active" href="RegisterStaff.jsp">Register Staff</a></li>
                                 <li><a class="dropdown-item" href="ViewStaff.jsp">View Staff</a></li>
                             </ul>
                         </li>
@@ -89,38 +96,62 @@
                     </ul>
                 </div>
             </div>
-        </nav>  
-        <sql:query var="result" dataSource="${myDatasource}">
-            SELECT * FROM DONATION
-        </sql:query>
-        <h1  style="margin-left:0px;color:white; text-align: center ">Donor Details</h1>
-        <div class="container" >
-            <div class="card">
+        </nav>    
+        <%
+        String name_hospital = request.getParameter("name_hospital");
+        String address_hospital = request.getParameter("address_hospital");
+        String pic = request.getParameter("pic");
+        String id_hospital= request.getParameter("ID_HOSPITAL");
+        %>
+
+        <h1  style="margin-left:0px;color:white; text-align: center ">Update Hospital Information</h1>
+        <div class="container">
+            <div class="card mx-auto" style="width: 18rem;">
                 <div class="card-body">
-                    <a href="register_donation.jsp" class="btn btn-primary">Register New Donation</a>
-                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
-
-                        <table class="table table-bordered table-striped mb-0">
+                    <form action="HospitalControl" method="POST">
+                        <table>
                             <tr>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Blood Type</th>
-                                <th>Contact</th>
+                              <input type="hidden" name="method" value="update">
+                            <input type="hidden" name="ID_HOSPITAL" value="<%=id_hospital%>">
+                                <td> <label>Name</td>
+                                <td> <input type="text" name="name_hospital"></td>
                             </tr>
-                            <c:forEach var ="row" items = "${result.rows}">
-                                <tr>
-                                    <td>${row.NAME}</td>
-                                    <td>${row.GENDER}</td>
-                                    <td>${row.TYPE_BLOOD}</td>
-                                    <td>${row.PHONENUM}</td>
+                            <tr>
+                                <td> <label>Address</label></td>
+                                <td> <input type="text" name="address_hospital"></td>
+                            </tr>
+                            <tr>
+                                <td>      <label>PIC</label>   </td> 
+                                <td>    <input type="text" name="pic">   </td> 
+                            </tr>
 
-                                </tr>
-                            </c:forEach>
+                            <tr>
+                                <td></td>
+                                <td>    <input type="Submit" name="Submit"></td>
+                            </tr>
                         </table>
-                    </div>
+                    </form>
+                    <%
+                        List errorMsgs = (List) request.getAttribute("errorMsgs");
+                        if (errorMsgs != null) {
+                    %>
+                    <font color="red">
+                    <ul><%
+                        Iterator items = errorMsgs.iterator();
+                        while (items.hasNext()) {
+                            String message = (String) items.next();
+                        %>
+                        <li>
+                            <%= message%>
+                        </li>
+                        <%}%>
+                    </ul>
+                    </font>
+                    <%}%>
+                    <br>
                 </div>
             </div>
         </div>
-        <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+             <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     </body>
 </html>

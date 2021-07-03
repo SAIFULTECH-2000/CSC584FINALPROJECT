@@ -86,9 +86,15 @@ display: block;
           <li class="nav-item">
                  <a  class="nav-link"  href="submission.html">Submission</a>
           </li>
-          <li class="nav-item">
-                 <a  class="nav-link" href="hospital.html">Hospital</a>
-          </li>
+          <li class="nav-item dropdown">
+                            <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Hospital
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li> <a  class="dropdown-item active" href="RegisterHospital.jsp">Register Hospital</a></li>
+                                <li> <a class="dropdown-item active" href="Hospital.jsp">View Hospitals</a></li>
+                            </ul>
+                        </li>
           <li class="nav-item">
               <a class="nav-link"  href="logout">Logout</a>
           </li>
@@ -98,7 +104,7 @@ display: block;
   </nav>    
 
 
-    <h1  style="margin-left:0px;color:white; text-align: center ">Successful Add Staff</h1>
+    <h1  style="margin-left:0px;color:white; text-align: center ">Successfully Added Staff</h1>
     <div class="container" >
         <div class="card mx-auto"  style="width: 30rem;">
             <div class="card-body">

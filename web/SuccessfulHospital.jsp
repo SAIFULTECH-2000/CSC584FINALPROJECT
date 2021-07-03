@@ -1,16 +1,17 @@
 <%-- 
-    Document   : Dashboard
-    Created on : Jun 18, 2021, 12:42:05 AM
-    Author     : saifultech/syakir
+    Document   : SuccessfulHospital
+    Created on : Jul 2, 2021, 1:31:31 AM
+    Author     : Syakir
 --%>
 
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
+<jsp:useBean id="hospital" class="Location.Hospital" scope="request"/>
 <%
-    if (null == session.getAttribute("username")) {
+    if (null == session.getAttribute("name_hospital")) {
         response.sendRedirect("index.jsp");
 
     }
@@ -21,10 +22,10 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard</title>
+        <title>Hospital Success</title>
         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
-<style>
+ <style>
 .gradient-custom {
   /* fallback for old browsers */
   background: #2980b9;
@@ -48,6 +49,10 @@ overflow: auto;
 display: block;
 }
 </style>
+    
+    <body>
+        
+    </table>
    <body class="gradient-custom">
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid">
@@ -58,7 +63,7 @@ display: block;
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a href="Dashboard.jsp" aria-current="page" class="nav-link active">Dashboard</a>
+            <a href="dashboard.jsp" aria-current="page" class="nav-link active">Dashboard</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -69,10 +74,6 @@ display: block;
                  <li> <a  class="dropdown-item" href="donation_information.jsp">Donation Information</a></li>
             </ul>
           </li>
-          <%
-          int role_id =(Integer) session.getAttribute("role_id");
-          if(role_id==1){
-          %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Staff
@@ -82,7 +83,6 @@ display: block;
               <li><a class="dropdown-item" href="ViewStaff.jsp">View Staff</a></li>
             </ul>
           </li>
-          <%}%>
           <li class="nav-item">
                  <a  class="nav-link"  href="submission.html">Submission</a>
           </li>
@@ -103,72 +103,33 @@ display: block;
     </div>
   </nav>    
 
-        <%
-            String username = (String) session.getAttribute("username");
-            int id = (Integer) session.getAttribute("ID");
-        %>
-        <sql:query var="result" dataSource="${myDatasource}">
-            SELECT *  FROM STAFF where USERNAME = '${username}' and ID_USER = <%=id%>
-        </sql:query>
-    <h1 style="margin-left:0px;color:white; text-align: center ">Profile</h1>
-    <c:forEach var = "row" items = "${result.rows}">
-        <div class="container" >
-            <div class="card">
-                <div class="card-body">
-                  <table>
+
+    <h1  style="margin-left:0px;color:white; text-align: center ">Successfully Added Hospital</h1>
+    <div class="container" >
+        <div class="card mx-auto"  style="width: 30rem;">
+            <div class="card-body">
+         <br>
+        You have successfully added a new hospital
+         <br>
+         <%
+         
+         %>
+           <table style="width:100%">
                     <tr>
-                        <td>Name:${row.name}</td>
+                        <td>Name:<jsp:getProperty name="hospital" property="name_hospital"/></td>
                     </tr>
                     <tr>
-                        <td>Email:${row.email}</td>
+                        <td>ADDRESS:<jsp:getProperty name="hospital" property="address_hospital"/></td>
                     </tr>
                     <tr>
-                        <td>Position:${row.position}</td>
+                        <td>PIC:<jsp:getProperty name="hospital" property="pic"/></td>
                     </tr>
-                </table>
-                </div>
-               
+          </table>
+                    <a href="RegisterHospital.jsp">Back</a>
+        <br>
             </div>
         </div>
-    </c:forEach>
-
-  <div class="container">
-    <h1  style="margin-left:0px;color:white; text-align: center ">Blood Types Inventory</h1>
-    <div class="card">
-      <div class="card-body">
-        <div class="table-wrapper-scroll-y my-custom-scrollbar">
-
-          <table class="table table-bordered table-striped mb-0">
-            <thead>
-              <tr>
-                <th scope="col">Blood Type</th>
-                <th scope="col">Quantity(Bags)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>A</td>
-                <td>1000</td>
-              </tr>
-              <tr>
-                <td>B</td>
-                <td>750</td>
-              </tr>
-              <tr>
-                  <td>AB</td>
-                  <td>1200</td>
-              </tr>
-              <tr>
-                  <td>O</td>
-                  <td>450</td>
-              </tr>
-            </tbody>
-          </table>
-        
-        </div>
-      </div>
     </div>
-  </div>
-        <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 </body>
 </html>

@@ -16,95 +16,6 @@
         <title>Donation Information</title>
         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
-    <script>
-        function validateForm() {
-            let errorname = document.forms["myForm"]["name"].value;
-            let erroric = document.forms["myForm"]["ic"].value;
-            let erroraddress = document.forms["myForm"]["address"].value;
-            let errortel = document.forms["myForm"]["tel"].value;
-            let errorbloodtype = document.forms["myForm"]["bloodtype"].value;
-            let isChecked = Array.prototype.some.call(document.forms["myForm"]["gender"], function (radio) {
-                return radio.checked;
-            });
-            if (!isChecked) {
-                document.getElementById("errorgender").innerHTML = "Please Insert gender!";
-                if (errorname == "") {
-                    document.getElementById("errorname").innerHTML = "Please Insert name!";
-
-                }
-                if (erroric == "") {
-                    document.getElementById("erroric").innerHTML = "Please Insert ic!";
-                }
-                if (erroraddress == "") {
-                    document.getElementById("erroraddress").innerHTML = "Please Insert address!";
-                }
-                if (errortel == "") {
-                    document.getElementById("errortel").innerHTML = "Please Insert Phone number!";
-                }
-                if (errorbloodtype == "") {
-                    document.getElementById("errorbloodtype").innerHTML = "Please Insert bloodtype!";
-                }
-                return false;
-            }
-
-
-            if (errorname == "") {
-                document.getElementById("errorname").innerHTML = "Please Insert name!";
-                if (erroric == "") {
-                    document.getElementById("erroric").innerHTML = "Please Insert ic!";
-                }
-                if (erroraddress == "") {
-                    document.getElementById("erroraddress").innerHTML = "Please Insert address!";
-                }
-                if (errortel == "") {
-                    document.getElementById("errortel").innerHTML = "Please Insert Phone number!";
-                }
-                if (errorbloodtype == "") {
-                    document.getElementById("errorbloodtype").innerHTML = "Please Insert bloodtype!";
-                }
-                return false;
-            }
-            if (erroric == "") {
-                document.getElementById("erroric").innerHTML = "Please Insert ic!";
-               
-                if (erroraddress == "") {
-                    document.getElementById("erroraddress").innerHTML = "Please Insert address!";
-                }
-                if (errortel == "") {
-                    document.getElementById("errortel").innerHTML = "Please Insert Phone number!";
-                }
-                if (errorbloodtype == "") {
-                    document.getElementById("errorbloodtype").innerHTML = "Please Insert bloodtype!";
-                }
-                 return false;
-            }
-            if (erroraddress == "") {
-                document.getElementById("erroraddress").innerHTML = "Please Insert address!";
-                 if (errortel == "") {
-                    document.getElementById("errortel").innerHTML = "Please Insert Phone number!";
-                }
-                if (errorbloodtype == "") {
-                    document.getElementById("errorbloodtype").innerHTML = "Please Insert bloodtype!";
-                }
-                return false;
-            }
-            if (errortel == "") {
-
-                document.getElementById("errortel").innerHTML = "Please Insert Phone number!";
-                   if (errorbloodtype == "") {
-                    document.getElementById("errorbloodtype").innerHTML = "Please Insert bloodtype!";
-                }
-                return false;
-            }
-            if (errorbloodtype == "") {
-
-                document.getElementById("errorbloodtype").innerHTML = "Please Insert bloodtype!";
-                return false;
-            }
-
-
-        }
-    </script>
     <style>
         .gradient-custom {
             /* fallback for old browsers */
@@ -180,56 +91,97 @@
         </nav>  
 
         <h1  style="margin-left:0px;color:white; text-align: center ">BLOOD DONATION REGISTER</h1>
+        <%
+            String gender = request.getParameter("gender");
+            String name = request.getParameter("Name");
+            String ic = request.getParameter("IC");
+            String address = request.getParameter("address");
+            String tel = request.getParameter("tel");
+            String bloodtype = request.getParameter("bloodtype");
+        %>
+
         <div class="container" >
             <div class="card mx-auto"  style="width: 30rem;">
                 <div class="card-body" >
-
-                    <form name="myForm" action="DonationControl" onsubmit="return validateForm()"  method="post">
+                    <%
+                        if (name == null || ic == null || address == null || tel == null || bloodtype == null) {
+                    %>
+                    <form action="DonationControl" method="post">
                         <table>
                             <tr>
                                 <td><label>Gender</label></td>                 
                                 <td><input type="checkbox" name="gender" id="gender" value="MALE">Male
                                     <input type="checkbox" name="gender" id="gender" value="FEMALE">Female</td>
-
                             </tr>
 
-                            <tr>
-                                <td colspan="2"> <p id="errorgender" style="color:red"></p></td>
-                            </tr>
                             <tr>
                                 <td>Name</td>
-                                <td><input type="text" name="Name" id="name"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"> <p id="errorname" style="color:red"></p></td>
+                                <td><input type="text" name="Name" id="Name"></td>
                             </tr>
                             <tr>
                                 <td>IC</td>
-                                <td><input type="text" name="IC" id="ic"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"> <p id="erroric" style="color:red"></p></td>
+                                <td><input type="text" name="IC" id="IC"></td>
                             </tr>
                             <tr>
                                 <td>Address</td>
-                                <td><input type="text" name="address" id="address"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"> <p id="erroraddress" style="color:red"></p></td>
+                                <td><input type="text" name="address" id="addresss"></td>
                             </tr>
                             <tr>
                                 <td>Contact Number</td>
                                 <td> <input type="text" name="tel" id="tel"></td
                             </tr>
                             <tr>
-                                <td colspan="2"> <p id="errortel" style="color:red"></p></td>
-                            </tr>
-                            <tr>
                                 <td>Blood Type</td>
                                 <td><input type="text" name="bloodtype" id="bloodtype"></td>
                             </tr>
                             <tr>
-                                <td colspan="2"> <p id="errorbloodtype" style="color:red"></p></td>
+                                <td>Health History (If applicable)</td>
+                                <td> <input type="text" name="hh" id="hh"></td>                      
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td> <input type="Submit" name="Submit"></td>                      
+                            </tr>
+
+                            <br> <br>
+                        </table>
+                    </form>
+                    <%} else {%>
+                    <form action="DonationControl" method="post">
+                        <table>
+                            <tr>
+                                <td><label>Gender</label></td>                 
+                                <td>
+                                    
+                                 <%   if(gender.equals("MALE")){%>
+                                    <input type="radio" name="gender" id="gender" value="MALE" checked>Male
+                                    <input type="radio" name="gender" id="gender" value="FEMALE">Female
+                                      <%  }else{%>
+                                    <input type="radio" name="gender" id="gender" value="MALE">Male
+                                    <input type="radio" name="gender" id="gender" value="FEMALE" checked>Female
+                                <%    }%>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Name</td>
+                                <td><input type="text" name="Name" id="Name" value="<%=name%>"></td>
+                            </tr>
+                            <tr>
+                                <td>IC</td>
+                                <td><input type="text" name="IC" id="IC" value="<%=ic%>"></td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td><input type="text" name="address" id="addresss" value="<%=address%>"></td>
+                            </tr>
+                            <tr>
+                                <td>Contact Number</td>
+                                <td> <input type="text" name="tel" id="tel"value="<%=tel%>"></td
+                            </tr>
+                            <tr>
+                                <td>Blood Type</td>
+                                <td><input type="text" name="bloodtype" id="bloodtype" value="<%=bloodtype%>"></td>
                             </tr>
                             <tr>
                                 <td>Health History (If applicable)</td>
@@ -260,10 +212,10 @@
                     </ul>
                     </font>
                     <%}%>
-                    <a href="donation_information.jsp">Back</a>
+                    <%}%>
                 </div>
             </div>
-
+            <a href="donation_information.jsp">Back</a>
         </div>
         <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     </body>

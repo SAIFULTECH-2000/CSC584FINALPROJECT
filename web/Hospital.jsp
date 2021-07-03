@@ -1,9 +1,8 @@
 <%-- 
-    Document   : Dashboard
-    Created on : Jun 18, 2021, 12:42:05 AM
-    Author     : saifultech/syakir
+    Document   : Hospital
+    Created on : Jul 1, 2021, 11:40:43 PM
+    Author     : Syakir/Saifultech
 --%>
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
@@ -21,7 +20,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard</title>
+        <title>Hospital</title>
         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
 <style>
@@ -103,67 +102,74 @@ display: block;
     </div>
   </nav>    
 
-        <%
-            String username = (String) session.getAttribute("username");
-            int id = (Integer) session.getAttribute("ID");
-        %>
-        <sql:query var="result" dataSource="${myDatasource}">
-            SELECT *  FROM STAFF where USERNAME = '${username}' and ID_USER = <%=id%>
-        </sql:query>
-    <h1 style="margin-left:0px;color:white; text-align: center ">Profile</h1>
-    <c:forEach var = "row" items = "${result.rows}">
-        <div class="container" >
-            <div class="card">
-                <div class="card-body">
-                  <table>
-                    <tr>
-                        <td>Name:${row.name}</td>
-                    </tr>
-                    <tr>
-                        <td>Email:${row.email}</td>
-                    </tr>
-                    <tr>
-                        <td>Position:${row.position}</td>
-                    </tr>
-                </table>
-                </div>
-               
-            </div>
+  
+      <%
+      int id = (Integer) session.getAttribute("ID");
+      %>
+    
+    <sql:query var="result" dataSource="${myDatasource}">
+        SELECT *  FROM HOSPITAL WHERE ID_HOSPITAL != <%=id%>
+    </sql:query>
+       <%
+       String md=(String) session.getAttribute("md");
+       String name_hospital=(String) session.getAttribute("mdname_hospital");
+       if(md!=null){
+       if(md.equals("delete")){ 
+       %>
+         
+    <div class="card">
+        <div class="container">
+              <h1  style="margin-left:0px;color:red; text-align: center ">Successfully Deleted Hospital:<%=name_hospital%></h1>
+           
         </div>
-    </c:forEach>
-
+    </div>
+    <%session.removeAttribute("md");session.removeAttribute("mdname_hospital");}else if(md.equals("update")){%>
+    
+      <div class="card">
+        <div class="container">
+              <h1  style="margin-left:0px;color:green; text-align: center ">Successfully Update Hospital:<%=name_hospital%></h1>
+           
+        </div>
+    </div>
+    <%session.removeAttribute("md");session.removeAttribute("mdname_hospital");} %>
+    <%}%>
   <div class="container">
-    <h1  style="margin-left:0px;color:white; text-align: center ">Blood Types Inventory</h1>
+    <h1  style="margin-left:0px;color:white; text-align: center ">Hospital List</h1>
     <div class="card">
       <div class="card-body">
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
 
           <table class="table table-bordered table-striped mb-0">
-            <thead>
-              <tr>
-                <th scope="col">Blood Type</th>
-                <th scope="col">Quantity(Bags)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>A</td>
-                <td>1000</td>
-              </tr>
-              <tr>
-                <td>B</td>
-                <td>750</td>
-              </tr>
-              <tr>
-                  <td>AB</td>
-                  <td>1200</td>
-              </tr>
-              <tr>
-                  <td>O</td>
-                  <td>450</td>
-              </tr>
-            </tbody>
-          </table>
+                          <tr>
+                    <th>Hospital Name</th>
+                    <th>Hospital Address</th>
+                    <th>Person In Charge (PIC)</th>
+                    <th>Action</th>
+                </tr>
+                <c:forEach var = "row" items = "${result.rows}">
+                    <tr>
+                        <td>${row.NAME_HOSPITAL}</td>
+                        <td>${row.ADDRESS_HOSPITAL}</td>
+                        <td>${row.PIC}</td>
+                        <td>
+                            <form action="UpdateHospital.jsp" method="post">
+                                <input type="hidden" name="name_hospital" value="${row.NAME_HOSPITAL}">
+                                <input type="hidden" name="address_hospital" value="${row.ADDRESS_HOSPITAL}">
+                                <input type="hidden" name="pic" value="${row.PIC}">
+                                <input type="submit" value="UPDATE">
+                            </form>
+                             <form action="HospitalControl" method="post">
+                                 <input type="hidden" name="method" value="delete">
+                                <input type="hidden" name="id_hospital" value="${row.ID_HOSPITAL}">
+                                <input type="hidden" name="name_hospital" value="${row.NAME_HOSPITAL}">
+                                <input type="submit" value="DELETE">
+                            </form>  
+                            
+                        </td>
+                    </tr>
+                </c:forEach>
+                    </table>
+            
         
         </div>
       </div>
