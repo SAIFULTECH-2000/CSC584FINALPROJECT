@@ -24,6 +24,89 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Register Staff</title>
         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script>
+            function validateForm() {
+                let errorusername = document.forms["myForm"]["username"].value;
+                let errorname = document.forms["myForm"]["name"].value;
+                let errorpass = document.forms["myForm"]["pass"].value;
+                let erroric = document.forms["myForm"]["IC"].value;
+                let errorposition = document.forms["myForm"]["position"].value;
+                let erroremail = document.forms["myForm"]["position"].value;
+                if (errorusername == "") {
+                    document.getElementById("errorusername").innerHTML = "Please Insert username!";
+                    if (errorname == "") {
+                        document.getElementById("errorname").innerHTML = "Please Insert name!";
+                    }
+                    if (errorpass == "") {
+                        document.getElementById("errorpass").innerHTML = "Please Insert password!";
+                    }
+                    if (erroric == "") {
+                        document.getElementById("erroric").innerHTML = "Please Insert Ic!";
+                    }
+                    if (errorposition == "") {
+                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
+                    }
+                    if (erroremail == "") {
+                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
+                    }
+
+                    return false;
+                }
+
+                if (errorname == "") {
+                    document.getElementById("errorname").innerHTML = "Please Insert name!";
+                     if (errorpass == "") {
+                        document.getElementById("errorpass").innerHTML = "Please Insert password!";
+                    }
+                    if (erroric == "") {
+                        document.getElementById("erroric").innerHTML = "Please Insert Ic!";
+                    }
+                    if (errorposition == "") {
+                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
+                    }
+                    if (erroremail == "") {
+                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
+                    }
+                    return false;
+
+                }
+                if (errorpass == "") {
+                    document.getElementById("errorpass").innerHTML = "Please Insert password!";
+                    if (erroric == "") {
+                        document.getElementById("erroric").innerHTML = "Please Insert Ic!";
+                    }
+                    if (errorposition == "") {
+                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
+                    }
+                    if (erroremail == "") {
+                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
+                    }
+                    return false;
+                }
+                if (erroric == "") {
+                    document.getElementById("erroric").innerHTML = "Please Insert Ic";
+                    if (errorposition == "") {
+                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
+                    }
+                    if (erroremail == "") {
+                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
+                    }
+                    return false;
+                }
+                if (errorposition == "") {
+                    document.getElementById("errorposition").innerHTML = "Please Insert position";
+                    if (erroremail == "") {
+                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
+                    }
+                    return false;
+                }
+                if (erroremail == "") {
+                    document.getElementById("erroremail").innerHTML = "Please Insert Email";
+                    return false;
+                }
+
+            }
+        </script>
     </head>
     <style>
         .gradient-custom {
@@ -92,7 +175,7 @@
                 </div>
             </div>
         </nav>    
-        <%            String username = request.getParameter("username");
+        <%  String username = request.getParameter("username");
             String name = request.getParameter("name");
             String ic = request.getParameter("ic");
             String position = request.getParameter("position");
@@ -103,95 +186,47 @@
         <div class="container">
             <div class="card mx-auto" style="width: 18rem;">
                 <div class="card-body">
-                    <form action="StaffControl" method="POST">
-                        <%
-                            if (name == null || ic == null || position == null || email == null) {
-                        %>
-                        <table>
-                            <tr>
-                                <td> <label>Username</label></td>
-                                <td> <input type="text" name="username" id="username"></td>
-                            </tr>
-                            <tr>
-                                <td>Name</td>
-
-                                <td><input type="text" name="name" ></td>
-                            </tr>
-                            <tr>
-                                <td> <label>Password</label>   </td> 
-                                <td> <input type="text" name="password" >    </td> 
-                            </tr>
-
-                            <tr>
-                                <td>      <label>IC</label>   </td> 
-                                <td>    <input type="text" name="ic" >   </td> 
-                            </tr>
-                            <tr>
-                                <td>      <label>ROLE ID</label>   </td> 
-                                <td>    
-                                    <select class="form-select" aria-label="Default select example" name="role">
-                                        <option value="1">Admin</option>
-                                        <option value="2">Staff</option>
-                                    </select>
-                                </td> 
-                            </tr>
-                            <tr>
-                                <td>   <label>POSITION</label>   </td> 
-                                <td>   <input type="text" name="position" >   </td> 
-                            </tr>
-                            <tr>
-                                <td>   <label>Email</label>   </td> 
-                                <td>     <input type="text" name="email" >   </td> 
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>    <input type="Submit" name="Submit"></td>
-                            </tr>
-                        </table>
-                        <%} else {%>
-                        <table>
-                            <tr>
-                                <td> <label>Username</label></td>
-                                <td> <input type="text" name="username" value="<%=username%>"></td>
-                            </tr>
-                            <tr>
-                                <td>Name</td>
-
-                                <td><input type="text" name="name" value="<%=name%>"></td>
-                            </tr>
-                            <tr>
-                                <td> <label>Password</label>   </td> 
-                                <td> <input type="text" name="password" >    </td> 
-                            </tr>
-
-                            <tr>
-                                <td>      <label>IC</label>   </td> 
-                                <td>    <input type="text" name="ic" value="<%=ic%>">   </td> 
-                            </tr>
-                            <tr>
-                                <td>IC</td>
-                                <td> 
-                                    <select class="form-select" aria-label="Default select example" name="role">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">Admin</option>
-                                        <option value="2">Staff</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>   <label>POSITION</label>   </td> 
-                                <td>   <input type="text" name="position" value="<%=position%>">   </td> 
-                            </tr>
-                            <tr>
-                                <td>   <label>Email</label>   </td> 
-                                <td>     <input type="text" name="email" value="<%=email%>">   </td> 
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>    <input type="Submit" name="Submit"></td>
-                            </tr>
-                        </table>
-                        <%}%>
+                    <form name="myForm" action="StaffControl" onsubmit="return validateForm()" method="POST"   >
+                        <div class="mb-3">
+                            <label  class="form-label">USERNAME</label>
+                            <input type="text" class="form-control" name="username">
+                            <p id="errorusername" style="color:red"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label  class="form-label">NAME</label>
+                            <input type="text" class="form-control" name="name">
+                            <p id="errorname" style="color:red"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label  class="form-label">PASSWORD</label>
+                            <input type="text" class="form-control" name="pass">
+                            <p id="errorpass" style="color:red"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label>IC</label> <br>
+                            <input type="text" class="form-control" name="IC" > 
+                            <p id="erroric" style="color:red"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label>ROLE ID</label> 
+                            <select class="form-select" aria-label="Default select example" name="role">
+                                <option value="1">Admin</option>
+                                <option value="2">Staff</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>POSITION</label> 
+                            <input type="text" class="form-control" name="position" >
+                            <p id="errorposition" style="color:red"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label>Email</label><br>
+                            <input type="text" class="form-control" name="email" > 
+                            <p id="erroremail" style="color:red"></p>
+                        </div>
+                        <div class="mb-3">
+                            <input type="Submit" class="btn btn-primary" name="Submit">
+                        </div>
                     </form>
                     <%
                         List errorMsgs = (List) request.getAttribute("errorMsgs");

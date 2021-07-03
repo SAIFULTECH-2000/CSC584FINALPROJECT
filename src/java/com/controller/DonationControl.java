@@ -77,83 +77,16 @@ public class DonationControl extends HttpServlet {
             String hh = request.getParameter("hh");
             HttpSession session = request.getSession();
             int id = (Integer) session.getAttribute("ID");
-            String method = request.getParameter("method");
-            int iddonation =Integer.parseInt(  request.getParameter("ID"));
             DonatorDao dao = new DonatorDao();
-            if(method !=null){
-            if (method.equals("DELETE")) {
-                //DELETE
-                if (dao.deleteDonator(iddonation)) {
-                    RequestDispatcher view = request.getRequestDispatcher("donation_information.jsp");
-                    view.forward(request, response);
-                } else {
-                    errorMsgs.add("Please contact your developer");
-                    PrintWriter out = response.getWriter();
-                    out.println("Please contact your developer");
-                }
-            }
-            if (method.equals("UPDATE")) {
-                if (gender == null || name.length() == 0 || ic.length() == 0 || address.length() == 0 || tel.length() == 0 || bloodtype.length() == 0) {
-                    Donator donator = new Donator(gender, name, ic, address, tel, bloodtype, hh);
-                    if (dao.updateDonator(donator, id)) {
-                        RequestDispatcher view = request.getRequestDispatcher("donation_information.jsp");
-                        view.forward(request, response);
-                    } else {
-                        errorMsgs.add("Please contact your developer");
-                        PrintWriter out = response.getWriter();
-                        out.println("Please contact your developer");
-                    }
-                }
-            }
-            }
-            if (gender == null || name.length() == 0 || ic.length() == 0 || address.length() == 0 || tel.length() == 0 || bloodtype.length() == 0) {
-                if (gender != null) {
-                    request.setAttribute("gender", gender);
-                } else {
-                    errorMsgs.add("Please choose gender");
-                }
-                if (name.length() != 0) {
-                    request.setAttribute("name", name);
-                } else {
-                    errorMsgs.add("Please insert name");
-                }
-                if (ic.length() != 0) {
-                    request.setAttribute("ic", ic);
-                } else {
-                    errorMsgs.add("Please insert ic");
-                }
-                if (address.length() != 0) {
-                    request.setAttribute("address", address);
-                } else {
-                    errorMsgs.add("Please insert address");
-                }
-                if (tel.length() != 0) {
-                    request.setAttribute("tel", tel);
-                } else {
-                    errorMsgs.add("Please insert Phone");
-                }
-                if (bloodtype.length() != 0) {
-                    request.setAttribute("bloodtype", bloodtype);
-                } else {
-                    errorMsgs.add("Please insert bloodtype");
-                }
-
-                request.setAttribute("errorMsgs", errorMsgs);
-                RequestDispatcher view = request.getRequestDispatcher("register_donation.jsp");
-                view.forward(request, response);
-            } else {
+           
+           
                 //insert Donation
                 Donator donator = new Donator(gender, name, ic, address, tel, bloodtype, hh);
                 if (dao.insertDonator(donator, id)) {
                     RequestDispatcher view = request.getRequestDispatcher("donation_information.jsp");
                     view.forward(request, response);
-                } else {
-                    errorMsgs.add("Please contact your developer");
-                    PrintWriter out = response.getWriter();
-                    out.println("Please contact your developer");
                 }
-            }
-            
+           
         } catch (Exception e) {
 
         }

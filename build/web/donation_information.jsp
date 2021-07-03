@@ -100,7 +100,6 @@
                                 <th>Gender</th>
                                 <th>Blood Type</th>
                                 <th>Contact</th>
-                                <th>Action</th>
                             </tr>
                             <c:forEach var ="row" items = "${result.rows}">
                                 <tr>
@@ -108,25 +107,7 @@
                                     <td>${row.GENDER}</td>
                                     <td>${row.TYPE_BLOOD}</td>
                                     <td>${row.PHONENUM}</td>
-                                    <td>
-                                        <form action="update_donation.jsp" method="post">
-                                            <input type="hidden" name="Name" id="Name" value="${row.NAME}">
-                                            <input type="hidden" name="IC" id="IC" value="${row.IC}">
-                                            <input type="hidden" name="address" id="addresss" value="${row.ADDRESS}">
-                                            <input type="hidden" name="tel" id="tel"value="${row.PHONENUM}">
-                                            <input type="hidden" name="bloodtype" id="bloodtype" value="${row.TYPE_BLOOD}">
-                                            <input type="hidden" name="ID" name="ID" value="${row.ID_DONATION}">
-                                            <input type="hidden" name="hh" id="hh" value="${row.HEALTHHISTORY}">  
-                                            <input type="hidden" name="gender" value="${row.gender}">
-                                               <input type="submit" value="UPDATE">
-                                        </form>
-                                   
-                                <form action="DonationControl" method="post">
-                                    <input type="hidden" name="method" value="DELETE">
-                                    <input type="hidden" name="ID" value="${row.ID_DONATION}">
-                                    <input type="submit" value="DELETE">
-                                </form>
-                                </td>
+
                                 </tr>
                             </c:forEach>
                         </table>

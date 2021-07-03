@@ -23,7 +23,91 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Update Staff</title>
-         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <script>
+            function validateForm() {
+                let errorusername = document.forms["myForm"]["username"].value;
+                let errorname = document.forms["myForm"]["name"].value;
+                let errorpass = document.forms["myForm"]["pass"].value;
+                let erroric = document.forms["myForm"]["IC"].value;
+                let errorposition = document.forms["myForm"]["position"].value;
+                let erroremail = document.forms["myForm"]["position"].value;
+                if (errorusername == "") {
+                    document.getElementById("errorusername").innerHTML = "Please Insert username!";
+                    if (errorname == "") {
+                        document.getElementById("errorname").innerHTML = "Please Insert name!";
+                    }
+                    if (errorpass == "") {
+                        document.getElementById("errorpass").innerHTML = "Please Insert password!";
+                    }
+                    if (erroric == "") {
+                        document.getElementById("erroric").innerHTML = "Please Insert Ic!";
+                    }
+                    if (errorposition == "") {
+                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
+                    }
+                    if (erroremail == "") {
+                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
+                    }
+
+                    return false;
+                }
+
+                if (errorname == "") {
+                    document.getElementById("errorname").innerHTML = "Please Insert name!";
+                    if (errorpass == "") {
+                        document.getElementById("errorpass").innerHTML = "Please Insert password!";
+                    }
+                    if (erroric == "") {
+                        document.getElementById("erroric").innerHTML = "Please Insert Ic!";
+                    }
+                    if (errorposition == "") {
+                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
+                    }
+                    if (erroremail == "") {
+                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
+                    }
+                    return false;
+
+                }
+                if (errorpass == "") {
+                    document.getElementById("errorpass").innerHTML = "Please Insert password!";
+                    if (erroric == "") {
+                        document.getElementById("erroric").innerHTML = "Please Insert Ic!";
+                    }
+                    if (errorposition == "") {
+                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
+                    }
+                    if (erroremail == "") {
+                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
+                    }
+                    return false;
+                }
+                if (erroric == "") {
+                    document.getElementById("erroric").innerHTML = "Please Insert Ic";
+                    if (errorposition == "") {
+                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
+                    }
+                    if (erroremail == "") {
+                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
+                    }
+                    return false;
+                }
+                if (errorposition == "") {
+                    document.getElementById("errorposition").innerHTML = "Please Insert position";
+                    if (erroremail == "") {
+                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
+                    }
+                    return false;
+                }
+                if (erroremail == "") {
+                    document.getElementById("erroremail").innerHTML = "Please Insert Email";
+                    return false;
+                }
+
+            }
+        </script>
     </head>
     <style>
         .gradient-custom {
@@ -93,12 +177,12 @@
             </div>
         </nav>    
         <%
-        String username = request.getParameter("username");
-        String name = request.getParameter("name");
-        String ic = request.getParameter("ic");
-        String position = request.getParameter("position");
-        String email = request.getParameter("email");
-        String id = request.getParameter("ID");
+            String username = request.getParameter("username");
+            String name = request.getParameter("name");
+            String ic = request.getParameter("ic");
+            String position = request.getParameter("position");
+            String email = request.getParameter("email");
+            String id = request.getParameter("ID");
         %>
 
         <h1  style="margin-left:0px;color:white; text-align: center ">Update Staff</h1>
@@ -106,36 +190,37 @@
             <div class="card mx-auto" style="width: 18rem;">
                 <div class="card-body">
                     <form action="StaffControl" method="POST">
-                        <table>
-                            <tr>
-                              <input type="hidden" name="method" value="update">
-                            <input type="hidden" name="ID" value="<%=id%>">
-                                <td> <label>Username</label></td>
-                                <td> <input type="text" name="username" value="<%=username%>"></td>
-                            </tr>
-                            <tr>
-                                <td> <label>Name</label></td>
-                                <td> <input type="text" name="name" value="<%=name%>"></td>
-                            </tr>
-                            <tr>
-                                <td>      <label>IC</label>   </td> 
-                                <td>    <input type="text" name="ic" value="<%=ic%>">   </td> 
-                            </tr>
-
-                            <tr>
-                                <td>   <label>POSITION</label>   </td> 
-                                <td>   <input type="text" name="position" value="<%=position%>">   </td> 
-                            </tr>
-                            <tr>
-                                <td>   <label>Email</label>   </td> 
-                                <td>     <input type="text" name="email" value="<%=email%>">   </td> 
-                                                
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>    <input type="Submit" name="Submit"></td>
-                            </tr>
-                        </table>
+                        <input type="hidden" name="method" value="update">
+                        <input type="hidden" name="ID" value="<%=id%>">
+                        <div class="mb-3">
+                            <label  class="form-label">USERNAME</label>
+                            <input type="text" class="form-control" name="username" value="<%=username%>">
+                            <p id="errorusername" style="color:red"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label  class="form-label">NAME</label>
+                            <input type="text" class="form-control" name="name" value="<%=name%>">
+                            <p id="errorname" style="color:red"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label>IC</label> <br>
+                            <input type="text" class="form-control" name="IC" value="<%=ic%>" > 
+                            <p id="erroric" style="color:red"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label>POSITION</label> 
+                            <input type="text" class="form-control" name="position" value="<%=position%>">
+                            <p id="errorposition" style="color:red"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label>Email</label><br>
+                            <input type="text" class="form-control" name="email"value="<%=email%>" > 
+                            <p id="erroremail" style="color:red"></p>
+                        </div>
+                        <div class="mb-3">
+                            <input type="Submit" class="btn btn-primary" name="Submit" >
+                        </div>
+                      
                     </form>
                     <%
                         List errorMsgs = (List) request.getAttribute("errorMsgs");
@@ -158,6 +243,6 @@
                 </div>
             </div>
         </div>
-             <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+        <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     </body>
 </html>

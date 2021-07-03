@@ -73,7 +73,7 @@ public class StaffControl extends HttpServlet {
             String username = request.getParameter("username");
             String name = request.getParameter("name");
             String password = request.getParameter("password");
-            String ic = request.getParameter("ic");
+            String ic = request.getParameter("IC");
             String position = request.getParameter("position");
             String email = request.getParameter("email");
             String id = request.getParameter("ID");
@@ -82,42 +82,8 @@ public class StaffControl extends HttpServlet {
             String method = request.getParameter("method");
             
             if (id == null) {
-                if (username.length() == 0 || name.length() == 0 || password.length() == 0 || ic.length() == 0 || position.length() == 0 || email.length() == 0) {
-                    if (username.length() != 0) {
-                        request.setAttribute("username", username);
-                    } else {
-                        errorMsgs.add("Please insert Username");
-                    }
-                    if (name.length() != 0) {
-                        request.setAttribute("name", name);
-                    } else {
-                        errorMsgs.add("Please insert Name");
-                    }
-                    if (password.length() == 0) {
-                        errorMsgs.add("Please insert Password");
-                    }
-                    if (ic.length() != 0) {
-                        request.setAttribute("ic", ic);
-                    } else {
-                        errorMsgs.add("Please insert IC");
-                    }
-                    if (position.length() != 0) {
-                        request.setAttribute("position", position);
-                    } else {
-                        errorMsgs.add("Please insert position");
-                    }
-                    if (email.length() != 0) {
-                        request.setAttribute("email", email);
-                    } else {
-                        errorMsgs.add("Please insert email");
-                    }
-                    
-                    errorMsgs.add("Please insert all details");
-                    request.setAttribute("errorMsgs", errorMsgs);
-                    RequestDispatcher view = request.getRequestDispatcher("RegisterStaff.jsp");
-                    view.forward(request, response);
-                } else {
-                    //insert
+                if (username.length() != 0 || name.length() != 0 || password.length() != 0 || ic.length() != 0 || position.length() != 0 || email.length() != 0) {
+               
                     if (staffDao.checkusername(username)) {
                         errorMsgs.add("username is take please try again");
                         request.setAttribute("name", name);
@@ -142,7 +108,7 @@ public class StaffControl extends HttpServlet {
                             view.forward(request, response);
                         }
                     }
-                }
+                } 
             }else{
              if (method.equals("delete")){
              //delete

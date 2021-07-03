@@ -1,20 +1,27 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%-- 
-    Document   : donation_information
-    Created on : Jun 23, 2021, 7:22:38 PM
-    Author     : SAIFULTECH/syakir
+    Document   : blooddonation
+    Created on : Jul 4, 2021, 12:40:00 AM
+    Author     : SAIFULTECH
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
+<%
+    if (null == session.getAttribute("username")) {
+        response.sendRedirect("index.jsp");
+
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Donation Information</title>
+        <title>Dashboard</title>
         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <style>
@@ -62,6 +69,10 @@
                                 <li> <a  class="dropdown-item" href="donation_information.jsp">Donation Information</a></li>
                             </ul>
                         </li>
+                        <%
+                            int role_id = (Integer) session.getAttribute("role_id");
+                            if (role_id == 1) {
+                        %>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Staff
@@ -71,6 +82,7 @@
                                 <li><a class="dropdown-item" href="ViewStaff.jsp">View Staff</a></li>
                             </ul>
                         </li>
+                        <%}%>
                         <li class="nav-item">
                             <a  class="nav-link"  href="submission.html">Submission</a>
                         </li>
@@ -83,38 +95,35 @@
                     </ul>
                 </div>
             </div>
-        </nav>  
+        </nav>    
         <sql:query var="result" dataSource="${myDatasource}">
-            SELECT * FROM DONATION
+            SELECT  * FROM DONATION
         </sql:query>
-        <h1  style="margin-left:0px;color:white; text-align: center ">Donor Details</h1>
+
+        <h1 style="margin-left:0px;color:white; text-align: center ">Profile</h1>
         <div class="container" >
             <div class="card">
                 <div class="card-body">
-                    <a href="register_donation.jsp" class="btn btn-primary">Register New Donation</a>
-                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
-
-                        <table class="table table-bordered table-striped mb-0">
-                            <tr>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Blood Type</th>
-                                <th>Contact</th>
-                            </tr>
-                            <c:forEach var ="row" items = "${result.rows}">
-                                <tr>
-                                    <td>${row.NAME}</td>
-                                    <td>${row.GENDER}</td>
-                                    <td>${row.TYPE_BLOOD}</td>
-                                    <td>${row.PHONENUM}</td>
-
-                                </tr>
-                            </c:forEach>
-                        </table>
-                    </div>
+                    <form>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Please Choose donator</label>
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                    <c:forEach var = "row" items = "${result.rows}">
+                                         <option>1</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
+
+
+
         <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     </body>
 </html>
