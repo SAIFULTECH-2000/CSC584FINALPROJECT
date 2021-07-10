@@ -51,15 +51,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="Dashboard.jsp" aria-current="page" class="nav-link active">Dashboard</a>
+                            <a href="Dashboard.jsp" aria-current="page" class="nav-link">Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Donation
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li> <a class="dropdown-item" href="blooddonation.html">Blood Donation</a></li>
-                                <li> <a  class="dropdown-item" href="donation_information.jsp">Donation Information</a></li>
+                                <li> <a class="dropdown-item" href="blooddonation.jsp">Blood Donation</a></li>
+                                <li> <a  class="dropdown-item active" href="donation_information.jsp">Donation Information</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

@@ -32,7 +32,8 @@
                 let erroric = document.forms["myForm"]["IC"].value;
                 let errorposition = document.forms["myForm"]["position"].value;
                 let erroremail = document.forms["myForm"]["position"].value;
-                if (errorusername == "") {
+                if (errorusername == ""||errorname == ""||errorpass == ""||erroric == ""||errorposition == ""||erroremail=="") {
+                    if(errorusername=="")
                     document.getElementById("errorusername").innerHTML = "Please Insert username!";
                     if (errorname == "") {
                         document.getElementById("errorname").innerHTML = "Please Insert name!";
@@ -52,59 +53,6 @@
 
                     return false;
                 }
-
-                if (errorname == "") {
-                    document.getElementById("errorname").innerHTML = "Please Insert name!";
-                     if (errorpass == "") {
-                        document.getElementById("errorpass").innerHTML = "Please Insert password!";
-                    }
-                    if (erroric == "") {
-                        document.getElementById("erroric").innerHTML = "Please Insert Ic!";
-                    }
-                    if (errorposition == "") {
-                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
-                    }
-                    if (erroremail == "") {
-                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
-                    }
-                    return false;
-
-                }
-                if (errorpass == "") {
-                    document.getElementById("errorpass").innerHTML = "Please Insert password!";
-                    if (erroric == "") {
-                        document.getElementById("erroric").innerHTML = "Please Insert Ic!";
-                    }
-                    if (errorposition == "") {
-                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
-                    }
-                    if (erroremail == "") {
-                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
-                    }
-                    return false;
-                }
-                if (erroric == "") {
-                    document.getElementById("erroric").innerHTML = "Please Insert Ic";
-                    if (errorposition == "") {
-                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
-                    }
-                    if (erroremail == "") {
-                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
-                    }
-                    return false;
-                }
-                if (errorposition == "") {
-                    document.getElementById("errorposition").innerHTML = "Please Insert position";
-                    if (erroremail == "") {
-                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
-                    }
-                    return false;
-                }
-                if (erroremail == "") {
-                    document.getElementById("erroremail").innerHTML = "Please Insert Email";
-                    return false;
-                }
-
             }
         </script>
     </head>
@@ -149,7 +97,7 @@
                                 Donation
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li> <a class="dropdown-item" href="blooddonation.html">Blood Donation</a></li>
+                                <li> <a class="dropdown-item" href="blooddonation.jsp">Blood Donation</a></li>
                                 <li> <a  class="dropdown-item" href="donation_information.jsp">Donation Information</a></li>
                             </ul>
                         </li>
@@ -181,13 +129,7 @@
                 </div>
             </div>
         </nav>    
-        <%  String username = request.getParameter("username");
-            String name = request.getParameter("name");
-            String ic = request.getParameter("ic");
-            String position = request.getParameter("position");
-            String email = request.getParameter("email");
-        %>
-
+ 
         <h1  style="margin-left:0px;color:white; text-align: center ">Register Staff</h1>
         <div class="container">
             <div class="card mx-auto" style="width: 18rem;">

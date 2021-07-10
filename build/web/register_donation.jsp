@@ -26,7 +26,7 @@
             let isChecked = Array.prototype.some.call(document.forms["myForm"]["gender"], function (radio) {
                 return radio.checked;
             });
-            if (!isChecked) {
+            if (!isChecked||errorname == ""||erroric == ""||erroraddress == ""||errortel == ""||errorbloodtype == "") {
                 document.getElementById("errorgender").innerHTML = "Please Insert gender!";
                 if (errorname == "") {
                     document.getElementById("errorname").innerHTML = "Please Insert name!";
@@ -46,63 +46,6 @@
                 }
                 return false;
             }
-
-
-            if (errorname == "") {
-                document.getElementById("errorname").innerHTML = "Please Insert name!";
-                if (erroric == "") {
-                    document.getElementById("erroric").innerHTML = "Please Insert ic!";
-                }
-                if (erroraddress == "") {
-                    document.getElementById("erroraddress").innerHTML = "Please Insert address!";
-                }
-                if (errortel == "") {
-                    document.getElementById("errortel").innerHTML = "Please Insert Phone number!";
-                }
-                if (errorbloodtype == "") {
-                    document.getElementById("errorbloodtype").innerHTML = "Please Insert bloodtype!";
-                }
-                return false;
-            }
-            if (erroric == "") {
-                document.getElementById("erroric").innerHTML = "Please Insert ic!";
-               
-                if (erroraddress == "") {
-                    document.getElementById("erroraddress").innerHTML = "Please Insert address!";
-                }
-                if (errortel == "") {
-                    document.getElementById("errortel").innerHTML = "Please Insert Phone number!";
-                }
-                if (errorbloodtype == "") {
-                    document.getElementById("errorbloodtype").innerHTML = "Please Insert bloodtype!";
-                }
-                 return false;
-            }
-            if (erroraddress == "") {
-                document.getElementById("erroraddress").innerHTML = "Please Insert address!";
-                 if (errortel == "") {
-                    document.getElementById("errortel").innerHTML = "Please Insert Phone number!";
-                }
-                if (errorbloodtype == "") {
-                    document.getElementById("errorbloodtype").innerHTML = "Please Insert bloodtype!";
-                }
-                return false;
-            }
-            if (errortel == "") {
-
-                document.getElementById("errortel").innerHTML = "Please Insert Phone number!";
-                   if (errorbloodtype == "") {
-                    document.getElementById("errorbloodtype").innerHTML = "Please Insert bloodtype!";
-                }
-                return false;
-            }
-            if (errorbloodtype == "") {
-
-                document.getElementById("errorbloodtype").innerHTML = "Please Insert bloodtype!";
-                return false;
-            }
-
-
         }
     </script>
     <style>
@@ -139,15 +82,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="Dashboard.jsp" aria-current="page" class="nav-link active">Dashboard</a>
+                            <a href="Dashboard.jsp" aria-current="page" class="nav-link">Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Donation
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li> <a class="dropdown-item" href="blooddonation.html">Blood Donation</a></li>
-                                <li> <a  class="dropdown-item" href="donation_information.jsp">Donation Information</a></li>
+                                <li> <a class="dropdown-item" href="blooddonation.jsp">Blood Donation</a></li>
+                                <li> <a  class="dropdown-item active" href="donation_information.jsp">Donation Information</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

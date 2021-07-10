@@ -90,7 +90,7 @@ display: block;
                                 Hospital
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li> <a  class="dropdown-item active" href="RegisterHospital.jsp">Register Hospital</a></li>
+                                <li> <a  class="dropdown-item" href="RegisterHospital.jsp">Register Hospital</a></li>
                                 <li> <a class="dropdown-item active" href="Hospital.jsp">View Hospitals</a></li>
                             </ul>
                         </li>
