@@ -109,7 +109,7 @@ display: block;
         <div class="card mx-auto"  style="width: 30rem;">
             <div class="card-body">
          <br>
-        You have successful add new staff
+        You have successfully added new staff
          <br>
          <%
          

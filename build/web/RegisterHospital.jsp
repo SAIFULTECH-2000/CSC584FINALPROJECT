@@ -119,6 +119,7 @@
             <div class="card mx-auto" style="width: 25rem;">
                 <div class="card-body">
                     <form name="myForm" action="" onsubmit="return validateForm()"  method="POST">
+                    <form action="HospitalControl" method="POST">
                         <table>
                             <tr>
                                 <td> <label>Name</label></td>

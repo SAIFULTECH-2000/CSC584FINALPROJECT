@@ -14,6 +14,18 @@ public class Hospital {
     String address_hospital;
     String pic;
     
+    public Hospital() {
+        name_hospital = " ";
+        address_hospital = " ";
+        pic = " ";
+    }
+    
+    public Hospital(String name_hospital, String address_hospital, String pic) {
+        this.name_hospital = name_hospital;
+        this.address_hospital = address_hospital;
+        this.pic = pic;
+    }
+
     public String getName() {
         return name_hospital;
     }
@@ -38,13 +50,10 @@ public class Hospital {
         this.pic = pic;
     }
 
-    public Hospital() {
+    @Override
+    public String toString() {
+        return "Hospital{" + "name_hospital=" + name_hospital + ", address_hospital=" + address_hospital + ", pic=" + pic + '}';
     }
-
-    public Hospital(String name_hospital, String address_hospital, String pic) {
-        this.name_hospital = name_hospital;
-        this.address_hospital = address_hospital;
-        this.pic = pic;
-    }
+    
     
 }

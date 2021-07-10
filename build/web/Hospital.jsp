@@ -144,7 +144,6 @@ display: block;
                     <th>Hospital Name</th>
                     <th>Hospital Address</th>
                     <th>Person In Charge (PIC)</th>
-                    <th>Action</th>
                 </tr>
                 <c:forEach var = "row" items = "${result.rows}">
                     <tr>
@@ -152,28 +151,22 @@ display: block;
                         <td>${row.ADDRESS_HOSPITAL}</td>
                         <td>${row.PIC}</td>
                         <td>
-                            <form action="UpdateHospital.jsp" method="post">
+                            <form action="SendBlood.jsp" method="post">
                                 <input type="hidden" name="name_hospital" value="${row.NAME_HOSPITAL}">
                                 <input type="hidden" name="address_hospital" value="${row.ADDRESS_HOSPITAL}">
                                 <input type="hidden" name="pic" value="${row.PIC}">
-                                <input type="submit" value="UPDATE">
                             </form>
-                             <form action="HospitalControl" method="post">
-                                 <input type="hidden" name="method" value="delete">
-                                <input type="hidden" name="id_hospital" value="${row.ID_HOSPITAL}">
-                                <input type="hidden" name="name_hospital" value="${row.NAME_HOSPITAL}">
-                                <input type="submit" value="DELETE">
-                            </form>  
-                            
                         </td>
                     </tr>
                 </c:forEach>
                     </table>
             
-        
         </div>
       </div>
     </div>
+    <form action="SendBlood.jsp" method="post">
+                <input type="submit" value="Send Blood">
+            </form>
   </div>
         <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 </body>
