@@ -72,15 +72,15 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a  class="nav-link"  href="submission.html">Submission</a>
+                             <a  class="nav-link"  href="Report.jsp">Report</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Hospital
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li> <a  class="dropdown-item active" href="RegisterHospital.jsp">Register Hospital</a></li>
-                                <li> <a class="dropdown-item active" href="Hospital.jsp">View Hospitals</a></li>
+                                <li> <a  class="dropdown-item " href="RegisterHospital.jsp">Register Hospital</a></li>
+                                <li> <a class="dropdown-item " href="Hospital.jsp">View Hospitals</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">

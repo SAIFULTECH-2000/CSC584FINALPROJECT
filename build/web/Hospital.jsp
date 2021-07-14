@@ -57,14 +57,14 @@ display: block;
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a href="Dashboard.jsp" aria-current="page" class="nav-link active">Dashboard</a>
+            <a href="Dashboard.jsp" aria-current="page" class="nav-link ">Dashboard</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
              Donation
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                 <li> <a class="dropdown-item" href="blooddonation.html">Blood Donation</a></li>
+                 <li> <a class="dropdown-item" href="blooddonation.jsp">Blood Donation</a></li>
                  <li> <a  class="dropdown-item" href="donation_information.jsp">Donation Information</a></li>
             </ul>
           </li>
@@ -83,7 +83,7 @@ display: block;
           </li>
           <%}%>
           <li class="nav-item">
-                 <a  class="nav-link"  href="submission.html">Submission</a>
+                  <a  class="nav-link"  href="Report.jsp">Report</a>
           </li>
           <li class="nav-item dropdown">
                             <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -108,7 +108,7 @@ display: block;
       %>
     
     <sql:query var="result" dataSource="${myDatasource}">
-        SELECT *  FROM HOSPITAL WHERE ID_HOSPITAL != <%=id%>
+        SELECT *  FROM HOSPITAL 
     </sql:query>
        <%
        String md=(String) session.getAttribute("md");
@@ -164,9 +164,7 @@ display: block;
         </div>
       </div>
     </div>
-    <form action="SendBlood.jsp" method="post">
-                <input type="submit" value="Send Blood">
-            </form>
+    <a href="SendBlood.jsp" class="btn btn-warning">Send Blood</a>
   </div>
         <script src="dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 </body>

@@ -12,6 +12,10 @@
         <servlet-name>BloodDonator</servlet-name>
         <servlet-class>com.controller.BloodDonator</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HospitalControl</servlet-name>
+        <servlet-class>com.controller.HospitalControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Auth</servlet-name>
         <url-pattern>/Auth</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>BloodDonator</servlet-name>
         <url-pattern>/BloodDonator</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HospitalControl</servlet-name>
+        <url-pattern>/HospitalControl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -23,7 +23,7 @@ public class HospitalDao {
      ps = conn.prepareStatement("INSERT INTO HOSPITAL (NAME_HOSPITAL,ADDRESS_HOSPITAL,PIC) values(?,?,?)");
      ps.setString(1, hospital.getName());
      ps.setString(2, hospital.getAddress());
-     ps.setString(3, hospital.getPIC());
+     ps.setString(3, hospital.getPic());
      
      num =ps.executeUpdate();
      if(num==1)
@@ -44,7 +44,7 @@ public class HospitalDao {
      ps = conn.prepareStatement("UPDATE HOSPITAL SET NAME_HOSPITAL=?,ADDRESS_HOSPITAL=?,PIC=? where ID_HOSPITAL=?");
      ps.setString(1, hospital.getName());
      ps.setString(2, hospital.getAddress());
-     ps.setString(3, hospital.getPIC());
+     ps.setString(3, hospital.getPic());
      num =ps.executeUpdate();
      if(num==1)
         status=true;

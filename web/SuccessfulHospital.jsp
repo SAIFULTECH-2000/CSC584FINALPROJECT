@@ -10,12 +10,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sql:setDataSource var="myDatasource" driver="org.apache.derby.jdbc.ClientDriver" url="jdbc:derby://localhost:1527/BloodManagement" user="root"password="root"/>
 <jsp:useBean id="hospital" class="Location.Hospital" scope="request"/>
-<%
-    if (null == session.getAttribute("name_hospital")) {
-        response.sendRedirect("index.jsp");
 
-    }
-%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -84,7 +79,7 @@ display: block;
             </ul>
           </li>
           <li class="nav-item">
-                 <a  class="nav-link"  href="submission.html">Submission</a>
+                  <a  class="nav-link"  href="Report.jsp">Report</a>
           </li>
           <li class="nav-item dropdown">
                             <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -111,15 +106,13 @@ display: block;
          <br>
         You have successfully added a new hospital
          <br>
-         <%
-         
-         %>
+    
            <table style="width:100%">
                     <tr>
-                        <td>Name:<jsp:getProperty name="hospital" property="name_hospital"/></td>
+                        <td>Name:<jsp:getProperty name="hospital" property="name"/></td>
                     </tr>
                     <tr>
-                        <td>ADDRESS:<jsp:getProperty name="hospital" property="address_hospital"/></td>
+                        <td>ADDRESS:<jsp:getProperty name="hospital" property="address"/></td>
                     </tr>
                     <tr>
                         <td>PIC:<jsp:getProperty name="hospital" property="pic"/></td>

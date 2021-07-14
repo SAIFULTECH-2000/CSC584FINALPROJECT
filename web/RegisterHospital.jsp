@@ -75,7 +75,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="dashboard.jsp" aria-current="page" class="nav-link">Dashboard</a>
+                            <a href="Dashboard.jsp" aria-current="page" class="nav-link">Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -96,7 +96,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a  class="nav-link"  href="submission.html">Submission</a>
+                             <a  class="nav-link"  href="Report.jsp">Report</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -118,7 +118,7 @@
         <div class="container">
             <div class="card mx-auto" style="width: 25rem;">
                 <div class="card-body">
-                    <form name="myForm" action="" onsubmit="return validateForm()"  method="POST">
+                    <form name="myForm" action="HospitalControl" onsubmit="return validateForm()"  method="POST">
                     <form action="HospitalControl" method="POST">
                         <table>
                             <tr>

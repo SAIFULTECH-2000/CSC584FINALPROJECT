@@ -33,7 +33,8 @@
                 let erroric = document.forms["myForm"]["IC"].value;
                 let errorposition = document.forms["myForm"]["position"].value;
                 let erroremail = document.forms["myForm"]["position"].value;
-                if (errorusername == "") {
+                if (errorusername == ""||errorname == ""||errorpass == ""||erroric == ""||erroremail == ""||errorposition == "") {
+                    if(errorusername == "")
                     document.getElementById("errorusername").innerHTML = "Please Insert username!";
                     if (errorname == "") {
                         document.getElementById("errorname").innerHTML = "Please Insert name!";
@@ -51,58 +52,6 @@
                         document.getElementById("erroremail").innerHTML = "Please Insert Email!";
                     }
 
-                    return false;
-                }
-
-                if (errorname == "") {
-                    document.getElementById("errorname").innerHTML = "Please Insert name!";
-                    if (errorpass == "") {
-                        document.getElementById("errorpass").innerHTML = "Please Insert password!";
-                    }
-                    if (erroric == "") {
-                        document.getElementById("erroric").innerHTML = "Please Insert Ic!";
-                    }
-                    if (errorposition == "") {
-                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
-                    }
-                    if (erroremail == "") {
-                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
-                    }
-                    return false;
-
-                }
-                if (errorpass == "") {
-                    document.getElementById("errorpass").innerHTML = "Please Insert password!";
-                    if (erroric == "") {
-                        document.getElementById("erroric").innerHTML = "Please Insert Ic!";
-                    }
-                    if (errorposition == "") {
-                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
-                    }
-                    if (erroremail == "") {
-                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
-                    }
-                    return false;
-                }
-                if (erroric == "") {
-                    document.getElementById("erroric").innerHTML = "Please Insert Ic";
-                    if (errorposition == "") {
-                        document.getElementById("errorposition").innerHTML = "Please Insert position!";
-                    }
-                    if (erroremail == "") {
-                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
-                    }
-                    return false;
-                }
-                if (errorposition == "") {
-                    document.getElementById("errorposition").innerHTML = "Please Insert position";
-                    if (erroremail == "") {
-                        document.getElementById("erroremail").innerHTML = "Please Insert Email!";
-                    }
-                    return false;
-                }
-                if (erroremail == "") {
-                    document.getElementById("erroremail").innerHTML = "Please Insert Email";
                     return false;
                 }
 
@@ -143,7 +92,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="dashboard.jsp" aria-current="page" class="nav-link">Dashboard</a>
+                            <a href="Dashboard.jsp" aria-current="page" class="nav-link">Dashboard</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -189,6 +138,7 @@
             String position = request.getParameter("position");
             String email = request.getParameter("email");
             String id = request.getParameter("ID");
+            String role = request.getParameter("role");
         %>
 
         <h1  style="margin-left:0px;color:white; text-align: center ">Update Staff</h1>
@@ -198,9 +148,10 @@
                     <form action="StaffControl" method="POST">
                         <input type="hidden" name="method" value="update">
                         <input type="hidden" name="ID" value="<%=id%>">
+                        <input type="hidden" name="role" value="<%=role%>">
                         <div class="mb-3">
                             <label  class="form-label">USERNAME</label>
-                            <input type="text" class="form-control" name="username" value="<%=username%>">
+                            <p><%=username%></p>
                             <p id="errorusername" style="color:red"></p>
                         </div>
                         <div class="mb-3">

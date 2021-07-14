@@ -85,6 +85,8 @@ public class StaffControl extends HttpServlet {
                 if (username.length() != 0 || name.length() != 0 || password.length() != 0 || ic.length() != 0 || position.length() != 0 || email.length() != 0) {
                
                     if (staffDao.checkusername(username)) {
+                    
+                       
                         errorMsgs.add("username is take please try again");
                         request.setAttribute("name", name);
                         request.setAttribute("ic", ic);
@@ -95,7 +97,8 @@ public class StaffControl extends HttpServlet {
                         RequestDispatcher view = request.getRequestDispatcher("RegisterStaff.jsp");
                         view.forward(request, response);
                     } else {
-                        //insert method here
+                       
+                  
                         Staff staff = new Staff(username, name, email, ic, position,Integer.parseInt(role));
                         if (staffDao.insertStaff(staff, password)) {
                             request.setAttribute("staff", staff);
@@ -110,9 +113,11 @@ public class StaffControl extends HttpServlet {
                     }
                 } 
             }else{
+             
              if (method.equals("delete")){
              //delete
              if(staffDao.deleteStaff(Integer.parseInt(id))){
+                
               HttpSession session=request.getSession();  
               session.setAttribute("md","delete");
               session.setAttribute("mdname",name);
@@ -122,18 +127,26 @@ public class StaffControl extends HttpServlet {
               view.forward(request, response);
              }
              
-             }else if(method.equals("update")){
-                Staff staff = new Staff(username, name, email, ic, position,Integer.parseInt(role));
+             }
+             if(method.equals("update")){
+                
+        
+                Staff staff = new Staff();
+                staff.setName(name);
+                staff.setEmail(email);
+                staff.setIc(ic);
+                staff.setPosition(position);
                 if(staffDao.updateStaff(staff,Integer.parseInt(id))){
+                 
+                    
                     HttpSession session=request.getSession();  
- 
-                 session.setAttribute("md","update");
+              session.setAttribute("md","update");
               session.setAttribute("mdname",name);
-              RequestDispatcher view = request.getRequestDispatcher("ViewStaff.jsp");
-              view.forward(request, response);
+              request.getRequestDispatcher("ViewStaff.jsp").forward(request, response);
+                    
                 }else{
-                RequestDispatcher view = request.getRequestDispatcher("ViewStaff.jsp");
-                view.forward(request, response);
+              request.getRequestDispatcher("ViewStaff.jsp").forward(request, response);
+              
                 }
              }
             }

@@ -148,6 +148,7 @@
                                             <input type="hidden" name="ic" value="${row.IC}">
                                             <input type="hidden" name="position" value="${row.POSITION}">
                                             <input type="hidden" name="email" value="${row.EMAIL}">
+                                            <input type="hidden" name="role" value="${row.role}">
                                             <input type="submit" value="UPDATE">
                                         </form>
                                         <form action="StaffControl" method="post">

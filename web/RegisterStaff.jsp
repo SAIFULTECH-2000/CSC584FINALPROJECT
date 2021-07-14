@@ -111,15 +111,15 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a  class="nav-link"  href="submission.html">Submission</a>
+                            <a  class="nav-link"  href="Report.jsp">Report</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Hospital
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li> <a  class="dropdown-item active" href="RegisterHospital.jsp">Register Hospital</a></li>
-                                <li> <a class="dropdown-item active" href="Hospital.jsp">View Hospitals</a></li>
+                                <li> <a  class="dropdown-item " href="RegisterHospital.jsp">Register Hospital</a></li>
+                                <li> <a class="dropdown-item " href="Hospital.jsp">View Hospitals</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -142,7 +142,11 @@
                         </div>
                         <div class="mb-3">
                             <label  class="form-label">NAME</label>
+                            <%if(request.getAttribute("name")==null){%>
                             <input type="text" class="form-control" name="name">
+                            <%}else{%>
+                            <input type="text" class="form-control" name="name" value="<%=request.getAttribute("name")%>">
+                            <%}%>
                             <p id="errorname" style="color:red"></p>
                         </div>
                         <div class="mb-3">
@@ -152,7 +156,11 @@
                         </div>
                         <div class="mb-3">
                             <label>IC</label> <br>
+                              <%if(request.getAttribute("ic")==null){%>
                             <input type="text" class="form-control" name="IC" > 
+                            <%}else{%>
+                              <input type="text" class="form-control" name="IC" value="<%=request.getAttribute("ic")%>"> 
+                            <%}%>
                             <p id="erroric" style="color:red"></p>
                         </div>
                         <div class="mb-3">
@@ -164,12 +172,20 @@
                         </div>
                         <div class="mb-3">
                             <label>POSITION</label> 
+                              <%if(request.getAttribute("position")==null){%>
                             <input type="text" class="form-control" name="position" >
+                             <%}else{%>
+                             <input type="text" class="form-control" name="position" value="<%=request.getAttribute("position")%>" >
+                            <%}%>
                             <p id="errorposition" style="color:red"></p>
                         </div>
                         <div class="mb-3">
                             <label>Email</label><br>
+                             <%if(request.getAttribute("email")==null){%>
                             <input type="text" class="form-control" name="email" > 
+                              <%}else{%>
+                              <input type="text" class="form-control" name="email"  value="<%=request.getAttribute("email")%>"> 
+                              <%}%>
                             <p id="erroremail" style="color:red"></p>
                         </div>
                         <div class="mb-3">

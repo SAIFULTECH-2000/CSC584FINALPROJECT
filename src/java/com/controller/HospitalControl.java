@@ -13,17 +13,14 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author SAIFULTECH
  */
-@WebServlet(name = "HospitalControl", urlPatterns = {"/HospitalControl"})
 public class HospitalControl extends HttpServlet {
 
     /**
@@ -37,7 +34,7 @@ public class HospitalControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,7 +63,7 @@ public class HospitalControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+       response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         List errorMsgs = new LinkedList();
         try {
@@ -76,87 +73,34 @@ public class HospitalControl extends HttpServlet {
             String id_hospital = request.getParameter("id_hospital");
             HospitalDao hospitalDao = new HospitalDao();
             String method = request.getParameter("method");
-            
-            if (id_hospital == null) {
-                
-                
-                if (name_hospital.length() == 0 || address_hospital.length() == 0 || pic.length() == 0) {
-                    if (name_hospital.length() != 0) {
-                        request.setAttribute("name_hospital", name_hospital);
-                    } else {
-                        errorMsgs.add("Please insert Hospital Name");
-                    }
-                    if (address_hospital.length() != 0) {
-                        request.setAttribute("address_hospital", address_hospital);
-                    } else {
-                        errorMsgs.add("Please insert Hospital Address");
-                    }
-                    if (pic.length() == 0) {
-                        errorMsgs.add("Please insert Person In Charge(PIC)");
-                    }
-                    
-                    errorMsgs.add("Please insert all details");
+
+            if (hospitalDao.checkHospital(name_hospital)) {
+                errorMsgs.add("hospital name is taken please try again");
+                request.setAttribute("name_hospital", name_hospital);
+                request.setAttribute("address_hospital", address_hospital);
+                request.setAttribute("pic", pic);
+                request.setAttribute("errorMsgs", errorMsgs);
+                RequestDispatcher view = request.getRequestDispatcher("RegisterHospital.jsp");
+                view.forward(request, response);
+            } else {
+                //insert method here
+                Hospital hospital = new Hospital(name_hospital, address_hospital, pic);
+                if (hospitalDao.insertHospital(hospital)) {
+                    request.setAttribute("hospital", hospital);
+                    RequestDispatcher view = request.getRequestDispatcher("SuccessfulHospital.jsp");
+                    view.forward(request, response);
+                } else {
+                    errorMsgs.add("Please contact Developer");
                     request.setAttribute("errorMsgs", errorMsgs);
                     RequestDispatcher view = request.getRequestDispatcher("RegisterHospital.jsp");
                     view.forward(request, response);
-                } else {
-                    //insert
-                    
-                    if (hospitalDao.checkHospital(name_hospital)) {
-                        errorMsgs.add("hospital name is taken please try again");
-                        request.setAttribute("name_hospital", name_hospital);
-                        request.setAttribute("address_hospital", address_hospital);
-                        request.setAttribute("pic", pic);
-                        request.setAttribute("errorMsgs", errorMsgs);
-                        RequestDispatcher view = request.getRequestDispatcher("RegisterHospital.jsp");
-                        view.forward(request, response);
-                    } else {
-                        //insert method here
-                        Hospital hospital = new Hospital(name_hospital, address_hospital, pic);
-                        if (hospitalDao.insertHospital(hospital)) {
-                            request.setAttribute("hospital", hospital);
-                            RequestDispatcher view = request.getRequestDispatcher("SuccessfulHospital.jsp");
-                            view.forward(request, response);
-                        } else {
-                            errorMsgs.add("Please contact Developer");
-                            request.setAttribute("errorMsgs", errorMsgs);
-                            RequestDispatcher view = request.getRequestDispatcher("RegisterHospital.jsp");
-                            view.forward(request, response);
-                        }
-                    }
                 }
-            }else{
-             if (method.equals("delete")){
-             //delete
-             if(hospitalDao.deleteHospital(Integer.parseInt(id_hospital))){
-              HttpSession session=request.getSession();  
-              session.setAttribute("md","delete");
-              session.setAttribute("mdname_hospital",name_hospital);
-              request.getRequestDispatcher("Hospital.jsp").forward(request, response);
-             }else{
-              RequestDispatcher view = request.getRequestDispatcher("Hospital.jsp");
-              view.forward(request, response);
-             }
-             
-             }else if(method.equals("update")){
-                Hospital hospital = new Hospital(name_hospital, address_hospital, pic);
-                if(hospitalDao.updateHospital(hospital,Integer.parseInt(id_hospital))){
-                    HttpSession session=request.getSession();  
- 
-                 session.setAttribute("md","update");
-              session.setAttribute("mdname_hospital",name_hospital);
-              RequestDispatcher view = request.getRequestDispatcher("Hospital.jsp");
-              view.forward(request, response);
-                }else{
-                RequestDispatcher view = request.getRequestDispatcher("Hospital.jsp");
-                view.forward(request, response);
-                }
-             }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }
 
     /**

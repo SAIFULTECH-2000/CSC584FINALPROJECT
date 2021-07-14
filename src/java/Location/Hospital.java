@@ -34,7 +34,7 @@ public class Hospital {
         return address_hospital;
     }
 
-    public String getPIC() {
+    public String getPic() {
         return pic;
     }
 
