@@ -103,7 +103,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a  class="nav-link"  href="submission.html">Submission</a>
+                            <a  class="nav-link"  href="Report.jsp">Report</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -180,7 +180,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td> <input type="Submit" name="Submit"></td>                      
+                                <td> <input type="Submit" name="Submit" class="btn btn-primary"></td>                      
                             </tr>
 
                             <br> <br>

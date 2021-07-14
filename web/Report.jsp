@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Staff</title>
+        <title>Report</title>
         <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <style>
@@ -67,11 +67,11 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li> <a  class="dropdown-item" href="RegisterStaff.jsp">Register Staff</a></li>
-                                <li><a class="dropdown-item active" href="ViewStaff.jsp">View Staff</a></li>
+                                <li><a class="dropdown-item " href="ViewStaff.jsp">View Staff</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a  class="nav-link"  href="Report.jsp">Report</a>
+                        <li class="nav-item ">
+                            <a  class="nav-link active"  href="Report.jsp">Report</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -93,10 +93,6 @@
         <%
             int id = (Integer) session.getAttribute("ID");
         %>
-
-        <sql:query var="result" dataSource="${myDatasource}">
-            SELECT *  FROM STAFF WHERE ID_USER != <%=id%>
-        </sql:query>
         <%
             String md = (String) session.getAttribute("md");
             String name = (String) session.getAttribute("mdname");
@@ -131,36 +127,27 @@
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
 
                         <table class="table table-bordered table-striped mb-0">
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Action</th>
-                            </tr>
-                            <c:forEach var = "row" items = "${result.rows}">
+                            <sql:query var="result" dataSource="${myDatasource}">
+                                SELECT *  FROM BLOOD_OUT
+                            </sql:query>
+    
+                            
+                                <!-- column headers -->
                                 <tr>
-                                    <td>${row.name}</td>
-                                    <td>${row.position}</td>
-                                    <td>
-                                        <form action="UpdateStaff.jsp" method="post">
-                                            <input type="hidden" name="ID" value="${row.ID_USER}">
-                                            <input type="hidden" name="username" value="${row.USERNAME}">
-                                            <input type="hidden" name="name" value="${row.name}">
-                                            <input type="hidden" name="ic" value="${row.IC}">
-                                            <input type="hidden" name="position" value="${row.POSITION}">
-                                            <input type="hidden" name="email" value="${row.EMAIL}">
-                                            <input type="hidden" name="role" value="${row.role}">
-                                            <input type="submit" value="UPDATE" class="btn btn-primary">
-                                        </form>
-                                        <form action="StaffControl" method="post">
-                                            <input type="hidden" name="method" value="delete">
-                                            <input type="hidden" name="ID" value="${row.ID_USER}">
-                                            <input type="hidden" name="name" value="${row.name}">
-                                            <input type="submit" value="Delete" class="btn btn-warning">
-                                        </form>
-                                    </td>
+                                    <c:forEach var="columnName" items="${result.columnNames}">
+                                        <th><c:out value="${columnName}"/></th>
+                                        </c:forEach>
                                 </tr>
-                            </c:forEach>
-                        </table>
+                                <!-- column data -->
+                                <c:forEach var="row" items="${result.rowsByIndex}">
+                                    <tr>
+                                        <c:forEach var="column" items="${row}">
+                                            <td><c:out value="${column}"/></td>
+                                        </c:forEach>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                      
                     </div>
                 </div>
             </div>

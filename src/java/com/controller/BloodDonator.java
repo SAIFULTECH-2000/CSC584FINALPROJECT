@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,10 +38,11 @@ public class BloodDonator extends HttpServlet {
         PrintWriter out = response.getWriter();
         int ID = Integer.parseInt( request.getParameter("ID"));
         if (insert(ID)) {
+            request.setAttribute("name", getName(ID));
             RequestDispatcher view = request.getRequestDispatcher("SuccessfulDonation.jsp");
             view.forward(request, response);
         } else {
-            RequestDispatcher view = request.getRequestDispatcher("Dashboard.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("blooddonation.jsp");
             view.forward(request, response);
         }
     }
@@ -103,5 +105,22 @@ public class BloodDonator extends HttpServlet {
             e.printStackTrace();
         }
         return status;
+    }
+    
+    public String getName(int ID) {
+         String name="";
+    try{
+        Connection conn = DBConnection.createConnection();
+        PreparedStatement ps = conn.prepareStatement("select * from DONATION where ID_DONATION=?");
+         ps.setInt(1,ID);
+         ResultSet rs =ps.executeQuery();
+        while(rs.next()){
+        name=rs.getString("NAME");
+        }
+    }catch(Exception ex)
+    {
+     ex.printStackTrace();
+    }
+    return name;
     }
 }

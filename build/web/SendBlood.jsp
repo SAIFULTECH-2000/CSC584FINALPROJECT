@@ -57,7 +57,7 @@ display: block;
              Donation
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                 <li> <a class="dropdown-item" href="blooddonation.html">Blood Donation</a></li>
+                 <li> <a class="dropdown-item" href="blooddonation.jsp">Blood Donation</a></li>
                  <li> <a  class="dropdown-item" href="donation_information.jsp">Donation Information</a></li>
             </ul>
           </li>
@@ -146,7 +146,6 @@ display: block;
                                 <input type="hidden" name="name_hospital" value="${row.NAME_HOSPITAL}">
                                 <input type="hidden" name="address_hospital" value="${row.ADDRESS_HOSPITAL}">
                                 <input type="hidden" name="pic" value="${row.PIC}">
-                                <form action="SendControl">
                                     <label for="bloodtype">Choose blood type:</label>
                                     <select id="bloodtype" name="bloodtype">
                                     <option value="a">A</option>
@@ -154,8 +153,6 @@ display: block;
                                     <option value="ab">AB</option>
                                     <option value="o">O</option>
                                     </select>
-                                </form>
-                                <form action="SendControl">
                                     <label for="quantity">Choose quantity:</label>
                                     <select id="quantity" name="quantity">
                                     <option value="50">50</option>
@@ -163,8 +160,7 @@ display: block;
                                     <option value="200">200</option>
                                     <option value="300">300</option>
                                     </select>
-                                    <input type="submit">
-                                </form>
+                                    <input type="submit" class="btn btn-primary"> 
                             </form>
                             
                         </td>

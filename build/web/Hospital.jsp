@@ -143,20 +143,13 @@ display: block;
                           <tr>
                     <th>Hospital Name</th>
                     <th>Hospital Address</th>
-                    <th>Person In Charge (PIC)</th>
+                    <th>Person In Charge (PIC)</th>  
                 </tr>
                 <c:forEach var = "row" items = "${result.rows}">
                     <tr>
                         <td>${row.NAME_HOSPITAL}</td>
                         <td>${row.ADDRESS_HOSPITAL}</td>
                         <td>${row.PIC}</td>
-                        <td>
-                            <form action="SendBlood.jsp" method="post">
-                                <input type="hidden" name="name_hospital" value="${row.NAME_HOSPITAL}">
-                                <input type="hidden" name="address_hospital" value="${row.ADDRESS_HOSPITAL}">
-                                <input type="hidden" name="pic" value="${row.PIC}">
-                            </form>
-                        </td>
                     </tr>
                 </c:forEach>
                     </table>

@@ -71,7 +71,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a  class="nav-link"  href="submission.html">Submission</a>
+                            <a  class="nav-link"  href="Report.jsp">Report</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -149,15 +149,14 @@
                                             <input type="hidden" name="position" value="${row.POSITION}">
                                             <input type="hidden" name="email" value="${row.EMAIL}">
                                             <input type="hidden" name="role" value="${row.role}">
-                                            <input type="submit" value="UPDATE">
+                                            <input type="submit" value="UPDATE" class="btn btn-primary">
                                         </form>
                                         <form action="StaffControl" method="post">
                                             <input type="hidden" name="method" value="delete">
                                             <input type="hidden" name="ID" value="${row.ID_USER}">
                                             <input type="hidden" name="name" value="${row.name}">
-                                            <input type="submit" value="Delete">
-                                        </form>  
-
+                                            <input type="submit" value="Delete" class="btn btn-warning">
+                                        </form>
                                     </td>
                                 </tr>
                             </c:forEach>
