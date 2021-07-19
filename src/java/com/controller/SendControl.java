@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 /**
  *
- * @author Admin
+ * @author Saiful
  */
 @WebServlet(name = "SendControl", urlPatterns = {"/SendControl"})
 public class SendControl extends HttpServlet{
