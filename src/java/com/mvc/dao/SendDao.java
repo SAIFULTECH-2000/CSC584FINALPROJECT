@@ -19,7 +19,7 @@ public class SendDao {
     try
     {
      conn=DBConnection.createConnection();
-     ps = conn.prepareStatement("INSERT INTO BLOOD_OUT (TYPE_BLOOD,QUANTITY) values(?,?)");
+     ps = conn.prepareStatement("INSERT INTO BLOOD_OUT (ID_HOSPITAL,QUANTITY,TYPE_BLOOD) values(?,?,?)");
      ps.setInt(1, send.getId_hospital());
      ps.setInt(2, send.getQuantity());
      ps.setString(3, send.getBloodtype());

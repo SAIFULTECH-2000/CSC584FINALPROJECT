@@ -51,7 +51,7 @@
                         <li class="nav-item">
                             <a href="Dashboard.jsp" aria-current="page" class="nav-link">Dashboard</a>
                         </li>
-                        
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Donation
@@ -107,8 +107,8 @@
             </div>
         </div>
         <%session.removeAttribute("md");
-        session.removeAttribute("mdname");
-    } else if (md.equals("update")) {%>
+            session.removeAttribute("mdname");
+        } else if (md.equals("update")) {%>
 
         <div class="card">
             <div class="container">
@@ -117,10 +117,10 @@
             </div>
         </div>
         <%session.removeAttribute("md");
-            session.removeAttribute("mdname");
-        } %>
+                session.removeAttribute("mdname");
+            } %>
         <%}%>
-        <h1  style="margin-left:0px;color:white; text-align: center ">Staff List</h1>
+        <h1  style="margin-left:0px;color:white; text-align: center ">HOSPITAL BLOOD OUT</h1>
         <div class="container" >
             <div class="card">
                 <div class="card-body">
@@ -128,26 +128,27 @@
 
                         <table class="table table-bordered table-striped mb-0">
                             <sql:query var="result" dataSource="${myDatasource}">
-                                SELECT *  FROM BLOOD_OUT
+                                SELECT *  FROM BLOOD_OUT INNER JOIN HOSPITAL ON BLOOD_OUT.ID_HOSPITAL =HOSPITAL.ID_HOSPITAL
                             </sql:query>
-    
-                            
-                                <!-- column headers -->
+
+
+                            <tr>
+                                <th>NAME HOSPITAL</th>
+                                <th>ADDRESS HOSPITAL</th>
+                                <th>TYPE_BLOOD</th>
+                                <th>PIC</th>
+                            </tr>
+                            <!-- column data -->
+                            <c:forEach var="row" items="${result.rows}">
                                 <tr>
-                                    <c:forEach var="columnName" items="${result.columnNames}">
-                                        <th><c:out value="${columnName}"/></th>
-                                        </c:forEach>
+                                    <td>${row.NAME_HOSPITAL}</td>
+                                    <td>${row.ADDRESS_HOSPITAL}</td>
+                                    <td>${row.TYPE_BLOOD}</td>
+                                    <td>${row.PIC}</td>
                                 </tr>
-                                <!-- column data -->
-                                <c:forEach var="row" items="${result.rowsByIndex}">
-                                    <tr>
-                                        <c:forEach var="column" items="${row}">
-                                            <td><c:out value="${column}"/></td>
-                                        </c:forEach>
-                                    </tr>
-                                </c:forEach>
-                            </table>
-                      
+                            </c:forEach>
+                        </table>
+
                     </div>
                 </div>
             </div>

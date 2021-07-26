@@ -89,7 +89,19 @@
                     </ul>
                 </div>
             </div>
-        </nav>  
+        </nav>
+        <%
+          String md = (String) session.getAttribute("md");
+        if (md != null) {
+                if (md.equals("insert")) {
+        %>
+         <div class="card">
+            <div class="container">
+                <h1  style="margin-left:0px;color:green; text-align: center ">Successful Insert New Donor</h1>
+
+            </div>
+        </div>
+        <%}}%>
         <sql:query var="result" dataSource="${myDatasource}">
             SELECT * FROM DONATION
         </sql:query>

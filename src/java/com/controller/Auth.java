@@ -5,7 +5,6 @@ package com.controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import com.mvc.dao.AuthDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,6 +19,7 @@ import java.util.List;
 /**
  *
  * @author saifultech/syakir
+ * Auth.java for handle login when user when to login into system
  */
 public class Auth extends HttpServlet {
 
@@ -33,9 +33,7 @@ public class Auth extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-      
+            throws ServletException, IOException {   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,7 +64,6 @@ public class Auth extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
           List errorMsgs = new LinkedList();
-        
         try{
         PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
@@ -76,18 +73,17 @@ public class Auth extends HttpServlet {
             AuthDao obj = new AuthDao();
            if(obj.auth(username,password)){
            //successful login
-           // out.println("successful login .");
-            //Load the driver
-           //set the session
+           //Load the session driver
             HttpSession session=request.getSession();  
+            //set the session
             session.setAttribute("username",username);
             session.setAttribute("ID", obj.getID(username, password));
             session.setAttribute("role_id",obj.getRole_ID(username,password));
             //redirect dashboard
             RequestDispatcher view = request.getRequestDispatcher("/Dashboard.jsp");
             view.forward(request, response);
-            
            }else{
+           //unsuccess login
            errorMsgs.add("Password or Username not correct");
            request.setAttribute("errorMsgs", errorMsgs);
            RequestDispatcher view = request.getRequestDispatcher("/index.jsp");
@@ -97,10 +93,6 @@ public class Auth extends HttpServlet {
         }catch(IOException e ){
             PrintWriter out = response.getWriter();
             out.println("error:"+e);
-        errorMsgs.add("An unexpected error: " + e.getMessage());
-       // request.setAttribute("errorMsgs", errorMsgs);
-        //RequestDispatcher view = request.getRequestDispatcher("/error.view");
-       // view.forward(request, response);
         }
     }
 
@@ -113,5 +105,4 @@ public class Auth extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

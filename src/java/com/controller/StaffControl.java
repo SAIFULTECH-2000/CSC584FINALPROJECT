@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author SAIFULTECH
+ * @author SAIFULTECH StaffControl for handle insert, update, and delete
  */
 @WebServlet(name = "StaffControl", urlPatterns = {"/StaffControl"})
 public class StaffControl extends HttpServlet {
@@ -37,9 +37,7 @@ public class StaffControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -80,13 +78,11 @@ public class StaffControl extends HttpServlet {
             String role = request.getParameter("role");
             StaffDao staffDao = new StaffDao();
             String method = request.getParameter("method");
-            
             if (id == null) {
+                //Insert 
                 if (username.length() != 0 || name.length() != 0 || password.length() != 0 || ic.length() != 0 || position.length() != 0 || email.length() != 0) {
-               
+                    //check username valid or not
                     if (staffDao.checkusername(username)) {
-                    
-                       
                         errorMsgs.add("username is take please try again");
                         request.setAttribute("name", name);
                         request.setAttribute("ic", ic);
@@ -94,65 +90,57 @@ public class StaffControl extends HttpServlet {
                         request.setAttribute("email", email);
                         request.setAttribute("role", role);
                         request.setAttribute("errorMsgs", errorMsgs);
+                        //redirect back to registerstaff page
                         RequestDispatcher view = request.getRequestDispatcher("RegisterStaff.jsp");
                         view.forward(request, response);
                     } else {
-                       
-                  
-                        Staff staff = new Staff(username, name, email, ic, position,Integer.parseInt(role));
+                        Staff staff = new Staff(username, name, email, ic, position, Integer.parseInt(role));
                         if (staffDao.insertStaff(staff, password)) {
+                            //Sucessful to insert
                             request.setAttribute("staff", staff);
                             RequestDispatcher view = request.getRequestDispatcher("SuccessfulStaff.jsp");
                             view.forward(request, response);
                         } else {
+                            //The system can't insert when have something mistake at database.
                             errorMsgs.add("Please contact Developer");
                             request.setAttribute("errorMsgs", errorMsgs);
                             RequestDispatcher view = request.getRequestDispatcher("RegisterStaff.jsp");
                             view.forward(request, response);
                         }
                     }
-                } 
-            }else{
-             
-             if (method.equals("delete")){
-             //delete
-             if(staffDao.deleteStaff(Integer.parseInt(id))){
-                
-              HttpSession session=request.getSession();  
-              session.setAttribute("md","delete");
-              session.setAttribute("mdname",name);
-              request.getRequestDispatcher("ViewStaff.jsp").forward(request, response);
-             }else{
-              RequestDispatcher view = request.getRequestDispatcher("ViewStaff.jsp");
-              view.forward(request, response);
-             }
-             
-             }
-             if(method.equals("update")){
-                
-        
-                Staff staff = new Staff();
-                staff.setName(name);
-                staff.setEmail(email);
-                staff.setIc(ic);
-                staff.setPosition(position);
-                if(staffDao.updateStaff(staff,Integer.parseInt(id))){
-                 
-                    
-                    HttpSession session=request.getSession();  
-              session.setAttribute("md","update");
-              session.setAttribute("mdname",name);
-              request.getRequestDispatcher("ViewStaff.jsp").forward(request, response);
-                    
-                }else{
-              request.getRequestDispatcher("ViewStaff.jsp").forward(request, response);
-              
                 }
-             }
+            } else {
+                if (method.equals("delete")) {
+                    //At form will send method.When method delete the system will carry id and delete
+                    if (staffDao.deleteStaff(Integer.parseInt(id))) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("md", "delete");
+                        session.setAttribute("mdname", name);
+                        request.getRequestDispatcher("ViewStaff.jsp").forward(request, response);
+                    } else {
+                        RequestDispatcher view = request.getRequestDispatcher("ViewStaff.jsp");
+                        view.forward(request, response);
+                    }
+                }
+                if (method.equals("update")) {
+                    //At form will send method when method is update the system will carry data when to update .
+                    Staff staff = new Staff();
+                    staff.setName(name);
+                    staff.setEmail(email);
+                    staff.setIc(ic);
+                    staff.setPosition(position);
+                    if (staffDao.updateStaff(staff, Integer.parseInt(id))) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("md", "update");
+                        session.setAttribute("mdname", name);
+                        request.getRequestDispatcher("ViewStaff.jsp").forward(request, response);
+                    } else {
+                        request.getRequestDispatcher("ViewStaff.jsp").forward(request, response);
+                    }
+                }
             }
-
         } catch (Exception e) {
-            e.printStackTrace();
+            out.println("error:" + e);
         }
     }
 

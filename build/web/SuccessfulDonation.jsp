@@ -112,7 +112,7 @@ display: block;
          <%
          String name =(String) request.getAttribute("name");
          %>
-        <%=name%> have successfully added Donation
+        <%=name%> have successfully  Donation
         
         <a href="blooddonation.jsp">Back</a>
             </div>

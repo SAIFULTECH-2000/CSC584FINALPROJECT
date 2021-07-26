@@ -78,11 +78,10 @@ public class DonationControl extends HttpServlet {
             HttpSession session = request.getSession();
             int id = (Integer) session.getAttribute("ID");
             DonatorDao dao = new DonatorDao();
-           
-           
                 //insert Donation
                 Donator donator = new Donator(gender, name, ic, address, tel, bloodtype, hh);
                 if (dao.insertDonator(donator, id)) {
+                     session.setAttribute("md", "insert");
                     RequestDispatcher view = request.getRequestDispatcher("donation_information.jsp");
                     view.forward(request, response);
                 }

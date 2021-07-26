@@ -75,11 +75,10 @@ public class SendControl extends HttpServlet{
             out.println(id_hospital+" "+quantity+" "+bloodtype);
             if (quantity.length() != 0 ) {
                 //insert method here
-            
                 Send send = new Send(Integer.parseInt(id_hospital),Integer.parseInt(quantity),bloodtype);
                 if (sendDao.insertBlood(send)) {
                 request.setAttribute("send", send);
-                RequestDispatcher view = request.getRequestDispatcher("SuccessBlood.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("Report.jsp");
                 view.forward(request, response);
                 } else {
                 errorMsgs.add("Please contact Developer");
