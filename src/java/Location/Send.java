@@ -7,7 +7,7 @@ package Location;
 
 /**
  *
- * @author Admin
+ * @author Saiful/Syakir
  */
 public class Send {
     int id_hospital;
