@@ -70,7 +70,7 @@ public class StaffControl extends HttpServlet {
         try {
             String username = request.getParameter("username");
             String name = request.getParameter("name");
-            String password = request.getParameter("password");
+            String password = request.getParameter("pass");
             String ic = request.getParameter("IC");
             String position = request.getParameter("position");
             String email = request.getParameter("email");
